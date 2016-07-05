@@ -7,7 +7,7 @@ sampleName=$(basename $sampleDir)
 rootDir=$(dirname $(dirname $sampleDir))
 blastnResult="${sampleDir}06.BLAST/VIRUS/${sampleName}_BLASTn.blast"
 blastxResult="${sampleDir}06.BLAST/VIRUS/${sampleName}_BLASTx.blast"
-resultPage="${rootDir}/RESULTS/Index.html"
+resultPage="${rootDir}/RESULTS/${sampleName}/blast.html"
 
 echo "
 <html>
