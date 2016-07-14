@@ -23,15 +23,16 @@ echo -e "***********************************************************************
 #			03.BACTERIA
 #			04.VIRUS
 #			05.FUNGI
-#			06.PARASITE
-#			07.ASSEMBLY
+#			06.PROTOZOA
+#			07.INVERTEBRATE
+#			08.ASSEMBLY
 #				virus
 #					spades
 #					quast
 #				bacteria
 #					spades
 #					quast
-#			08.BLAST
+#			09.BLAST
 #	DOC
 #	RAW
 #		SAMPLENAME
@@ -39,28 +40,45 @@ echo -e "***********************************************************************
 #			xxxxxx_2.fasta
 #	REFERENCES
 #		HUMAN_GENOME_REFERENCE
+#			BLAST
+#				blastx
+#				blastn
 #			WG
 #				bwt2
 #		BACTERIA_GENOME_REFERENCE
+#			BLAST
+#				blastx
+#				blastn
 #			16S
 #				bwt2
 #			WG
 #				bwt2
 #		VIRUS_GENOME_REFERENCE
+#			BLAST
+#				blastx
+#				blastn
 #			WG
 #				bwt2
 #		FUNGI_GENOME_REFERENCE
+#			BLAST
+#				blastx
+#				blastn
 #			WG
 #				bwt2
 #			ITS
 #				bwt2
-#		PARASITE_GENOME_REFERENCE
-#			INVERTEBRATE_GENOME_REFERENCE
-#				WG
-#					bwt2
-#			PARASITE_GENOME_REFERENCE
-#				WG
-#					bwt2
+#		INVERTEBRATE_GENOME_REFERENCE
+#			BLAST
+#				blastx
+#				blastn
+#			WG
+#				bwt2
+#		PROTOZOA_GENOME_REFERENCE
+#			BLAST
+#				blastx
+#				blastn
+#			WG
+#				bwt2
 #	RESULTS
 #	TMP
 # Notes: inside each bwt2 folder are the bowtie index files for that DB.
@@ -88,9 +106,7 @@ hostDB="${workingDir}REFERENCES/HUMAN_GENOME_REFERENCE/"
 bacDB="${workingDir}REFERENCES/BACTERIA_GENOME_REFERENCE/"
 virDB="${workingDir}REFERENCES/VIRUS_GENOME_REFERENCE/"
 fungiDB="${workingDir}REFERENCES/FUNGI_GENOME_REFERENCE/"
-parasiteDB="${workingDir}REFERENCES/PARASITE_GENOME_REFERENCE/"
-vir_BLASTn_DB="${virDB}blastn/viral_blastn"
-vir_BLASTx_DB="${virDB}blastx/viral_blastx"
+parasiteDB="${workingDir}REFERENCES/"
 
 #	AWESOME SCRIPT
 echo -e "PIPELINE START: $(date)"
