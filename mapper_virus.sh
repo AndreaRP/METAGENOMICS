@@ -4,7 +4,7 @@ set -e
 #	SCRIPT TO FILTER VIR READS USING BOWTIE2 MAPPING	#
 #########################################################
 # Arguments:
-# $1 = virDB. File with the reference genome for the mapping. Must be adjacent to the bowtie index files.
+# $1 = virDBDir. File with the reference genome for the mapping. Must be adjacent to the bowtie index files.
 # $2 = sampleName. Name of the sample to be processed. Must match the name of the sample in the RAW directory.
 # 1. Creates necessary directories. 
 # 2. Maps against bacteria reference genome.
@@ -21,6 +21,7 @@ virDB=$1
 sampleAnalysisDir=$2
 #	INITIALIZE VARIABLES
 #		Directories
+virDBDir="${virDB}/WG/bwt2/all.fna.tar.gz"
 sampleName=$(basename "${sampleAnalysisDir}")
 virFilesDir="${sampleAnalysisDir}/04.VIRUS/" #directory where the host filtering files will we saved (sam for mapping and fastq for host free samples)
 noHostDir="${sampleAnalysisDir}/02.HOST/"
@@ -46,8 +47,8 @@ fi
 #	BOWTIE2 MAPPING AGAINST VIRUS
 echo -e "--------Bowtie2 is mapping against the reference ....------"
 echo -e "$(date)\t Start mapping ${sampleName}\n" > $bowtie2logFile
-echo -e "The command is: ### bowtie2 -fr -x "$virDB" -q -1 $noHostR1Fastq -2 $noHostR2Fastq -S $mappedSamFile ###\n" >> $bowtie2logFile 
-bowtie2 -fr -x "$virDB" -q -1 $noHostR1Fastq -2 $noHostR2Fastq -S $mappedSamFile 2>&1 | tee -a $bowtie2logFile
+echo -e "The command is: ### bowtie2 -fr -x "$virDBDir" -q -1 $noHostR1Fastq -2 $noHostR2Fastq -S $mappedSamFile ###\n" >> $bowtie2logFile 
+bowtie2 -fr -x "$virDBDir" -q -1 $noHostR1Fastq -2 $noHostR2Fastq -S $mappedSamFile 2>&1 | tee -a $bowtie2logFile
 echo -e "$(date)\t Finished mapping ${sampleName}\n" >> $bowtie2logFile
 
 #	SEPARATE R1 AND R2 MAPPED READS AND FILTER HOST

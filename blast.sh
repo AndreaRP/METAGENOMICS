@@ -21,11 +21,12 @@ blastDB="${refDB}BLAST/"
 BLASTn_DB="${blastDB}blastn/${organism}_blastn"
 BLASTx_DB="${blastDB}blastx/${organism}_blastx"
 #		Directories
-outputDir="${sampleAnalysisDir}08.BLAST/${organism}/"
+outputDir="${sampleAnalysisDir}/08.BLAST/${organism}/"
 #		Input Files
-sampleContig="${sampleAnalysisDir}07.ASSEMBLY/${organism}/spades/contigs.fasta"
+sampleContig="${sampleAnalysisDir}/07.ASSEMBLY/${organism}/spades/contigs.fasta"
 #		Output Files
 blastnResult="${outputDir}${sampleName}_BLASTn.blast"
+blastnResultFiltered="${outputDir}${sampleName}_BLASTn_filtered.blast"
 blastxResult="${outputDir}${sampleName}_BLASTx.blast"
 lablog="${outputDir}${sampleName}_blast_log.log"
 contigFaa="${outputDir}${sampleName}_contig_aa.faa"
@@ -44,21 +45,24 @@ fi
 #	RUN BLASTn	
 echo -e "$(date)\t start running BLASTn for ${sampleName}\n" > $lablog
 echo -e "$(date)\t start running BLASTn for ${sampleName}"
-echo -e "The command is: ### blastn -db $BLASTn_DB -query $sampleContig -outfmt '6 stitle std qseq staxid' > $blastResult ###" >> $lablog
+echo -e "The command is: ### blastn -db $BLASTn_DB -query $sampleContig -outfmt '6 stitle staxids std qseq' > $blastResult ###" >> $lablog
 blastn -db $BLASTn_DB -query $sampleContig -outfmt '6 stitle std qseq' > $blastnResult 
 echo -e "$(date)\t finished running BLASTn for ${sampleName}\n" >> $lablog
+#	Filter blast results that pass min 100 length (col. 5) and 90% alignment (col. 4).
+awk -F "\t" '{if($4 >= 90 && $5>= 100) print $0}' $blastnResult > $blastnResultFiltered
+
 #	CREATE FASTA WITH SEQUENCES THAT ALIGN 
 
 
 #	RUN BLASTx and RAPSearch2
-echo -e "$(date)\t start running BLASTx for ${sampleName}\n" >> $lablog
-echo -e "$(date)\t start running BLASTx for ${sampleName}" 
-echo -e "The command is: ### blastx -db $BLASTx_DB -query $sampleContig -html > $blastResult ###" >> $lablog
-blastx -db $BLASTx_DB -query $sampleContig -outfmt '6 stitle std' > $blastxResult 
-echo -e "$(date)\t finished running BLASTx for ${sampleName}\n" >> $lablog
+#echo -e "$(date)\t start running BLASTx for ${sampleName}\n" >> $lablog
+#echo -e "$(date)\t start running BLASTx for ${sampleName}" 
+#echo -e "The command is: ### blastx -db $BLASTx_DB -query $sampleContig -html > $blastResult ###" >> $lablog
+#blastx -db $BLASTx_DB -query $sampleContig -outfmt '6 stitle std' > $blastxResult 
+#echo -e "$(date)\t finished running BLASTx for ${sampleName}\n" >> $lablog
 
 #grep -A 5 -B 3 ">" $blastnResult > $blastnHits
 
 }
 
-#blast /processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/ANALYSIS/MuestraPrueba/ /processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/REFERENCES/VIRUS_GENOME_REFERENCE/
+blast /processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/ANALYSIS/Unai16/ /processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/REFERENCES/BACTERIA_GENOME_REFERENCE/

@@ -24,8 +24,8 @@ sampleAnalysisDir=$(echo $mappedDir | rev | cut -d'/' -f3- | rev) #gets the anal
 #		Directories
 outputDir="${sampleAnalysisDir}/07.ASSEMBLY/${organism}/"
 #		Input Files
-mappedR1Fastq="${mappedDir}${sampleName}_WG*_R1.fastq"
-mappedR2Fastq="${mappedDir}${sampleName}_WG*_R2.fastq"
+mappedR1Fastq="${mappedDir}${sampleName}*_R1.fastq"
+mappedR2Fastq="${mappedDir}${sampleName}*_R2.fastq"
 #		Output Files
 lablog="${outputDir}${sampleName}_assembly.log"
 

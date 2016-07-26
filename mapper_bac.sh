@@ -30,15 +30,15 @@ noHostDir="${sampleAnalysisDir}/02.HOST/" #directory where the host free samples
 noHostR1Fastq="${noHostDir}${sampleName}_noHost_R1.fastq" #R1 host free file
 noHostR2Fastq="${noHostDir}${sampleName}_noHost_R2.fastq" #R2 host free file
 #		OutputFiles: 16S
-mappedSam16SFile="${bacFilesDir}${sampleName}_16S_bacteria_mapped.sam" #bowtie sam file with the reads that mapped against the 16S reference
-bowtie2logFile16S="${bacFilesDir}${sampleName}_16S_bacteria_mapping.log" #log of the mapping against the 16S reference
-BacMappedR116SFastq="${bacFilesDir}${sampleName}_16S_Bacteria_R1.fastq" #file with the R1 reads which mapped against 16S reference
-BacMappedR216SFastq="${bacFilesDir}${sampleName}_16S_Bacteria_R2.fastq" #file with the R2 reads which mapped against the 16S reference
+mappedSam16SFile="${bacFilesDir}${sampleName}_bacteria_mapped_16S.sam" #bowtie sam file with the reads that mapped against the 16S reference
+bowtie2logFile16S="${bacFilesDir}${sampleName}_bacteria_mapping_16S.log" #log of the mapping against the 16S reference
+BacMappedR116SFastq="${bacFilesDir}${sampleName}_bacteria_R1_16S.fastq" #file with the R1 reads which mapped against 16S reference
+BacMappedR216SFastq="${bacFilesDir}${sampleName}_bacteria_R2_16S.fastq" #file with the R2 reads which mapped against the 16S reference
 #		OutputFiles: Whole Genome (WG)
 mappedSamWGFile="${bacFilesDir}${sampleName}_WG_bacteria_mapped.sam" #bowtie sam file with the reads that mapped against the WG reference
 bowtie2logFileWG="${bacFilesDir}${sampleName}_WG_bacteria_mapping.log" #log of the mapping against the WG reference  
-BacMappedR1WGFastq="${bacFilesDir}${sampleName}_WG_Bacteria_R1.fastq" #file with the R1 reads that mapped against the WG reference
-BacMappedR2WGFastq="${bacFilesDir}${sampleName}_WG_Bacteria_R2.fastq" #file with the R2 reads that mapped against the WG reference
+BacMappedR1WGFastq="${bacFilesDir}${sampleName}_WG_bacteria_R1.fastq" #file with the R1 reads that mapped against the WG reference
+BacMappedR2WGFastq="${bacFilesDir}${sampleName}_WG_bacteria_R2.fastq" #file with the R2 reads that mapped against the WG reference
 
 
 echo -e "$(date)" 
