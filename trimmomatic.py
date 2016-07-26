@@ -53,10 +53,10 @@ def main(argv):
 	os.chdir(inputDir)
 	#	Sacar archivo R1 y archivo R2
 	for files in os.listdir('.'):
-		if files.endswith('_1.fastq'):
+		if "R1" in files:
 			#input_R1 = dataSet + '/' + files
 			input_R1 =  os.path.abspath(files)
-		if files.endswith('_2.fastq'):
+		if "R2" in files:
 			#input_R2 = dataSet + '/' + files
 			input_R2 =  os.path.abspath(files)
     #	generar el script con las rutas correctas

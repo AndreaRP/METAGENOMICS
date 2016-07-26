@@ -24,8 +24,8 @@ sampleAnalysisDir=$2
 sampleName=$(basename "${sampleAnalysisDir}")
 fungiITSDB="${fungiDB}ITS/bwt2/ITS_all"
 fungiWGDB="${fungiDB}WG/bwt2/fungi_all"
-fungiFilesDir="${sampleAnalysisDir}05.FUNGI/" #directory where the files will we saved (sam for mapping and fastq for mapped samples)
-noHostDir="${sampleAnalysisDir}02.HOST/" #directory where the host free samples are located
+fungiFilesDir="${sampleAnalysisDir}/05.FUNGI/" #directory where the files will we saved (sam for mapping and fastq for mapped samples)
+noHostDir="${sampleAnalysisDir}/02.HOST/" #directory where the host free samples are located
 #		Input Files
 noHostR1Fastq="${noHostDir}${sampleName}_noHost_R1.fastq" #R1 host free file
 noHostR2Fastq="${noHostDir}${sampleName}_noHost_R2.fastq" #R2 host free file
@@ -92,4 +92,4 @@ echo -e "*********** FINISHED MAPPING fungi IN $sampleName ************"
 }
 
 #module load samtools/samtools-1.2
-map_fungi /processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/REFERENCES/FUNGI_GENOME_REFERENCE/ /processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/ANALYSIS/MuestraPrueba/
+#map_fungi /processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/REFERENCES/FUNGI_GENOME_REFERENCE/ /processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/ANALYSIS/MuestraPrueba/

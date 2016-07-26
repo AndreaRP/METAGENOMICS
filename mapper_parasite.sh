@@ -24,9 +24,9 @@ sampleAnalysisDir=$2
 sampleName=$(basename "${sampleAnalysisDir}")
 invertebrateDB="${DB}INVERTEBRATE_GENOME_REFERENCE/WG/bwt2/invertebrate_all"
 protozoaDB="${DB}PROTOZOA_GENOME_REFERENCE/WG/bwt2/protozoa_all"
-protozoaFilesDir="${sampleAnalysisDir}06.PROTOZOA/" #directory where the files will we saved (sam for mapping and fastq for mapped samples)
-invertebrateFilesDir="${sampleAnalysisDir}07.INVERTEBRATE/" #directory where the files will we saved (sam for mapping and fastq for mapped samples)
-noHostDir="${sampleAnalysisDir}02.HOST/" #directory where the host free samples are located
+protozoaFilesDir="${sampleAnalysisDir}/06.PROTOZOA/" #directory where the files will we saved (sam for mapping and fastq for mapped samples)
+invertebrateFilesDir="${sampleAnalysisDir}/07.INVERTEBRATE/" #directory where the files will we saved (sam for mapping and fastq for mapped samples)
+noHostDir="${sampleAnalysisDir}/02.HOST/" #directory where the host free samples are located
 #		Input Files
 noHostR1Fastq="${noHostDir}${sampleName}_noHost_R1.fastq" #R1 host free file
 noHostR2Fastq="${noHostDir}${sampleName}_noHost_R2.fastq" #R2 host free file
@@ -99,5 +99,5 @@ echo -e "$(date)"
 echo -e "*********** FINISHED MAPPING protozoa IN $sampleName ************"
 }
 
-module load samtools/samtools-1.2
-map_protozoa /processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/REFERENCES/ /processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/ANALYSIS/MuestraPrueba/
+#module load samtools/samtools-1.2
+#map_protozoa /processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/REFERENCES/ /processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/ANALYSIS/MuestraPrueba/

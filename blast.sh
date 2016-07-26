@@ -44,7 +44,7 @@ fi
 #	RUN BLASTn	
 echo -e "$(date)\t start running BLASTn for ${sampleName}\n" > $lablog
 echo -e "$(date)\t start running BLASTn for ${sampleName}"
-echo -e "The command is: ### blastn -db $BLASTn_DB -query $sampleContig -outfmt '6 stitle std qseq' > $blastResult ###" >> $lablog
+echo -e "The command is: ### blastn -db $BLASTn_DB -query $sampleContig -outfmt '6 stitle std qseq staxid' > $blastResult ###" >> $lablog
 blastn -db $BLASTn_DB -query $sampleContig -outfmt '6 stitle std qseq' > $blastnResult 
 echo -e "$(date)\t finished running BLASTn for ${sampleName}\n" >> $lablog
 #	CREATE FASTA WITH SEQUENCES THAT ALIGN 
@@ -61,4 +61,4 @@ echo -e "$(date)\t finished running BLASTx for ${sampleName}\n" >> $lablog
 
 }
 
-blast /processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/ANALYSIS/MuestraPrueba/ /processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/REFERENCES/VIRUS_GENOME_REFERENCE/
+#blast /processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/ANALYSIS/MuestraPrueba/ /processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/REFERENCES/VIRUS_GENOME_REFERENCE/

@@ -100,6 +100,7 @@ echo -e "***********************************************************************
 # 7. BLAST of the assemblies
 # 8. Identification of hits
 #######################################################################
+
 #	GLOBAL VARIABLES
 workingDir='/processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/'
 hostDB="${workingDir}REFERENCES/HUMAN_GENOME_REFERENCE/"
@@ -131,7 +132,7 @@ function showHelp {
 }
 
 #	VARIABLES
-sampleName=$(basename "$sampleDir")
+sampleName=$(basename "${sampleDir}")
 sampleAnalysisDir="${workingDir}ANALYSIS/${sampleName}"
 rawDir="${workingDir}RAW/${sampleName}"
 bacteriaDir="${sampleAnalysisDir}/03.BACTERIA/"
@@ -154,6 +155,7 @@ fi
 #      |_|                    |___/                                   
 
 
+module load samtools/samtools-1.2
 #	TRIMMOMMATIC QUALITY CONTROL
 #	Create sh file
 echo -e "$(date): ********* Start quaility control **********" > "${sampleAnalysisLog}"
