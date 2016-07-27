@@ -55,4 +55,4 @@ echo -e "$(date)\t finished running quast for ${sampleName} for ${organism}\n" >
 
 }
 
-#assemble /processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/ANALYSIS/MuestraPrueba/04.VIRUS/
+assemble /processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/ANALYSIS/Unai16/03.BACTERIA/

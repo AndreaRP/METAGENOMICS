@@ -101,6 +101,13 @@ echo -e "***********************************************************************
 # 8. Identification of hits
 #######################################################################
 
+module load samtools/samtools-1.2
+module load bedtools2/bedtools2-2.25.0
+module load bowtie/bowtie2-2.2.4
+module load SPAdes-3.5.0
+module load ncbi_blast-2.2.30+
+module load quast-4.1
+
 #	GLOBAL VARIABLES
 workingDir='/processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/'
 hostDB="${workingDir}REFERENCES/HUMAN_GENOME_REFERENCE/"

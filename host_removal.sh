@@ -11,6 +11,7 @@ set -e
 # 3. Creates a .fastq file using the sam file created by bowtie2 containing only those reads which don't match the host
 # Output files: (In ANALYSIS/sampleName/02.HOST/)
 # sampleName_Mapped.sam: SAM file from mapping the processed files against the reference genome.
+# sampleName_Mapped.bam: BAM file from mapping the processed files against the reference genome.
 # sampleName_NoHost.fastq: .fastq file created from the unmapped reads of the SAM file.
 # sampleName_host_removal.log: .log file with a log of the mapping.
 
