@@ -253,6 +253,50 @@ fqsub makeblastdb -in /processing_Data/bioinformatics/research/20160530_METAGENO
 fqsub makeblastdb -in /processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/REFERENCES/INVERTEBRATE_GENOME_REFERENCE/WG/invertebrate_wg_all.fna -parse_seqids -dbtype nucl -out /processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/REFERENCES/INVERTEBRATE_GENOME_REFERENCE/BLAST/blastn/INVERTEBRATE_blastn
 fqsub makeblastdb -in /processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/REFERENCES/PROTOZOA_GENOME_REFERENCE/WG/protozoa_wg_all.fna -parse_seqids -dbtype nucl -out /processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/REFERENCES/PROTOZOA_GENOME_REFERENCE/BLAST/blastn/PROTOZOA_blastn
 
-- Hay que bajar las BD de proteina de cada organismo y crear la base de datos de basttx:
+- Hay que bajar las BD de proteina de cada organismo y crear la base de datos de blastx:
 fqsub makeblastdb -in /processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/REFERENCES/Viral_2.1_Genomic/viral.nonredundant_protein.1.protein.faa -parse_seqids -dbtype prot -out BACTERIA_blastx
 - Hay que revisar el script de mapper parasite para dividirlo en protozoa y invert.
+15-7-2016
+- Terminado el script de mapper parasite
+- terminada clusterizacion de 16S 
+- paso a generar csv y fasta para srst2 para 0.90 y 0.96:
+fqsub python /opt/srst2-0.1.8/database_clustering/cdhit_to_csv.py --cluster_file 16S_GreenGenes_Cluster0.90.clstr --infasta 16S_GreenGenes.fasta --outfile 16S_clustered.csv
+fqsub python /opt/srst2-0.1.8/database_clustering/cdhit_to_csv.py --cluster_file 16S_GreenGenes_Cluster0.96.clstr --infasta 16S_GreenGenes.fasta --outfile 16S_clustered096.csv
+
+18-7-2016
+- creo el fasta:
+fqsub python /opt/srst2-0.1.8/database_clustering/csv_to_gene_db.py -t 16S_clustered.csv -o seqs_clustered_090.fasta -f 16S_GreenGenes.fasta -c 4
+fqsub python /opt/srst2-0.1.8/database_clustering/csv_to_gene_db.py -t 16S_clustered096.csv -o seqs_clustered_096.fasta -f 16S_GreenGenes.fasta -c 4
+
+20-7-2016
+- Hay que correr cdhit desde 95% hasta 100% y mirar empiricamente cuál es el cutoff que no mezcla nombres. Se debe clusterizar de tal forma que en cada grupo 
+sólo haya secuencias con la misma identidad; es decir si el nombre llega hasta sp, se debe haber clusterizado por sp y en ese grupo sólo debe haber secuencias de esa sp.
+Si la taxonomia llega a Genero cada grupo sólo puede contener miembros del mismo género (puede haber más de un grupo de mismo género, que correspondería a sp no identificadas)
+y así hacia arriba en la taxonomía.
+/opt/cdhit/cd-hit-est -i 16S_GreenGenes.fasta -o 16S_GreenGenes_Cluster095 -d 0 -c 0.95 -M 10240 &> lablog095
+/opt/cdhit/cd-hit-est -i 16S_GreenGenes.fasta -o 16S_GreenGenes_Cluster097 -d 0 -c 0.97 -M 10240 &> lablog097
+/opt/cdhit/cd-hit-est -i 16S_GreenGenes.fasta -o 16S_GreenGenes_Cluster098 -d 0 -c 0.98 -M 10240 &> lablog098
+/opt/cdhit/cd-hit-est -i 16S_GreenGenes.fasta -o 16S_GreenGenes_Cluster099 -d 0 -c 0.99 -M 10240 &> lablog099
+/opt/cdhit/cd-hit-est -i 16S_GreenGenes.fasta -o 16S_GreenGenes_Cluster100 -d 0 -c 1.00 -M 10240 &> lablog100
+
+27-7-2016
+- Recojo las muestras de virus.
+- Analizo con mi pipeline la muestra Unai16
+- modifico el script:
+  - ahora se genera un archivo mas a partir del blast con cutoff min 90% alineamiento y 100 pb de read.
+  - se trabaja con el BAM en vez de el SAM en todos los mapajes para poder usar bedtools en el paso siguiente.
+- Hay que añadir una rama al pipeline que calcule el coverage y profundidad de cada genoma representado (con bedtools). Así se diferencia entre ortología y presencia real de patógeno.
+- Hay que hacer PSI-blast con todas las reads que no mapen contra nada.  
+BEDTOOLS
+Creo fichero fai para sacar la longitud de cada entrada del fasta. para ello ejecuto:
+fqsub samtools faidx REFERENCES/BACTERIA_GENOME_REFERENCE/WG/bact_wg_all.fna
+esto saca un archivo .fai con: 
+    chromosome name
+    chromosome length
+    offset of the first base of the chromosome sequence in the file
+    length of the fasta lines
+    some other length of the fasta lines called "line_blen" in the source code? Appears to typically (for me) be length of fasta line + 1.
+Me quedo con las dos primeras columnas que son las que me interesan:
+cut -f1-2 REFERENCES/BACTERIA_GENOME_REFERENCE/WG/bact_wg_all.fna.fai > REFERENCES/BACTERIA_GENOME_REFERENCE/WG/genome_length.txt
+- Lanzo bedtools:
+qsub -V -b y -o ANALYSIS/Unai16/09.BEDTOOLS/unai16_coverage.txt -cwd -q all.q bedtools genomecov -ibam ANALYSIS/03.BACTERIA/Unai16_WG_bacteria_mapped.bam -g REFERENCES/BACTERIA_GENOME_REFERENCE/WG/genome_length.txt 
