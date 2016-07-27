@@ -26,7 +26,7 @@ noHostFilesDir="${sampleAnalysisDir}/02.HOST/" #directory where the host filteri
 sampleR1="${preprocessedFilesDir}${sampleName}_output_R1_paired.fastq"
 sampleR2="${preprocessedFilesDir}${sampleName}_output_R2_paired.fastq"
 mappedSamFile="${noHostFilesDir}${sampleName}_Mapped.sam"
-#noHostFileFastq="${noHostFilesDir}${sampleName}_NoHost.fastq"
+mappedBamFile="${noHostFilesDir}${sampleName}_Mapped.bam"
 bowtie2logFile="${noHostFilesDir}${sampleName}_host_removal.log"
 mappedR1Fastq="${noHostFilesDir}${sampleName}_noHost_R1.fastq"
 mappedR2Fastq="${noHostFilesDir}${sampleName}_noHost_R2.fastq"
@@ -46,16 +46,18 @@ echo -e "$(date)\t Start mapping ${sampleName}\n" > $bowtie2logFile
 echo -e "The command is: ### bowtie2 -fr -x "$hostDB" -q -1 $sampleR1 -2 $sampleR2 -S $mappedSamFile ###\n" >> $bowtie2logFile 
 bowtie2 -fr -x "$hostDB" -q -1 $sampleR1 -2 $sampleR2 -S $mappedSamFile 2>&1 | tee -a $bowtie2logFile
 echo -e "$(date)\t Finished mapping ${sampleName}\n" >> $bowtie2logFile
+echo -e "$(date)\t Converting SAM to BAM of ${sampleName} \n" >> $bowtie2logFile
+samtools view -Sb $mappedSamFile > $mappedBamFile
+rm $mappedSamFile
+echo -e "$(date)\t Finished converting SAM to BAM of ${sampleName} \n" >> $bowtie2logFile
 
 #	SEPARATE R1 AND R2 MAPPED READS AND FILTER HOST
 echo -e "-----------------Filtering non-host reads...---------------------"
 echo -e "$(date)\t Start filtering ${sampleName}\n" >> $bowtie2logFile
-#echo -e "The command is: ###samtools view -F 0x40 $mappedSamFile | awk '{if($3 == '*') print '@'$1'\\n'$10'\\n''+'$1'\\n'$11}' > $mappedR1Fastq" >> $bowtie2logFile
-echo -e "The command is: ###samtools view -F 0x40 $mappedSamFile | awk '{if($3 == '*') print "@"$1'\\n'$10'\\n''+''\\n'$11}' > $mappedR1Fastq" >> $bowtie2logFile
-samtools view -F 0x40 $mappedSamFile | awk '{if($3 == "*") print "@" $1 "\n" $10 "\n" "+" $1 "\n" $11}' > $mappedR1Fastq
-echo -e "The command is: ###samtools view -f 0x40 $mappedSamFile | awk '{if($3 == '*') print '@'$1'\\n'$10'\\n''-''\\n'$11}' > $mappedR2Fastq" >> $bowtie2logFile
-#echo -e "The command is: ###samtools view -f 0x40 $mappedSamFile | awk '{if($3 == '*') print '@'$1'\\n'$10'\\n''+'$1'\\n'$11}' > $mappedR2Fastq" >> $bowtie2logFile
-samtools view -f 0x40 $mappedSamFile | awk '{if($3 == "*") print "@" $1 "\n" $10 "\n" "+" $1 "\n" $11}' > $mappedR2Fastq
+echo -e "The command is: ###samtools view -F 0x40 $mappedBamFile | awk '{if($3 == '*') print "@"$1'\\n'$10'\\n''+''\\n'$11}' > $mappedR1Fastq" >> $bowtie2logFile
+samtools view -F 0x40 $mappedBamFile | awk '{if($3 == "*") print "@" $1 "\n" $10 "\n" "+" $1 "\n" $11}' > $mappedR1Fastq
+echo -e "The command is: ###samtools view -f 0x40 $mappedBamFile | awk '{if($3 == '*') print '@'$1'\\n'$10'\\n''-''\\n'$11}' > $mappedR2Fastq" >> $bowtie2logFile
+samtools view -f 0x40 $mappedBamFile | awk '{if($3 == "*") print "@" $1 "\n" $10 "\n" "+" $1 "\n" $11}' > $mappedR2Fastq
 #	samtools separates R1 (-F) or R2 (-f) reads using the mapped SAM file and awk filters those not mapped (="*") in fastq format
 echo -e "$(date)\t Finished filtering ${sampleName}\n" >> $bowtie2logFile
 
