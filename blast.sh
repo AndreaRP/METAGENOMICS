@@ -32,6 +32,8 @@ lablog="${outputDir}${sampleName}_blast_log.log"
 contigFaa="${outputDir}${sampleName}_contig_aa.faa"
 blastnHits="${outputDir}blastn_Hits.txt"
 
+module load ncbi_blast-2.2.30+
+
 echo -e "$(date)" 
 echo -e "*********** BLAST $sampleName ************"
 

@@ -29,6 +29,8 @@ mappedR2Fastq="${mappedDir}${sampleName}*_R2.fastq"
 #		Output Files
 lablog="${outputDir}${sampleName}_assembly.log"
 
+module load SPAdes-3.5.0
+module load quast-4.1
 
 echo -e "$(date)" 
 echo -e "*********** ASSEMBLY $sampleName ************"

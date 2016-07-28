@@ -46,6 +46,8 @@ bowtie2logFileInvertebrate="${invertebrateFilesDir}${sampleName}_invertebrate_ma
 invertebrateMappedR1Fastq="${invertebrateFilesDir}${sampleName}_invertebrate_R1.fastq" #file with the R1 reads that mapped against the protozoa reference
 invertebrateMappedR2Fastq="${invertebrateFilesDir}${sampleName}_invertebrate_R2.fastq" #file with the R2 reads that mapped against the protozoa reference
 
+module load bowtie/bowtie2-2.2.4
+module load samtools/samtools-1.2
 
 echo -e "$(date)" 
 echo -e "*********** MAPPING parasites IN $sampleName ************"

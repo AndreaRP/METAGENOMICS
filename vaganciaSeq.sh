@@ -107,6 +107,7 @@ module load bowtie/bowtie2-2.2.4
 module load SPAdes-3.5.0
 module load ncbi_blast-2.2.30+
 module load quast-4.1
+module load FastQC-0.11.3
 
 #	GLOBAL VARIABLES
 workingDir='/processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/'
@@ -162,7 +163,6 @@ fi
 #      |_|                    |___/                                   
 
 
-module load samtools/samtools-1.2
 #	TRIMMOMMATIC QUALITY CONTROL
 #	Create sh file
 echo -e "$(date): ********* Start quaility control **********" > "${sampleAnalysisLog}"
@@ -182,6 +182,14 @@ fi
 echo -e "$(date): Execute ${sampleAnalysisDir}/01.PREPROCESSING/TRIMMOMATIC/trimmomatic.sh" >> "${sampleAnalysisLog}"
 $(${sampleAnalysisDir}/01.PREPROCESSING/TRIMMOMATIC/trimmomatic.sh) 
 echo -e "$(date): Finished executing trimmommatic" >> "${sampleAnalysisLog}"
+#	Execute fastqc 
+if [ ! -x ${workingDir}ANALYSIS/SRC/fastqc.sh ]
+then
+	chmod +x ${workingDir}ANALYSIS/SRC/fastqc.sh   
+fi
+echo -e "$(date): Execute fastqc.sh" >> "${sampleAnalysisLog}"
+${workingDir}ANALYSIS/SRC/fastqc.sh $sampleAnalysisDir
+echo -e "$(date): Finish fastqc.sh" >> "${sampleAnalysisLog}"
 echo -e "$(date): ********* Finished quaility control **********" >> "${sampleAnalysisLog}"
 
 #   _               _                                        _ 
@@ -348,7 +356,7 @@ echo -e "$(date): ******** Finished fungi blast ***********" >> "${sampleAnalysi
 #  | .__/ \__,_|_|  \__,_|___/_|\__\___|
 #  |_| 
 
-#	VIRUS MAPPING
+#	PARASITE MAPPING
 echo -e "$(date): ******** start mapping parasite ***********" >> "${sampleAnalysisLog}"
 echo -e "******************* parasites.... are you there? ****************"
 if [ ! -x ${workingDir}ANALYSIS/SRC/mapper_parasite.sh ]

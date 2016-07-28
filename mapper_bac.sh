@@ -45,6 +45,8 @@ bowtie2logFileWG="${bacFilesDir}${sampleName}_WG_bacteria_mapping.log" #log of t
 BacMappedR1WGFastq="${bacFilesDir}${sampleName}_WG_bacteria_R1.fastq" #file with the R1 reads that mapped against the WG reference
 BacMappedR2WGFastq="${bacFilesDir}${sampleName}_WG_bacteria_R2.fastq" #file with the R2 reads that mapped against the WG reference
 
+module load bowtie/bowtie2-2.2.4
+module load samtools/samtools-1.2
 
 echo -e "$(date)" 
 echo -e "*********** MAPPING BACTERIA IN $sampleName ************"
