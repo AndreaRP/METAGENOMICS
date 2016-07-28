@@ -37,6 +37,9 @@ mappedSamFile="${virFilesDir}${sampleName}_virus_mapped.sam"
 mappedBamFile="${bacFilesDir}${sampleName}_virus_mapped.bam" #bowtie bam file with the reads that mapped against the WG reference
 sortedBamFile="${bacFilesDir}${sampleName}_virus_sorted.bam" #bowtie bam file with the reads that mapped against the WG reference
 
+module load bowtie/bowtie2-2.2.4
+module load samtools/samtools-1.2
+
 echo -e "$(date)" 
 echo -e "*********** MAPPING VIRUS IN $sampleName ************"
 

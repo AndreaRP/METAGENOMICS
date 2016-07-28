@@ -32,6 +32,10 @@ sortedBamFile="${noHostFilesDir}${sampleName}_sorted.bam"
 bowtie2logFile="${noHostFilesDir}${sampleName}_host_removal.log"
 mappedR1Fastq="${noHostFilesDir}${sampleName}_noHost_R1.fastq"
 mappedR2Fastq="${noHostFilesDir}${sampleName}_noHost_R2.fastq"
+
+module load bowtie/bowtie2-2.2.4
+module load samtools/samtools-1.2
+
 echo -e "$(date)" 
 echo -e "*********** REMOVING HOST FROM $sampleName ************"
 

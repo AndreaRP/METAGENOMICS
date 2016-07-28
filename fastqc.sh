@@ -22,6 +22,8 @@ fastqcDir="${analysisDir}/01.PREPROCESSING/fastqc/"
 trimmommaticDir="${analysisDir}/01.PREPROCESSING/TRIMMOMATIC/"
 fastqcLablog="${fastqcDir}/fastqc_lablog.log"
 
+module load FastQC-0.11.3
+
 #	create directory if it doesn't exist
 if [ ! -d ${fastqcDir} ]
 then
@@ -32,7 +34,7 @@ fi
 #	execute fastqc for each fastq
 echo -e "$(date)\t Start fastqc \n" > $fastqcLablog
 find $trimmommaticDir -name "*.fastq" -exec fastqc {} --outdir $fastqcDir \; >> $fastqcLablog
-echo -e "$(date)\t End fastqc \n" > $fastqcLablog
+echo -e "$(date)\t End fastqc \n" >> $fastqcLablog
 
 #for file in $( ls $trimmommaticDir )
 #do
