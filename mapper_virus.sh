@@ -35,6 +35,7 @@ VirMappedR1Fastq="${virFilesDir}${sampleName}_Virus_R1.fastq"
 VirMappedR2Fastq="${virFilesDir}${sampleName}_Virus_R2.fastq"
 mappedSamFile="${virFilesDir}${sampleName}_virus_mapped.sam"
 mappedBamFile="${bacFilesDir}${sampleName}_virus_mapped.bam" #bowtie bam file with the reads that mapped against the WG reference
+sortedBamFile="${bacFilesDir}${sampleName}_virus_sorted.bam" #bowtie bam file with the reads that mapped against the WG reference
 
 echo -e "$(date)" 
 echo -e "*********** MAPPING VIRUS IN $sampleName ************"
@@ -55,6 +56,9 @@ echo -e "$(date)\t Finished mapping ${sampleName}\n" >> $bowtie2logFile
 echo -e "$(date)\t Converting SAM to BAM of ${sampleName} \n" >> $bowtie2logFile
 samtools view -Sb $mappedSamFile > $mappedBamFile
 rm $mappedSamFile
+samtools sort -O bam -T temp -o $sortedBamFile $mappedBamFile
+samtools index -b $sortedBamFile
+rm $mappedBamFile
 echo -e "$(date)\t Finished converting SAM to BAM of ${sampleName} \n" >> $bowtie2logFile
 
 #	SEPARATE R1 AND R2 MAPPED READS AND FILTER HOST

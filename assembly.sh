@@ -8,7 +8,7 @@ set -e
 # 2. Assembles fastq files.
 # 3. Runs quast to see quality
 # Output files: (In ANALYSIS/sampleName/05.ASSEMBLY)
-# sampleName_bacteria_mapped.sam: SAM file from mapping the processed files against the reference genome.
+# sampleName_bacteria_sorted.sam: SAM file from mapping the processed files against the reference genome.
 # sampleName_*_R1.fastq: .fastq file with R1 reads that mapped the DB.
 # sampleName_*_R2.fastq: .fastq file with R2 reads that mapped the DB.
 # sampleName_assembly.log: .log file with a log of the mapping.
@@ -55,4 +55,4 @@ echo -e "$(date)\t finished running quast for ${sampleName} for ${organism}\n" >
 
 }
 
-assemble /processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/ANALYSIS/Unai16/03.BACTERIA/
+#assemble /processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/ANALYSIS/Unai16/03.BACTERIA/

@@ -34,12 +34,14 @@ noHostR2Fastq="${noHostDir}${sampleName}_noHost_R2.fastq" #R2 host free file
 #		Output Files: invertebrate
 mappedSamProtozoaFile="${protozoaFilesDir}${sampleName}_protozoa_mapped.sam" #bowtie sam file with the reads that mapped against the invertebrate reference
 mappedBamProtozoaFile="${bacFilesDir}${sampleName}_WG_protozoa_mapped.bam" #bowtie bam file with the reads that mapped against the WG reference
+sortedBamProtozoaFile="${bacFilesDir}${sampleName}_WG_protozoa_sorted.bam" #bowtie bam file with the reads that mapped against the WG reference
 bowtie2logFileProtozoa="${protozoaFilesDir}${sampleName}_protozoa_mapping.log" #log of the mapping against the invertebrate reference
 protozoaMappedR1Fastq="${protozoaFilesDir}${sampleName}_protozoa_R1.fastq" #file with the R1 reads which mapped against invertebrate reference
 protozoaMappedR2Fastq="${protozoaFilesDir}${sampleName}_protozoa_R2.fastq" #file with the R2 reads which mapped against the invertebrate reference
 #					  protozoa
 mappedSamInvertebrateFile="${invertebrateFilesDir}${sampleName}_invertebrate_mapped.sam" #bowtie sam file with the reads that mapped against the protozoa reference
 mappedBamInvertebrateFile="${bacFilesDir}${sampleName}_WG_invertebrate_mapped.bam" #bowtie bam file with the reads that mapped against the WG reference
+sortedBamInvertebrateFile="${bacFilesDir}${sampleName}_WG_invertebrate_sorted.bam" #bowtie bam file with the reads that mapped against the WG reference
 bowtie2logFileInvertebrate="${invertebrateFilesDir}${sampleName}_invertebrate_mapping.log" #log of the mapping against the protozoa reference  
 invertebrateMappedR1Fastq="${invertebrateFilesDir}${sampleName}_invertebrate_R1.fastq" #file with the R1 reads that mapped against the protozoa reference
 invertebrateMappedR2Fastq="${invertebrateFilesDir}${sampleName}_invertebrate_R2.fastq" #file with the R2 reads that mapped against the protozoa reference
@@ -70,6 +72,9 @@ echo -e "$(date)\t Finished mapping ${sampleName} against protozoa reference \n"
 echo -e "$(date)\t Converting SAM to BAM of ${sampleName} \n" >> $bowtie2logFileProtozoa
 samtools view -Sb $mappedSamProtozoaFile > $mappedBamProtozoaFile
 rm $mappedSamProtozoaFile
+samtools sort -O bam -T temp -o $sortedBamProtozoaFile $mappedBamProtozoaFile
+samtools index -b $sortedBamProtozoaFile
+rm $mappedBamProtozoaFile
 echo -e "$(date)\t Finished converting SAM to BAM of ${sampleName} \n" >> $bowtie2logFileProtozoa
 
 #	SEPARATE AND EXTRACT R1 AND R2 READS MAPPED TO protozoa 
@@ -92,15 +97,18 @@ echo -e "$(date)\t Finished mapping ${sampleName} against Invertebrate reference
 echo -e "$(date)\t Converting SAM to BAM of ${sampleName} \n" >> $bowtie2logFileInvertebrate
 samtools view -Sb $mappedSamInvertebrateFile > $mappedBamInvertebrateFile
 rm $mappedSamInvertebrateFile
+samtools sort -O bam -T temp -o $sortedBamInvertebrateFile $mappedBamInvertebrateFile
+samtools index -b $sortedBamInvertebrateFile
+rm $mappedBamInvertebrateFile
 echo -e "$(date)\t Finished converting SAM to BAM of ${sampleName} \n" >> $bowtie2logFileInvertebrate
 
 #	SEPARATE AND EXTRACT R1 AND R2 READS MAPPED TO Invertebrate 
 echo -e "----------------- Filtering Invertebrate reads that mapped to reference ...---------------------"
 echo -e "$(date)\t Start filtering ${sampleName} reads that mapped to Invertebrate \n" >> $bowtie2logFileInvertebrate
-echo -e "The command is: ###samtools view -F 0x40 $mappedBamInvertebrateFile | awk '{if($3 != '*') print '@' $1 '\\n' $10 '\\n' '+' '\\n' $11}' > $invertebrateMappedR1Fastq" >> $bowtie2logFileInvertebrate
-samtools view -F 0x40 $mappedBamInvertebrateFile | awk '{if($3 != "*") print "@" $1 "\n" $10 "\n" "+" $1 "\n" $11}' > $invertebrateMappedR1Fastq
-echo -e "The command is: ###samtools view -f 0x40 $mappedBamInvertebrateFile | awk '{if($3 != '*') print '@' $1 '\\n' $10 '\\n' '-' '\\n' $11}' > $invertebrateMappedR2Fastq" >> $bowtie2logFileInvertebrate
-samtools view -f 0x40 $mappedBamInvertebrateFile | awk '{if($3 != "*") print "@" $1 "\n" $10 "\n" "+" $1 "\n" $11}' > $invertebrateMappedR2Fastq
+echo -e "The command is: ###samtools view -F 0x40 $sortedBamInvertebrateFile | awk '{if($3 != '*') print '@' $1 '\\n' $10 '\\n' '+' '\\n' $11}' > $invertebrateMappedR1Fastq" >> $bowtie2logFileInvertebrate
+samtools view -F 0x40 $sortedBamInvertebrateFile | awk '{if($3 != "*") print "@" $1 "\n" $10 "\n" "+" $1 "\n" $11}' > $invertebrateMappedR1Fastq
+echo -e "The command is: ###samtools view -f 0x40 $sortedBamInvertebrateFile | awk '{if($3 != '*') print '@' $1 '\\n' $10 '\\n' '-' '\\n' $11}' > $invertebrateMappedR2Fastq" >> $bowtie2logFileInvertebrate
+samtools view -f 0x40 $sortedBamInvertebrateFile | awk '{if($3 != "*") print "@" $1 "\n" $10 "\n" "+" $1 "\n" $11}' > $invertebrateMappedR2Fastq
 #	samtools separates R1 (-F) or R2 (-f) reads using the mapped SAM file and awk filters those mapped (=!"*") in fastq format
 echo -e "$(date)\t Finished filtering ${sampleName} reads that mapped to Invertebrate \n" >> $bowtie2logFileInvertebrate
 
