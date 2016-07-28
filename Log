@@ -299,4 +299,20 @@ esto saca un archivo .fai con:
 Me quedo con las dos primeras columnas que son las que me interesan:
 cut -f1-2 REFERENCES/BACTERIA_GENOME_REFERENCE/WG/bact_wg_all.fna.fai > REFERENCES/BACTERIA_GENOME_REFERENCE/WG/genome_length.txt
 - Lanzo bedtools:
-qsub -V -b y -o ANALYSIS/Unai16/09.BEDTOOLS/unai16_coverage.txt -cwd -q all.q bedtools genomecov -ibam ANALYSIS/03.BACTERIA/Unai16_WG_bacteria_mapped.bam -g REFERENCES/BACTERIA_GENOME_REFERENCE/WG/genome_length.txt 
+qsub -V -b y -o ANALYSIS/Unai16/09.BEDTOOLS/unai16_coverage.txt -cwd -q all.q bedtools genomecov -ibam ANALYSIS/Unai16/03.BACTERIA/Unai16_WG_bacteria_mapped.bam -g REFERENCES/BACTERIA_GENOME_REFERENCE/WG/genome_length.txt 
+
+28-7-2016
+- Cambio scrpits:
+    - ahora funciona con el bam sorteado y genera indice .bai
+    - creo el script para generar fastqc de cada fastq una vez trimado
+    - modularizo vagancia para lanzar cada parte por separado
+- Hay que:
+  - lanzar de nuevo bedtools genomecoverage para ver si se siguen duplicando entradas
+  - crear script que haga lo de bedtools y añadirlo a los pasos de cada organismo
+
+
+
+
+
+
+
