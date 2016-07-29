@@ -79,3 +79,17 @@ source ${workingDir}ANALYSIS/SRC/blast.sh
 echo -e " Execute blast $sampleAnalysisDir $virDB" >> "${sampleAnalysisLog}"
 blast $sampleAnalysisDir $virDB
 echo -e "$(date): ******** Finished virus blast ***********" >> "${sampleAnalysisLog}"
+
+
+
+#	COVERAGE 
+echo -e "$(date): ******** Start calculating coverage for virus ***********" >> "${sampleAnalysisLog}"
+echo -e "******************* Start calculating coverage for virus ****************"
+if [ ! -x ${workingDir}ANALYSIS/SRC/coverage.sh ]
+then
+	chmod +x ${workingDir}ANALYSIS/SRC/coverage.sh 
+fi
+#	execute coverage script
+echo -e " Execute coverage.sh $sampleAnalysisDir $virDB" >> "${sampleAnalysisLog}"
+coverage.sh $sampleAnalysisDir $virDB
+echo -e "$(date): ******** Finished virus coverage ***********" >> "${sampleAnalysisLog}" 

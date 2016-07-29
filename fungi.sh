@@ -79,3 +79,16 @@ source ${workingDir}ANALYSIS/SRC/blast.sh
 echo -e " Execute blast $sampleAnalysisDir $fungiDB" >> "${sampleAnalysisLog}"
 blast $sampleAnalysisDir $fungiDB
 echo -e "$(date): ******** Finished fungi blast ***********" >> "${sampleAnalysisLog}"
+
+
+#	COVERAGE 
+echo -e "$(date): ******** Start calculating coverage for fungi ***********" >> "${sampleAnalysisLog}"
+echo -e "******************* Start calculating coverage for fungi ****************"
+if [ ! -x ${workingDir}ANALYSIS/SRC/coverage.sh ]
+then
+	chmod +x ${workingDir}ANALYSIS/SRC/coverage.sh 
+fi
+#	execute coverage script
+echo -e " Execute coverage.sh $sampleAnalysisDir $fungiDB" >> "${sampleAnalysisLog}"
+coverage.sh $sampleAnalysisDir $fungiDB
+echo -e "$(date): ******** Finished fungi coverage ***********" >> "${sampleAnalysisLog}" 

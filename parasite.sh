@@ -78,3 +78,16 @@ source ${workingDir}ANALYSIS/SRC/blast.sh
 echo -e " Execute blast $sampleAnalysisDir $parasiteDB" >> "${sampleAnalysisLog}"
 blast $sampleAnalysisDir $parasiteDB
 echo -e "$(date): ******** Finished parasite blast ***********" >> "${sampleAnalysisLog}"
+
+
+#	COVERAGE 
+echo -e "$(date): ******** Start calculating coverage for parasite ***********" >> "${sampleAnalysisLog}"
+echo -e "******************* Start calculating coverage for parasite ****************"
+if [ ! -x ${workingDir}ANALYSIS/SRC/coverage.sh ]
+then
+	chmod +x ${workingDir}ANALYSIS/SRC/coverage.sh 
+fi
+#	execute coverage script
+echo -e " Execute coverage.sh $sampleAnalysisDir $parasiteDB" >> "${sampleAnalysisLog}"
+coverage.sh $sampleAnalysisDir $parasiteDB
+echo -e "$(date): ******** Finished parasite coverage ***********" >> "${sampleAnalysisLog}" 
