@@ -30,10 +30,10 @@ echo -e "$(date)"
 echo -e "*********** CALCULATING COVERAGE OF $organism FOR $sampleName ************"
 
 #	CREATE DIRECTORY FOR THE SAMPLE IF NECESSARY
-if [ ! -d ${genomeCov} ]
+if [ ! -d "${sampleAnalysisDir}/09.COVERAGE/${organism}/" ]
 then
-	mkdir -p $genomeCov
-	echo -e "${genomeCov} created"
+	mkdir -p "${sampleAnalysisDir}/09.COVERAGE/${organism}/"
+	echo -e "${sampleAnalysisDir}/09.COVERAGE/${organism}/ created"
 fi
 
 ################################################################################################	
