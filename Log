@@ -310,9 +310,24 @@ qsub -V -b y -o ANALYSIS/Unai16/09.BEDTOOLS/unai16_coverage.txt -cwd -q all.q be
   - lanzar de nuevo bedtools genomecoverage para ver si se siguen duplicando entradas
   - crear script que haga lo de bedtools y añadirlo a los pasos de cada organismo
 
-
-
-
-
+29-7-2016
+- Relanzo bedtools con el bam ordenado para ver si furula
+qsub -V -b y -o ANALYSIS/Unai16/09.BEDTOOLS/unai16_coverage.txt -cwd -q all.q bedtools genomecov -ibam ANALYSIS/Unai16/03.BACTERIA/Unai16_WG_bacteria_sorted.bam -g REFERENCES/BACTERIA_GENOME_REFERENCE/WG/genome_length.txt
+- Creo los length de las referencias de:
+Virus:
+fqsub samtools faidx REFERENCES/VIRUS_GENOME_REFERENCE/WG/virus_wg_all.fasta
+cut -f1-2 REFERENCES/VIRUS_GENOME_REFERENCE/WG/virus_wg_all.fasta.fai > REFERENCES/VIRUS_GENOME_REFERENCE/WG/genome_length.txt
+Fungi:
+fqsub samtools faidx REFERENCES/FUNGI_GENOME_REFERENCE/WG/fungi_all.fna
+cut -f1-2 REFERENCES/FUNGI_GENOME_REFERENCE/WG/fungi_all.fna.fai > REFERENCES/FUNGI_GENOME_REFERENCE/WG/genome_length.txt
+Invertebrate:
+fqsub samtools faidx REFERENCES/INVERTEBRATE_GENOME_REFERENCE/WG/invertebrate_wg_all.fna
+cut -f1-2 REFERENCES/INVERTEBRATE_GENOME_REFERENCE/WG/invertebrate_wg_all.fna.fai > REFERENCES/INVERTEBRATE_GENOME_REFERENCE/WG/genome_length.txt
+Protozoa:
+fqsub samtools faidx REFERENCES/PROTOZOA_GENOME_REFERENCE/WG/protozoa_wg_all.fna
+cut -f1-2 REFERENCES/PROTOZOA_GENOME_REFERENCE/WG/protozoa_wg_all.fna.fai > REFERENCES/PROTOZOA_GENOME_REFERENCE/WG/genome_length.txt
+- Creo script coverage.sh para sacar la cobertura con bedtools
+- Añado a los módulos la parte de cobertura
+- Falta añadir la cobertura en vagancia
 
 
