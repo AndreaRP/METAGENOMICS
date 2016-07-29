@@ -29,7 +29,7 @@ mappedR2Fastq="${mappedDir}${sampleName}*_R2.fastq"
 #		Output Files
 lablog="${outputDir}${sampleName}_assembly.log"
 
-module load SPAdes-3.5.0
+module load SPAdes-3.8.0
 module load quast-4.1
 
 echo -e "$(date)" 
@@ -41,7 +41,19 @@ then
 	mkdir -p $outputDir
 	echo -e "${outputDir} created"
 fi
-	
+if [ ! -d "${outputDir}spades" ]
+then
+	mkdir -p "${outputDir}spades"
+	echo -e "${outputDir}spades created"
+fi
+if [ ! -d "${outputDir}quast" ]
+then
+	mkdir -p "${outputDir}quast"
+	echo -e "${outputDir}quast created"
+fi
+
+
+
 #	RUN SPADES	
 echo -e "$(date)\t start running spades for ${sampleName} for ${organism}\n" > $lablog
 echo -e "The command is: ### spades.py --phred-offset 33 -1 $mappedR1Fastq -2 $mappedR2Fastq --meta -o $outputDir" >> $lablog
