@@ -257,6 +257,19 @@ echo -e " Execute blast $sampleAnalysisDir $bacDB" >> "${sampleAnalysisLog}"
 blast $sampleAnalysisDir $bacDB
 echo -e "$(date): ******** Finished bacteria blast ***********" >> "${sampleAnalysisLog}"
 
+#	COVERAGE 
+echo -e "$(date): ******** Start calculating coverage for bacteria ***********" >> "${sampleAnalysisLog}"
+echo -e "******************* Start calculating coverage for bacteria ****************"
+if [ ! -x ${workingDir}ANALYSIS/SRC/coverage.sh ]
+then
+	chmod +x ${workingDir}ANALYSIS/SRC/coverage.sh 
+fi
+#	execute coverage script
+echo -e " Execute coverage.sh $sampleAnalysisDir $bacDB" >> "${sampleAnalysisLog}"
+coverage.sh $sampleAnalysisDir $bacDB
+echo -e "$(date): ******** Finished bacteria coverage ***********" >> "${sampleAnalysisLog}" 
+
+
 #         _                
 #  __   _(_)_ __ _   _ ___ 
 #  \ \ / / | '__| | | / __|
@@ -302,6 +315,18 @@ source ${workingDir}ANALYSIS/SRC/blast.sh
 echo -e " Execute blast $sampleAnalysisDir $virDB" >> "${sampleAnalysisLog}"
 blast $sampleAnalysisDir $virDB
 echo -e "$(date): ******** Finished virus blast ***********" >> "${sampleAnalysisLog}"
+
+#	COVERAGE 
+echo -e "$(date): ******** Start calculating coverage for virus ***********" >> "${sampleAnalysisLog}"
+echo -e "******************* Start calculating coverage for virus ****************"
+if [ ! -x ${workingDir}ANALYSIS/SRC/coverage.sh ]
+then
+	chmod +x ${workingDir}ANALYSIS/SRC/coverage.sh 
+fi
+#	execute coverage script
+echo -e " Execute coverage.sh $sampleAnalysisDir $virDB" >> "${sampleAnalysisLog}"
+coverage.sh $sampleAnalysisDir $virDB
+echo -e "$(date): ******** Finished virus coverage ***********" >> "${sampleAnalysisLog}" 
 
 #    __                   _ 
 #   / _|_   _ _ __   __ _(_)
@@ -349,6 +374,18 @@ echo -e " Execute blast $sampleAnalysisDir $fungiDB" >> "${sampleAnalysisLog}"
 blast $sampleAnalysisDir $fungiDB
 echo -e "$(date): ******** Finished fungi blast ***********" >> "${sampleAnalysisLog}"
 
+#	COVERAGE 
+echo -e "$(date): ******** Start calculating coverage for fungi ***********" >> "${sampleAnalysisLog}"
+echo -e "******************* Start calculating coverage for fungi ****************"
+if [ ! -x ${workingDir}ANALYSIS/SRC/coverage.sh ]
+then
+	chmod +x ${workingDir}ANALYSIS/SRC/coverage.sh 
+fi
+#	execute coverage script
+echo -e " Execute coverage.sh $sampleAnalysisDir $fungiDB" >> "${sampleAnalysisLog}"
+coverage.sh $sampleAnalysisDir $fungiDB
+echo -e "$(date): ******** Finished fungi coverage ***********" >> "${sampleAnalysisLog}" 
+
 #                             _ _       
 #   _ __   __ _ _ __ __ _ ___(_) |_ ___ 
 #  | '_ \ / _` | '__/ _` / __| | __/ _ \
@@ -394,3 +431,16 @@ source ${workingDir}ANALYSIS/SRC/blast.sh
 echo -e " Execute blast $sampleAnalysisDir $parasiteDB" >> "${sampleAnalysisLog}"
 blast $sampleAnalysisDir $parasiteDB
 echo -e "$(date): ******** Finished parasite blast ***********" >> "${sampleAnalysisLog}"
+
+
+#	COVERAGE 
+echo -e "$(date): ******** Start calculating coverage for parasite ***********" >> "${sampleAnalysisLog}"
+echo -e "******************* Start calculating coverage for parasite ****************"
+if [ ! -x ${workingDir}ANALYSIS/SRC/coverage.sh ]
+then
+	chmod +x ${workingDir}ANALYSIS/SRC/coverage.sh 
+fi
+#	execute coverage script
+echo -e " Execute coverage.sh $sampleAnalysisDir $parasiteDB" >> "${sampleAnalysisLog}"
+coverage.sh $sampleAnalysisDir $parasiteDB
+echo -e "$(date): ******** Finished parasite coverage ***********" >> "${sampleAnalysisLog}" 

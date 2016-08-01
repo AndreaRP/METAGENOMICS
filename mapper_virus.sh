@@ -34,8 +34,8 @@ bowtie2logFile="${virFilesDir}${sampleName}_virus_mapping.log"
 VirMappedR1Fastq="${virFilesDir}${sampleName}_Virus_R1.fastq"
 VirMappedR2Fastq="${virFilesDir}${sampleName}_Virus_R2.fastq"
 mappedSamFile="${virFilesDir}${sampleName}_virus_mapped.sam"
-mappedBamFile="${bacFilesDir}${sampleName}_virus_mapped.bam" #bowtie bam file with the reads that mapped against the WG reference
-sortedBamFile="${bacFilesDir}${sampleName}_virus_sorted.bam" #bowtie bam file with the reads that mapped against the WG reference
+mappedBamFile="${virFilesDir}${sampleName}_virus_mapped.bam" #bowtie bam file with the reads that mapped against the WG reference
+sortedBamFile="${virFilesDir}${sampleName}_virus_sorted.bam" #bowtie bam file with the reads that mapped against the WG reference
 
 module load bowtie/bowtie2-2.2.4
 module load samtools/samtools-1.2
@@ -67,10 +67,10 @@ echo -e "$(date)\t Finished converting SAM to BAM of ${sampleName} \n" >> $bowti
 #	SEPARATE R1 AND R2 MAPPED READS AND FILTER HOST
 echo -e "----------------- Filtering virus reads ...---------------------"
 echo -e "$(date)\t Start filtering ${sampleName}\n" >> $bowtie2logFile
-echo -e "The command is: ###samtools view -F 0x40 $mappedBamFile | awk '{if($3 != "*") print "@"$1"\n"$10"\n""+""\n"$11}' > $VirMappedR1Fastq" >> $bowtie2logFile
-samtools view -F 0x40 $mappedBamFile | awk '{if($3 != "*") print "@" $1" \n" $10 "\n" "+" $1 "\n" $11}' > $VirMappedR1Fastq
-echo -e "The command is: ###samtools view -f 0x40 $mappedBamFile | awk '{if($3 != "*") print "@"$1"\n"$10"\n""-""\n"$11}' > $VirMappedR2Fastq" >> $bowtie2logFile
-samtools view -f 0x40 $mappedBamFile | awk '{if($3 != "*") print "@" $1" \n" $10 "\n" "+" $1 "\n" $11}' > $VirMappedR2Fastq
+echo -e "The command is: ###samtools view -F 0x40 $sortedBamFile | awk '{if($3 != "*") print "@"$1"\n"$10"\n""+""\n"$11}' > $VirMappedR1Fastq" >> $bowtie2logFile
+samtools view -F 0x40 $sortedBamFile | awk '{if($3 != "*") print "@" $1" \n" $10 "\n" "+" $1 "\n" $11}' > $VirMappedR1Fastq
+echo -e "The command is: ###samtools view -f 0x40 $sortedBamFile | awk '{if($3 != "*") print "@"$1"\n"$10"\n""-""\n"$11}' > $VirMappedR2Fastq" >> $bowtie2logFile
+samtools view -f 0x40 $sortedBamFile | awk '{if($3 != "*") print "@" $1" \n" $10 "\n" "+" $1 "\n" $11}' > $VirMappedR2Fastq
 #	samtools separates R1 (-F) or R2 (-f) reads using the mapped BAM file and awk filters those mapped (=!"*") in fastq format
 echo -e "$(date)\t Finished filtering ${sampleName}\n" >> $bowtie2logFile
 

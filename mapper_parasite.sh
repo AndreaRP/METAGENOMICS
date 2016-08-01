@@ -33,15 +33,15 @@ noHostR1Fastq="${noHostDir}${sampleName}_noHost_R1.fastq" #R1 host free file
 noHostR2Fastq="${noHostDir}${sampleName}_noHost_R2.fastq" #R2 host free file
 #		Output Files: invertebrate
 mappedSamProtozoaFile="${protozoaFilesDir}${sampleName}_protozoa_mapped.sam" #bowtie sam file with the reads that mapped against the invertebrate reference
-mappedBamProtozoaFile="${bacFilesDir}${sampleName}_WG_protozoa_mapped.bam" #bowtie bam file with the reads that mapped against the WG reference
-sortedBamProtozoaFile="${bacFilesDir}${sampleName}_WG_protozoa_sorted.bam" #bowtie bam file with the reads that mapped against the WG reference
+mappedBamProtozoaFile="${protozoaFilesDir}${sampleName}_protozoa_mapped.bam" #bowtie bam file with the reads that mapped against the WG reference
+sortedBamProtozoaFile="${protozoaFilesDir}${sampleName}_protozoa_sorted.bam" #bowtie bam file with the reads that mapped against the WG reference
 bowtie2logFileProtozoa="${protozoaFilesDir}${sampleName}_protozoa_mapping.log" #log of the mapping against the invertebrate reference
 protozoaMappedR1Fastq="${protozoaFilesDir}${sampleName}_protozoa_R1.fastq" #file with the R1 reads which mapped against invertebrate reference
 protozoaMappedR2Fastq="${protozoaFilesDir}${sampleName}_protozoa_R2.fastq" #file with the R2 reads which mapped against the invertebrate reference
 #					  protozoa
 mappedSamInvertebrateFile="${invertebrateFilesDir}${sampleName}_invertebrate_mapped.sam" #bowtie sam file with the reads that mapped against the protozoa reference
-mappedBamInvertebrateFile="${bacFilesDir}${sampleName}_WG_invertebrate_mapped.bam" #bowtie bam file with the reads that mapped against the WG reference
-sortedBamInvertebrateFile="${bacFilesDir}${sampleName}_WG_invertebrate_sorted.bam" #bowtie bam file with the reads that mapped against the WG reference
+mappedBamInvertebrateFile="${invertebrateFilesDir}${sampleName}_invertebrate_mapped.bam" #bowtie bam file with the reads that mapped against the WG reference
+sortedBamInvertebrateFile="${invertebrateFilesDir}${sampleName}_invertebrate_sorted.bam" #bowtie bam file with the reads that mapped against the WG reference
 bowtie2logFileInvertebrate="${invertebrateFilesDir}${sampleName}_invertebrate_mapping.log" #log of the mapping against the protozoa reference  
 invertebrateMappedR1Fastq="${invertebrateFilesDir}${sampleName}_invertebrate_R1.fastq" #file with the R1 reads that mapped against the protozoa reference
 invertebrateMappedR2Fastq="${invertebrateFilesDir}${sampleName}_invertebrate_R2.fastq" #file with the R2 reads that mapped against the protozoa reference
