@@ -330,4 +330,14 @@ cut -f1-2 REFERENCES/PROTOZOA_GENOME_REFERENCE/WG/protozoa_wg_all.fna.fai > REFE
 - Añado a los módulos la parte de cobertura
 - Falta añadir la cobertura en vagancia
 
+23-08-2016
+
+El archivo coverage de bedtools tiene las siguientes columnas:
+1. cromosoma (genoma de bicho) 
+2. cobertura 
+3. pb cubiertas 
+4. pares de bases totales 
+5. porcentaje cubierto
+
+Hay una entrada por cada cobertura de cada genoma.
 
