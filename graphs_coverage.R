@@ -4,14 +4,29 @@ library(plyr)
 #brewer_qualitative <- c("#0000ff","#ff0000","#483215","#008900","#7244c4","#e65a11","#000000","#e6e528","#ff00ee","#6e0000","#00c7dd","#d4b455","#8f008d","#736b00","#7d8cbf","#c2a91b","#374a12")
 # get file names
 # Para cada genoma genero un histograma con la cobertura
+#print(files <- list.files(pattern="coverage.csv$"))
 print(files <- list.files(pattern="coverage.csv$"))
+
 
 # load and parse the files
 #cov_graph <- NULL
 #for (f in files){
 # 	df=read.table(f, sep="\t")
-#	colnames(df) <- c("chr","covThreshold","fractionAtThisCoverage","ChrLength","diffFracBelowThreshold")
-# 	cov <- ddply(df,.(chr),summarize,covThreshold=covThreshold,fracAboveThreshold=1-cumsum(diffFracBelowThreshold))
+ 	df=read.table("/processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/ANALYSIS/06-virus/Unai-16/coverage/Unai-16_genome_coverage.txt", sep="\t")
+	colnames(df) <- c("gnm","covThreshold","fractionAtThisCoverage","genomeLength","diffFracBelowThreshold")
+ 	cov <- ddply(df,.(gnm),summarize,covThreshold=covThreshold,fracAboveThreshold=1-cumsum(diffFracBelowThreshold))
+ 	#nueva tabla con la media, min, max, sd y mediana de cada genoma
+ 	new_cov <- ddply(cov,.(gnm),summarize,covMean=mean(covThreshold),covMin=min(covThreshold),covMax=max(covThreshold),covSD=sd(covThreshold),covMedian=median(covThreshold))
+ 	#se agrupa por gnm y se saca el valor que corresponde a cobertura >1, >5, >10 y >20 (en columnas)
+	summary_cov <- by(cov, cov[,"gnm"], function(x) x$fracAboveThreshold[x$covThreshold==1 | x$covThreshold==5 | x$covThreshold==10 | x$covThreshold==20])
+ 	#convierte una lista en matriz
+ 	summary_cov <- do.call(rbind,summary_cov)
+ 	#damos nombre a las columnas
+ 	colnames(summary_cov) <- c("x1","x5","x10","x20")
+ 	#junto los dos dataframes
+ 	cov_def <- cbind(new_cov[new_cov$covMean > 0,],summary_cov)
+ 	write.table(cov_def, file="coverageTable.txt",sep="\t",row.names=F)
+
 # 	cov_graph <- rbind(cov_graph,cbind(cov, sample= gsub("^([0-9a-zA-Z]+).*$", "\\1", f)))
 #}
 #

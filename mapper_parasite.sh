@@ -19,29 +19,30 @@ set -e
 function map_protozoa {
 #	GET ARGUMENTS
 DB=$1  
-sampleAnalysisDir=$2
+sampleDir=$2
 #	INITIALIZE VARIABLES
 #		Directories
-sampleName=$(basename "${sampleAnalysisDir}")
+sampleName=$(basename "${sampleDir}")
 invertebrateDB="${DB}INVERTEBRATE_GENOME_REFERENCE/WG/bwt2/invertebrate_all"
 protozoaDB="${DB}PROTOZOA_GENOME_REFERENCE/WG/bwt2/protozoa_all"
-protozoaFilesDir="${sampleAnalysisDir}/06.PROTOZOA/" #directory where the files will we saved (sam for mapping and fastq for mapped samples)
-invertebrateFilesDir="${sampleAnalysisDir}/07.INVERTEBRATE/" #directory where the files will we saved (sam for mapping and fastq for mapped samples)
-noHostDir="${sampleAnalysisDir}/02.HOST/" #directory where the host free samples are located
+workingDir="/processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/"
+protozoaFilesDir="${workingDir}/ANALYSIS/08-protozoa/${sampleName}/reads/" #directory where the files will we saved (sam for mapping and fastq for mapped samples)
+invertebrateFilesDir="${workingDir}/ANALYSIS/09-invertebrate/${sampleName}/reads/" #directory where the files will we saved (sam for mapping and fastq for mapped samples)
+noHostDir="${workingDir}ANALYSIS/04-noHost/${sampleName}/" #directory where the host free samples are located
 #		Input Files
 noHostR1Fastq="${noHostDir}${sampleName}_noHost_R1.fastq" #R1 host free file
 noHostR2Fastq="${noHostDir}${sampleName}_noHost_R2.fastq" #R2 host free file
-#		Output Files: invertebrate
-mappedSamProtozoaFile="${protozoaFilesDir}${sampleName}_protozoa_mapped.sam" #bowtie sam file with the reads that mapped against the invertebrate reference
+#		Output Files: protozoa
+mappedSamProtozoaFile="${protozoaFilesDir}${sampleName}_protozoa_mapped.sam" #bowtie sam file with the reads that mapped against the protozoa reference
 mappedBamProtozoaFile="${protozoaFilesDir}${sampleName}_protozoa_mapped.bam" #bowtie bam file with the reads that mapped against the WG reference
-sortedBamProtozoaFile="${protozoaFilesDir}${sampleName}_protozoa_sorted.bam" #bowtie bam file with the reads that mapped against the WG reference
+sortedBamProtozoaFile="${protozoaFilesDir}${sampleName}_protozoa_sorted.bam" #sorted bowtie bam file with the reads that mapped against the WG reference
 bowtie2logFileProtozoa="${protozoaFilesDir}${sampleName}_protozoa_mapping.log" #log of the mapping against the invertebrate reference
 protozoaMappedR1Fastq="${protozoaFilesDir}${sampleName}_protozoa_R1.fastq" #file with the R1 reads which mapped against invertebrate reference
 protozoaMappedR2Fastq="${protozoaFilesDir}${sampleName}_protozoa_R2.fastq" #file with the R2 reads which mapped against the invertebrate reference
-#					  protozoa
-mappedSamInvertebrateFile="${invertebrateFilesDir}${sampleName}_invertebrate_mapped.sam" #bowtie sam file with the reads that mapped against the protozoa reference
+#		Output Files: invertebrate
+mappedSamInvertebrateFile="${invertebrateFilesDir}${sampleName}_invertebrate_mapped.sam" #bowtie sam file with the reads that mapped against the invertebrate reference
 mappedBamInvertebrateFile="${invertebrateFilesDir}${sampleName}_invertebrate_mapped.bam" #bowtie bam file with the reads that mapped against the WG reference
-sortedBamInvertebrateFile="${invertebrateFilesDir}${sampleName}_invertebrate_sorted.bam" #bowtie bam file with the reads that mapped against the WG reference
+sortedBamInvertebrateFile="${invertebrateFilesDir}${sampleName}_invertebrate_sorted.bam" #sorted bowtie bam file with the reads that mapped against the WG reference
 bowtie2logFileInvertebrate="${invertebrateFilesDir}${sampleName}_invertebrate_mapping.log" #log of the mapping against the protozoa reference  
 invertebrateMappedR1Fastq="${invertebrateFilesDir}${sampleName}_invertebrate_R1.fastq" #file with the R1 reads that mapped against the protozoa reference
 invertebrateMappedR2Fastq="${invertebrateFilesDir}${sampleName}_invertebrate_R2.fastq" #file with the R2 reads that mapped against the protozoa reference

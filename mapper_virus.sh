@@ -22,7 +22,7 @@ virDB=$1
 sampleDir=$2
 #	INITIALIZE VARIABLES
 #		Directories
-virDBDir="${virDB}/WG/bwt2/all.fna.tar.gz"
+virDBDir="${virDB}/WG/bwt2/virus_all"
 sampleName=$(basename "${sampleDir}")
 workingDir="/processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/"
 virFilesDir="${workingDir}/ANALYSIS/06-virus/${sampleName}/reads/" #directory where the host filtering files will we saved (sam for mapping and fastq for host free samples)

@@ -19,14 +19,15 @@ set -e
 function map_fungi {
 #	GET ARGUMENTS
 fungiDB=$1  
-sampleAnalysisDir=$2
+sampleDir=$2
 #	INITIALIZE VARIABLES
 #		Directories
-sampleName=$(basename "${sampleAnalysisDir}")
+sampleName=$(basename "${sampleDir}")
 fungiITSDB="${fungiDB}ITS/bwt2/ITS_all"
 fungiWGDB="${fungiDB}WG/bwt2/fungi_all"
-fungiFilesDir="${sampleAnalysisDir}/05.FUNGI/" #directory where the files will we saved (sam for mapping and fastq for mapped samples)
-noHostDir="${sampleAnalysisDir}/02.HOST/" #directory where the host free samples are located
+workingDir="/processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/"
+fungiFilesDir="${workingDir}/ANALYSIS/07-fungi/${sampleName}/reads/" #directory where the files will we saved (sam for mapping and fastq for mapped samples)
+noHostDir="${workingDir}ANALYSIS/04-noHost/${sampleName}/" #directory where the host free samples are located
 #		Input Files
 noHostR1Fastq="${noHostDir}${sampleName}_noHost_R1.fastq" #R1 host free file
 noHostR2Fastq="${noHostDir}${sampleName}_noHost_R2.fastq" #R2 host free file
