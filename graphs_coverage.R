@@ -57,7 +57,7 @@ by(cov, cov[,"gnm"], function(g) {
 		#scale_color_manual(values=brewer_qualitative) +
 		theme_bw() +
 		theme(axis.text.x = element_text(size = 10.5,angle=75, vjust=0.5), strip.text.x = element_text(size=6.5)) + 
-		labs(title=paste(g$gnm[1],"genome Coverage", sep=' '), x="Depth of coverage", y="Percentage of coverage") 
+		labs(title=paste(g$gnm[1],"genome coverage", sep=' '), x="Depth of coverage", y="Percentage of coverage") 
 
 		pdf(file=paste(g$gnm[1],"coverage_graph.pdf",sep='_'),width=15) 
 		print(p1) 
