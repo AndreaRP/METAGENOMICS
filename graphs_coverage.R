@@ -30,16 +30,26 @@ print(files <- list.files(pattern="coverage.csv$"))
 # 	cov_graph <- rbind(cov_graph,cbind(cov, sample= gsub("^([0-9a-zA-Z]+).*$", "\\1", f)))
 #}
 #
-# plot the data
-#maxCov=100
-#
-#p1<-ggplot(subset(cov_graph, covThreshold<maxCov & chr != "genome"), aes(x= covThreshold, y=100* fracAboveThreshold, color=sample)) +
-#geom_line() + 
-#ylim(0, 100) + 
-#scale_color_manual(values=brewer_qualitative) +
-#theme_bw() +
-#theme(axis.text.x = element_text(size = 10.5,angle=75, vjust=0.5), strip.text.x = element_text(size=6.5)) + 
-#labs(title="Genome Coverage", x="Depth of coverage", y="Percentage of coverage") +
+# plot the data. Generar un bucle para que haga esto por cada linea de cov_def (== coverageTable.txt)
+# mientras la cobertura sea menor que el máximo que he puesto (500) y por cada id_gnm (cada genoma)
+#p1<-ggplot(subset(cov, covThreshold<maxCov & gnm == 'AC_000007.1'), aes(x= covThreshold, y=100* fracAboveThreshold)) +
+by(cov, cov[,"gnm"], function(g) {
+	maxCov=500 # la máxima profundidad que se va a mostrar es 500 porque si no queda feo
+   	p1<-ggplot(subset(g, covThreshold<maxCov),aes(x=covThreshold, y=100*fracAboveThreshold)) +
+	geom_line() + 
+	ylim(0, 100) + 
+	#scale_color_manual(values=brewer_qualitative) +
+	theme_bw() +
+	theme(axis.text.x = element_text(size = 10.5,angle=75, vjust=0.5), strip.text.x = element_text(size=6.5)) + 
+	labs(title="Genome Coverage", x="Depth of coverage", y="Percentage of coverage") 
+
+	pdf(file=paste(g,"coverage_graph.pdf",sep='_'),width=15) 
+	print(p1) 
+	dev.off()
+	}
+)
+#print(p2)
+
 #facet_wrap(~chr)
 #
 #p2<-ggplot(subset(cov_graph, covThreshold<maxCov & chr == "genome"), aes(x= covThreshold, y=100* fracAboveThreshold, color=sample)) + 
@@ -50,8 +60,3 @@ print(files <- list.files(pattern="coverage.csv$"))
 #theme(axis.text.x = element_text(size = 10.5,angle=75, vjust=0.5), strip.text.x = element_text(size=6.5)) +
 #labs(title="Genome Coverage", x="Depth of coverage", y="Percentage of coverage")
 #
-#pdf(file="coverage_graph.pdf",width=15)
-#print(p1)
-#print(p2)
-#dev.off()
-

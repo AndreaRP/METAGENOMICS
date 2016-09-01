@@ -35,9 +35,9 @@ noHostR2Fastq="${noHostDir}${sampleName}_noHost_R2.fastq" #R2 host free file
 mappedSamITSFile="${fungiFilesDir}${sampleName}_fungi_mapped_ITS.sam" #bowtie sam file with the reads that mapped against the ITS reference
 mappedBamITSFile="${fungiFilesDir}${sampleName}_fungi_mapped_ITS.bam" #bowtie bam file with the reads that mapped against the ITS reference
 sortedBamITSFile="${fungiFilesDir}${sampleName}_fungi_sorted_ITS.bam" #bowtie bam file with the reads that mapped against the ITS reference
-bowtie2logFileITS="${fungiFilesDir}${sampleName}_ITS_fungi_mapping.log" #log of the mapping against the ITS reference
-fungiMappedR1ITSFastq="${fungiFilesDir}${sampleName}_ITS_fungi_R1.fastq" #file with the R1 reads which mapped against ITS reference
-fungiMappedR2ITSFastq="${fungiFilesDir}${sampleName}_ITS_fungi_R2.fastq" #file with the R2 reads which mapped against the ITS reference
+bowtie2logFileITS="${fungiFilesDir}${sampleName}_fungi_mapping_ITS.log" #log of the mapping against the ITS reference
+fungiMappedR1ITSFastq="${fungiFilesDir}${sampleName}_fungi_R1_ITS.fastq" #file with the R1 reads which mapped against ITS reference
+fungiMappedR2ITSFastq="${fungiFilesDir}${sampleName}_fungi_R2_ITS.fastq" #file with the R2 reads which mapped against the ITS reference
 #		OutputFiles: Whole Genome (WG)
 mappedSamWGFile="${fungiFilesDir}${sampleName}_WG_fungi_mapped.sam" #bowtie sam file with the reads that mapped against the WG reference
 mappedBamWGFile="${fungiFilesDir}${sampleName}_WG_fungi_mapped.bam" #bowtie bam file with the reads that mapped against the WG reference
