@@ -72,15 +72,3 @@ by(cov, cov[,"gnm"], function(g) {
 	}
 	}
 )
-#print(p2)
-
-#facet_wrap(~chr)
-#
-#p2<-ggplot(subset(cov_graph, covThreshold<maxCov & chr == "genome"), aes(x= covThreshold, y=100* fracAboveThreshold, color=sample)) + 
-#geom_line() + 
-#ylim(0, 100) + 
-#scale_color_manual(values=brewer_qualitative) +
-#theme_bw() +
-#theme(axis.text.x = element_text(size = 10.5,angle=75, vjust=0.5), strip.text.x = element_text(size=6.5)) +
-#labs(title="Genome Coverage", x="Depth of coverage", y="Percentage of coverage")
-#
