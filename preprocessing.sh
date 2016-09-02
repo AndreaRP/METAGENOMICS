@@ -106,5 +106,5 @@ mv ${sampleStatsDir}${sampleName}*R2*/ "${sampleStatsDir}${sampleName}_prePro_R2
 # copy fastqc files to 99-stats (y le cambio el nombre)
 find $samplePostProQCDir -name "*_paired_fastqc.zip" -exec unzip {} -d ${sampleStatsDir} \; 
 # change name of folder
-mv ${sampleStatsDir}${sampleName}*R1_paired*/ "${sampleStatsDir}${sampleName}_R1_filtered_fastqc/"
-mv ${sampleStatsDir}${sampleName}*R2_paired*/ "${sampleStatsDir}${sampleName}_R2_filtered_fastqc/"
+mv ${sampleStatsDir}${sampleName}*R1_paired*/ "${sampleStatsDir}${sampleName}_trimmed_R1_fastqc/"
+mv ${sampleStatsDir}${sampleName}*R2_paired*/ "${sampleStatsDir}${sampleName}_trimmed_R2_fastqc/"
