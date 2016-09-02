@@ -40,7 +40,9 @@ function showHelp {
 samplePreProQCDir="${workingDir}ANALYSIS/01-fastqc/${sampleName}"
 samplePostProDir="${workingDir}ANALYSIS/02-preprocessing/${sampleName}"
 samplePostProQCDir="${workingDir}ANALYSIS/03-preproQC/${sampleName}"
+sampleStatsDir="${workingDir}ANALYSIS/99-stats/${sampleName}/"
 rawDir="${workingDir}ANALYSIS/00-reads/"
+
 
 module load FastQC-0.11.3
 module load Trimmomatic-0.33
@@ -51,6 +53,19 @@ if [ ! -d "$1" ]
 then
 	mkdir -p "$1"
 fi
+}
+
+function unzip-strip {
+    local zip=$1
+    local dest=${2:-.}
+    local temp=$(mktemp -d) && unzip -d "$temp" "$zip" && mkdir -p "$dest" &&
+          	    shopt -s dotglob && local f=("$temp"/*) &&
+        	        if (( ${#f[@]} == 1 )) && [[ -d "${f[0]}" ]] ; then
+         	        	mv "$temp"/*/* "$dest"
+                    else
+                    	mv "$temp"/* "$dest"
+     	        	fi
+     	        && rmdir "$temp"/* "$temp"
 }
 
 #	RAW reads FastQC
@@ -78,3 +93,18 @@ find $samplePostProDir -name "*_paired.fastq" -exec fastqc {} --outdir $samplePo
 echo -e "$(date): Finish fastqc.sh" >> "${samplePostProQCDir}/${sampleName}_postQC.log"
 echo -e "$(date): ********* Finished quaility control **********" >> "${samplePostProQCDir}/${sampleName}_postQC.log"
 
+#	CREATE REPORT
+
+makedir $sampleStatsDir
+
+# copy fastqc files to 99-stats (y le cambio el nombre)
+find $samplePreProQCDir -name "*.zip" -exec unzip {} -d ${sampleStatsDir} \; 
+# change name of folder
+mv ${sampleStatsDir}${sampleName}*R1*/ "${sampleStatsDir}${sampleName}_prePro_R1_fastqc/"
+mv ${sampleStatsDir}${sampleName}*R2*/ "${sampleStatsDir}${sampleName}_prePro_R2_fastqc/"
+
+# copy fastqc files to 99-stats (y le cambio el nombre)
+find $samplePostProQCDir -name "*_paired_fastqc.zip" -exec unzip {} -d ${sampleStatsDir} \; 
+# change name of folder
+mv ${sampleStatsDir}${sampleName}*R1_paired*/ "${sampleStatsDir}${sampleName}_R1_filtered_fastqc/"
+mv ${sampleStatsDir}${sampleName}*R2_paired*/ "${sampleStatsDir}${sampleName}_R2_filtered_fastqc/"
