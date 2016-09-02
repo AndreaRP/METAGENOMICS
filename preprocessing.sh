@@ -58,7 +58,8 @@ fi
 makedir $samplePreProQCDir
 
 echo -e "$(date): Execute fastqc.sh" >> "${samplePreProQCDir}/${sampleName}_preProQC.log"
-find $rawDir -name "${sampleName}*.fastq" -exec fastqc {} --outdir $samplePreProQCDir \; >> "${samplePreProQCDir}/${sampleName}_preProQC.log"
+echo -e " Command is: ### find $rawDir -name "${sampleName}_*.fastq.gz" -exec fastqc {} --outdir $samplePreProQCDir \; ###" >> "${samplePreProQCDir}/${sampleName}_preProQC.log"
+find $rawDir -name "${sampleName}_*.fastq.gz" -exec fastqc {} --outdir $samplePreProQCDir \; >> "${samplePreProQCDir}/${sampleName}_preProQC.log"
 echo -e "$(date): Finish fastqc.sh" >> "${samplePreProQCDir}/${sampleName}_preProQC.log"
 echo -e "$(date): ********* Finished quaility control **********" >> "${samplePreProQCDir}/${sampleName}_preProQC.log"
 
@@ -73,7 +74,7 @@ java -jar /opt/Trimmomatic-0.33/trimmomatic-0.33.jar PE -threads 10 -phred33 ${w
 makedir $samplePostProQCDir
 
 echo -e "$(date): Execute fastqc.sh" >> "${samplePostProDir}/${sampleName}_postQC.log"
-find $samplePostProDir -name "*paired.fastq" -exec fastqc {} --outdir $samplePostProQCDir \; >> "${samplePostProQCDir}/${sampleName}_postQC.log"
+find $samplePostProDir -name "*_paired.fastq" -exec fastqc {} --outdir $samplePostProQCDir \; >> "${samplePostProQCDir}/${sampleName}_postQC.log"
 echo -e "$(date): Finish fastqc.sh" >> "${samplePostProQCDir}/${sampleName}_postQC.log"
 echo -e "$(date): ********* Finished quaility control **********" >> "${samplePostProQCDir}/${sampleName}_postQC.log"
 
