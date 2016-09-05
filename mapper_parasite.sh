@@ -83,10 +83,10 @@ echo -e "$(date)\t Finished converting SAM to BAM of ${sampleName} \n" >> $bowti
 #	SEPARATE AND EXTRACT R1 AND R2 READS MAPPED TO protozoa 
 echo -e "----------------- Filtering protozoa reads that mapped to reference ...---------------------"
 echo -e "$(date)\t Start filtering ${sampleName} reads that mapped to protozoa \n" >> $bowtie2logFileProtozoa
-echo -e "The command is: ###samtools view -F 0x40 $mappedBamProtozoaFile | awk '{if($3 != '*') print '@' $1 '\\n' $10 '\\n' '+' '\\n' $11}' > $protozoaMappedR1Fastq" >> $bowtie2logFileProtozoa
-samtools view -F 0x40 $mappedBamProtozoaFile | awk '{if($3 != "*") print "@" $1 "\n" $10 "\n" "+" $1 "\n" $11}' > $protozoaMappedR1Fastq
-echo -e "The command is: ###samtools view -f 0x40 $mappedBamProtozoaFile | awk '{if($3 != '*') print '@' $1 '\\n' $10 '\\n' '-' '\\n' $11}' > $protozoaMappedR2Fastq" >> $bowtie2logFileProtozoa
-samtools view -f 0x40 $mappedBamProtozoaFile | awk '{if($3 != "*") print "@" $1 "\n" $10 "\n" "+" $1 "\n" $11}' > $protozoaMappedR2Fastq
+echo -e "The command is: ###samtools view -F 0x40 $sortedBamProtozoaFile | awk '{if($3 != '*') print '@' $1 '\\n' $10 '\\n' '+' '\\n' $11}' > $protozoaMappedR1Fastq" >> $bowtie2logFileProtozoa
+samtools view -F 0x40 $sortedBamProtozoaFile | awk '{if($3 != "*") print "@" $1 "\n" $10 "\n" "+" $1 "\n" $11}' > $protozoaMappedR1Fastq
+echo -e "The command is: ###samtools view -f 0x40 $sortedBamProtozoaFile | awk '{if($3 != '*') print '@' $1 '\\n' $10 '\\n' '-' '\\n' $11}' > $protozoaMappedR2Fastq" >> $bowtie2logFileProtozoa
+samtools view -f 0x40 $sortedBamProtozoaFile | awk '{if($3 != "*") print "@" $1 "\n" $10 "\n" "+" $1 "\n" $11}' > $protozoaMappedR2Fastq
 #	samtools separates R1 (-F) or R2 (-f) reads using the mapped SAM file and awk filters those mapped (=!"*") in fastq format
 echo -e "$(date)\t Finished filtering ${sampleName} reads that mapped to protozoa \n" >> $bowtie2logFileProtozoa
 
