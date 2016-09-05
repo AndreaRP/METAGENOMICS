@@ -43,9 +43,11 @@ summary_cov <- by(cov, cov[,"gnm"], function(x){
 				  
 				  #x$fracAboveThreshold[max(x$covThreshold[x$covThreshold>=1 & x$covThreshold < 5]) | max(x$covThreshold[x$covThreshold>=5 & x$covThreshold<10]) | max(x$covThreshold[x$covThreshold>=10 & x$covThreshold <20]) | max(x$covThreshold>=20)]
                   #p$fracAboveThreshold[(p$covThreshold == max(p$covThreshold[p$covThreshold >=1 & p$covThreshold <5])) | p$covThreshold == max(p$covThreshold[p$covThreshold >=5 & p$covThreshold <10])]
-
+                  #se cogen los valores de frac above threshold de la read con mayor profundidad en cada intervalo.
                   x$fracAboveThreshold[
                   	  x$covThreshold == max(x$covThreshold[x$covThreshold >=1 & x$covThreshold <5]) 
+                  	# Se cogen todas las profundidades entre 1 y 4 y se selecciona la máxima. 
+                  	# De esa read se saca el frac above threshold que es la proporción de reads con esa cobertura o mayor.
                   	| x$covThreshold == max(x$covThreshold[x$covThreshold >=5 & x$covThreshold <10]) 
                   	| x$covThreshold == max(x$covThreshold[x$covThreshold >=10 & x$covThreshold <20])  
                   	| x$covThreshold == max(x$covThreshold[x$covThreshold >=20])

@@ -16,7 +16,7 @@ set -e
 # sampleName_organism_R2.fastq: .fastq file with R2 reads that mapped the organism DB.
 # sampleName_organism_mapping.log: .log file with a log of the mapping of DB.
 
-function map_protozoa {
+function map_parasite {
 #	GET ARGUMENTS
 DB=$1  
 sampleDir=$2
