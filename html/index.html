@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+		<title>Análisis metagenómico</title>
+		<meta name="description" content="Análisis metagenómico: Informe de resultados" />
+		<meta name="keywords" content="metagenetica, metagenomica, ISCIII, bioinformática" />
+		<meta name="author" content="Unidad Bioinformática ISCIII" />
+		<link rel="shortcut icon" href="../favicon.ico">
+		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="css/deco.css" />
+		<link rel="stylesheet" type="text/css" href="css/tabs.css" />
+		<link rel="stylesheet" type="text/css" href="css/tabstyles.css" />
+		<link rel="stylesheet" type="text/css" href="css/pieChart.css" />
+  		<script src="js/modernizr.custom.js"></script>
+  		<script src="js/barChart.js"></script>
+	</head>
+	<body>
+		<svg class="hidden">
+			<defs>
+				<path id="tabshape" d="M80,60C34,53.5,64.417,0,0,0v60H80z"/>
+			</defs>
+		</svg>
+		<div class="container">
+			<!-- Top Navigation -->
+			<header class="report-header">
+				<h1>Análisis metagenómico <span>Informe de resultados</span></h1>
+				<p class="support">Este navegador no soporta <strong>flexbox</strong>! <br />Por favor, abra este informe con un <strong>navegador actualizado</strong>.</p>
+			</header>
+			<section>
+				<div class="tabs tabs-style-bar">
+					<nav>
+						<ul>
+							<li><a href="#section-bar-1" class="icon icon-home"><span>Resúmen</span></a></li>
+							<li><a href="#section-bar-2" class="icon icon-box"><span>Por organismo</span></a></li>
+							<li><a href="#section-bar-3" class="icon icon-display"><span>Por muestra</span></a></li>
+							<li><a href="#section-bar-4" class="icon icon-upload"><span>Descartes</span></a></li>
+							<!--<li><a href="#section-bar-5" class="icon icon-tools"><span>Settings</span></a></li>-->
+						</ul>
+					</nav>
+					<div class="content-wrap">
+						<section id="section-bar-1">
+							  <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+						</section>
+						<section id="section-bar-2"><p>2</p></section>
+						<section id="section-bar-3">
+							<div class="pieContainer">
+							     <div class="pieBackground"></div>
+							     <div id="pieSlice1" class="hold"><div class="pie"></div></div>
+							     <div id="pieSlice2" class="hold"><div class="pie"></div></div>
+							     <div id="pieSlice3" class="hold"><div class="pie"></div></div>
+							     <div id="pieSlice4" class="hold"><div class="pie"></div></div>
+							</div>
+						</section>
+						<section id="section-bar-4"><p>4</p></section>
+						<!--<section id="section-bar-5"><p>5</p></section>-->
+					</div><!-- /content -->
+				</div><!-- /tabs -->
+			</section>
+			<!-- Related demos -->
+			<section class="related">
+				<a href="http://tympanus.net/codrops/?p=19559">
+					Desarrollado a partir de Tab Styles Inspiration de Cordrops
+				</a>
+				<div>Icons made by <a href="http://www.flaticon.com/authors/madebyoliver" title="Madebyoliver">Madebyoliver</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+			</section>
+		</div><!-- /container -->
+		<script src="js/cbpFWTabs.js"></script>
+		<script>
+			(function() {
+
+				[].slice.call( document.querySelectorAll( '.tabs' ) ).forEach( function( el ) {
+					new CBPFWTabs( el );
+				});
+
+			})();
+		</script>
+	</body>
+</html>

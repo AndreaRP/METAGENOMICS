@@ -1,0 +1,22 @@
+### Uso de los scripts para hacer la tabla html
+
+## Para fastqc. Las carpetas deben estar organizadas de la siguiente manera
+
+--- Directorio FASTQC
+--------sample1
+----------(.*)R1(.*)._filtered_fastqc$
+----------(.*)R2(.*)._filtered_fastqc$
+----------(.*)R1(.*)._fastqc$
+----------(.*)R2(.*)._fastqc$
+
+Se lanza 
+1) perl listFastQCReports.pl <ruta directorio FASTQC> > table.html
+2) perl parserBamUtil.pl <files bamUtil.txt> > table2.html 
+3) perl createHTML.pl
+
+El resultado se llama report.html
+
+Ejemplo:
+perl listFastQCReports.pl stats_0141613/fastqc > table.html
+perl parserBamUtil.pl stats_0141613/*.txt > table2.html
+perl createHTML.pl
