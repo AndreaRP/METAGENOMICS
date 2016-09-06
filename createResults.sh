@@ -1,19 +1,25 @@
 set -e
 #	GET PARAMETERS
-sampleDir=$1
+sampleDir=$1  #/workingDir/ANALYSIS/xx-organism/sampleName/
 
 #	INITIALIZE VARIABLES
 sampleName=$(basename $sampleDir)
-rootDir=$(dirname $(dirname $sampleDir))
-blastnResult="${sampleDir}08.BLAST/VIRUS/${sampleName}_BLASTn.blast"
-blastxResult="${sampleDir}08.BLAST/VIRUS/${sampleName}_BLASTx.blast"
-resultPage="${rootDir}/RESULTS/${sampleName}/blast.html"
+workingDir="$(echo $sampleDir | rev | cut -d'/' -f5- | rev)/" # 
+organismDir=$(echo $sampleDir | rev | cut -d'/' -f3 | rev) # gets the 3 to last column (xx-organism)
+organism="${organismDir##*-}" # gets what is after the '-' and assumes is the organism
+blastnResult="${sampleDir}blast/${sampleName}_BLASTn_filtered.blast"
+#blastxResult="${sampleDir}08.BLAST/VIRUS/${sampleName}_BLASTx.blast"
+genomeId=""
+coverageFile=""
+result_blastn_page="${workingDir}/RESULTS/${sampleName}/blast.html"
+
+mkdir -p "${workingDir}/RESULTS/${sampleName}/"
 
 echo "
 <html>
 	<head>
-   		<title>" > $resultPage
-   		 echo "$sampleName blast" >> $resultPage
+   		<title>" > $result_blastn_page
+   		 echo "$sampleName blast" >> $result_blastn_page
    		 echo "
    		</title>
    		<link rel='stylesheet' type='text/css' href='style.css'>
@@ -22,8 +28,8 @@ echo "
 	<body>
 		<table class='flatTable'>
 	   		<tr class='titleTr'>
-				<td class='titleTd'> " >> $resultPage
-				echo "${sampleName} blast result" >> $resultPage
+				<td class='titleTd'> " >> $result_blastn_page
+				echo "${sampleName} blast result" >> $result_blastn_page
 				echo "				
 				</td>
 				<td colspan='4'></td>
@@ -44,18 +50,22 @@ echo "
 				<td>End of alignment in subject</td>
 				<td>Expect value</td>
 				<td>Bit score</td>
-				<td></td>
-			</thead>" >> $resultPage
+				<td>Genome coverage</td>
+			</thead>" >> $result_blastn_page
 			#	Start formatting data from blast
 			while IFS='' read -r line || [[ -n $line ]]
 			do
 				echo "
-			<tr>" >> $resultPage
+			<tr>" >> $result_blastn_page
 				IFS='	' read -r -a array <<< "$line"
-				for value in "${array[@]}"
+				for value in "${array[@]:0:13}"
 				do
-					echo "<td>${value}</td>" >> $resultPage
+					echo "<td>${value}</td>" >> $result_blastn_page
 				done
+				# conseguir el genome id
+				genomeId="${array[2]}"
+				coverageFile="${sampleDir}coverage/${genomeId}_coverage_graph.pdf"
+				echo "<td><a href="$coverageFile">${genomeId}</a></td>" >> $result_blastn_page
 				echo "
       		</tr>
       		<!--
@@ -67,9 +77,9 @@ echo "
 	  				</div>  
 				</td>
 			-->
-      		</tr>" >> $resultPage
+      		</tr>" >> $result_blastn_page
 		done < ${blastnResult}
 			echo "
 		</table>
 	</body>
-</html>" >> $resultPage
+</html>" >> $result_blastn_page
