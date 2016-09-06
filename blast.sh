@@ -28,7 +28,8 @@ outputDir="${sampleDir}/blast/"
 sampleContig="${sampleDir}/contigs/contigs.fasta"
 #		Output Files
 blastnResult="${outputDir}${sampleName}_BLASTn.blast"
-blastnResultFiltered="${outputDir}${sampleName}_BLASTn_filtered.blast"
+blastnResultFiltered="${outputDir}${sampleName}_BLASTn_unsorted.blast"
+blastnResultSorted="${outputDir}${sampleName}_BLASTn_filtered.blast"
 blastxResult="${outputDir}${sampleName}_BLASTx.blast"
 lablog="${outputDir}${sampleName}_blast_log.log"
 contigFaa="${outputDir}${sampleName}_contig_aa.faa"
@@ -57,7 +58,7 @@ else
 	echo -e "$(date)\t finished running BLASTn for ${sampleName}\n" >> $lablog
 	#	Filter blast results that pass min 100 length (col. 5) and 90% alignment (col. 4).
 	awk -F "\t" '{if($4 >= 90 && $5>= 100) print $0}' $blastnResult > $blastnResultFiltered
-	
+	sort -k1 $blastnResultFiltered > $blastnResultSorted
 	#	CREATE FASTA WITH SEQUENCES THAT ALIGN 
 	
 	
