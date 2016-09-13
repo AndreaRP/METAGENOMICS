@@ -2,13 +2,20 @@
 #########################################################
 #		  SCRIPT TO EVALUATE COVERAGE				 	#
 #########################################################
-# Arguments:
-# $1 = (sampleDir) Directory where the analysis is. 
-# $2 = (refDB) Directory with the references.
 # 1. Creates necessary directories. 
-# 2. Calculates coverage.
-# 
-# Output files: (In ANALYSIS/sampleName/09.COVERAGE)
+# 2. Calculates coverage using bedtools.
+# 3. Creates coverage files and graphs using R.
+# Note: This script can only be run after mapping against a reference using the appropiate mapper_organism.sh script.
+ 
+# Arguments:
+# $1 = (sampleDir) Directory where the analysis is. (ANALYSIS/xx-organism/sampleName/) 
+# $2 = (refDB) Directory with the references. (/REFERENCES/ORGANISM_GENOME_REFERENCE)
+
+# Input Files:
+# genomeLength: List of the length of each of the genomes in the reference DB
+# sampleBam: BAM file 
+
+# Output files: (In ANALYSIS/xx-organism/sampleName/coverage)
 # sampleName_genome_coverage.txt: Coverage file from the BAM file.
 # sampleName_coverage_log.log: Log file.
 
@@ -17,15 +24,19 @@
 sampleDir=$1  #workingDir/ANALYSIS/xx-organism/sampleName/
 refDB=$2
 #	INITIALIZE VARIABLES
-sampleName=$(basename $sampleDir) # gets the sample name
-organismDir=$(echo $sampleDir | rev | cut -d'/' -f3 | rev) # gets the 3 to last column (xx-organism)
-workingDir="$(echo $sampleDir | rev | cut -d'/' -f4- | rev)/SRC/" # gets up to the 3 to last column 
-organism="${organismDir##*-}" # gets what is after the '-' and assumes is the organism
+#		Constants
+sampleName=$(basename $sampleDir) # (sampleName)
+organismDir=$(echo $sampleDir | rev | cut -d'/' -f3 | rev) # (xx-organism)
+organism="${organismDir##*-}" # (organism)
+workingDir="$(echo $sampleDir | rev | cut -d'/' -f4- | rev)/SRC/" # (ANALYSIS/SRC/) 
+#		Input Files
 genomeLength="${refDB}/WG/genome_length.txt"
-genomeCov="${sampleDir}/coverage/${sampleName}_genome_coverage.txt"
 sampleBam="${sampleDir}/reads/*sorted.bam"
+#		Output Files
+genomeCov="${sampleDir}/coverage/${sampleName}_genome_coverage.txt"
 lablog="${sampleDir}/coverage/${sampleName}_coverage_log.log"
 
+# load programs in module (comment for local runs) 
 module load bedtools2/bedtools2-2.25.0
 module load R/R-3.2.5
 

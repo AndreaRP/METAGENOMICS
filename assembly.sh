@@ -2,35 +2,41 @@ set -e
 #########################################################
 #		  SCRIPT TO ASSEMBLE READS USING SPADES		 	#
 #########################################################
-# Arguments:
-# $1 = (mappedDir) Group Directory. Directory where the fastq to be assembled are located.
 # 1. Creates necessary directories. 
-# 2. Assembles fastq files.
-# 3. Runs quast to see quality
-# Output files: (In ANALYSIS/sampleName/05.ASSEMBLY)
-# sampleName_bacteria_sorted.sam: SAM file from mapping the processed files against the reference genome.
-# sampleName_*_R1.fastq: .fastq file with R1 reads that mapped the DB.
-# sampleName_*_R2.fastq: .fastq file with R2 reads that mapped the DB.
+# 2. Assembles fastq files with spades.
+# 3. Runs quast to check alignment quality
+# Note: this script must be run only after mapping against a reference with the appropiate mapper_organism.sh script.
+
+# Arguments:
+# $1 (mappedDir) = Group Directory. Directory where the fastq to be assembled are located. (ANALYSIS/xx-organism/sampleName/reads)
+
+# Input files: (In mappedDir)
+# mappedR1Fastq = R1 alignment file.
+# mappedR2Fastq = R2 alignment file. 
+
+# Output files: (In ANALYSIS/xx-organism/sampleName/contigs)
+# spades output files (contigs.fasta, scaffolds.fasta...)
 # sampleName_assembly.log: .log file with a log of the mapping.
+# quast/: quast output files
 
 function assemble {
 #	GET ARGUMENTS
-mappedDir=$1  #workingDir/ANALYSIS/xx-organism/sampleName/reads/
+mappedDir=$1  # workingDir/ANALYSIS/xx-organism/sampleName/reads/
 #	INITIALIZE VARIABLES
-#		Organism
+#		Constants
 workingDir="/processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/"
-sampleName=$(echo $mappedDir | rev | cut -d'/' -f3 | rev) #gets the second to last column (sampleName)
-organismDir=$(echo $mappedDir | rev | cut -d'/' -f4 | rev) # gets the 3 to last column (xx-organism)
-organism="${organismDir##*-}" # gets what is after the '-' and assumes is the organism
-#sampleAnalysisDir=$(echo $mappedDir | rev | cut -d'/' -f3- | rev) #gets the analysis directory of the sample (everything before the 3 column)
+sampleName=$(echo $mappedDir | rev | cut -d'/' -f3 | rev) # (sampleName)
+organismDir=$(echo $mappedDir | rev | cut -d'/' -f4 | rev) # (xx-organism)
+organism="${organismDir##*-}" # (organism)
 #		Directories
-outputDir="$(echo $mappedDir | rev | cut -d'/' -f3- | rev)/contigs/" #where the contigs will be saved (workingDir/ANALYSIS/xx-organism/sampleName/contigs)
+outputDir="$(echo $mappedDir | rev | cut -d'/' -f3- | rev)/contigs/" # where the contigs will be saved (workingDir/ANALYSIS/xx-organism/sampleName/contigs)
 #		Input Files
 mappedR1Fastq="${mappedDir}${sampleName}*_R1.fastq"
 mappedR2Fastq="${mappedDir}${sampleName}*_R2.fastq"
 #		Output Files
 lablog="${outputDir}${sampleName}_assembly.log"
 
+# load programs in module (comment for local runs) 
 module load SPAdes-3.8.0
 module load quast-4.1
 
@@ -44,11 +50,6 @@ then
 	echo -e "${outputDir} created"
 fi
 
-#if [ ! -d "${outputDir}spades" ]
-#then
-#	mkdir -p "${outputDir}spades"
-#	echo -e "${outputDir}spades created"
-#fi
 
 if [ ! -d "${outputDir}quast" ]
 then
@@ -73,4 +74,3 @@ echo -e "$(date)\t finished running quast for ${sampleName} for ${organism}\n" >
 
 }
 
-#assemble /processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/ANALYSIS/Unai16/03.BACTERIA/

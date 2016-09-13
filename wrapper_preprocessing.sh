@@ -9,6 +9,6 @@ done
 
 # generate fastqc report: 
 
-perl /processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/ANALYSIS/SRC/html/listFastQCReports.pl 99-stats/ > /processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/RESULTS/fastqc/table.html
-perl /processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/ANALYSIS/SRC/html/createHTML.pl
+perl /processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/ANALYSIS/SRC/html/fastqc/listFastQCReports.pl 99-stats/ > /processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/ANALYSIS/99-stats/table.html
+perl /processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/ANALYSIS/SRC/html/fastqc/createHTML.pl
 

@@ -1,9 +1,12 @@
 library(ggplot2)
 
 
-df = read.table('percentageFile.txt',sep='\t')
+df = read.table('percentageFile.txt',sep='\t',row.names=1)
 #transponemos la tabla
 por_org=t(df)
-rownames(por_org) <- c("organism","bacteria","virus","fungi","protozoa","invertebrate")
+rownames(por_org) <- c("bacteria","virus","fungi","protozoa","invertebrate","NA")
 # por cada muestra queremos generar un grafico
-p = ggplot(data=por_org[,1], aes(x=factor(1),y=colsum([r(2,3,4,5,6),]), fill = factor(organism)),)
+for(i in ncol(por_org)){
+	sample=
+p = ggplot(data=por_org[,i], aes(x=factor(1),y=colsum([r(2,3,4,5,6),]), fill = factor(organism)),)
+}

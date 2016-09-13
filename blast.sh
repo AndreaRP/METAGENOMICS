@@ -2,24 +2,33 @@ set -e
 #########################################################
 #  SCRIPT TO RUN BLAST LOCALLY AGAINST NCBI VIRUS SEQ.	#
 #########################################################
-# Arguments:
-# $1 = Directory with the sample analysis.
-# $2 = Directory where the blast db is located
 # 1. Creates necessary directories. 
-# 2. Runs BLASTn against the reference.
-# 3. Runs BLASTx against the reference.
-# Output files: (In ANALYSIS/sampleName/06.BLAST)
+# 2. Runs BLASTn against reference.
+# 3. Runs BLASTx against reference.
+# Note: This script must be run after assemblying the reads into contigs with assembly.sh.
+
+# Arguments:
+# $1 (sampleDir) = Directory with the sample analysis. (ANALYSIS/xx-organism/sampleName/)
+# $2 (refDB) = Directory where the blast db is located (REFERENCES/ORGANISM_GENOME_REFERENCE/BLAST)
+
+# Input files: (In ANALYSIS/xx-organism/sampleName/contigs/)
+# sampleContig: fasta file with the contigs to be used as queries in blast.
+
+# Output files: (In ANALYSIS/xx-organism/sampleName/blast/)
+# sampleName_blast_log.log: log file for the blast run
+# sampleName_BLASTn.blast: hit file of the blast
+# sampleName_BLASTn_filtered.blast: hit file of the blast filetered by % id >90% and query sequence length > 100bp
 
 function blast {
 #	GET ARGUMENTS
 sampleDir=$1  #workingDir/ANALYSIS/xx-organism/sampleName/
 refDB=$2
 #	INITIALIZE VARIABLES
-sampleName=$(basename $sampleDir) # gets the sample name
-organismDir=$(echo $sampleDir | rev | cut -d'/' -f3 | rev) # gets the 3 to last column (xx-organism)
-organism="${organismDir##*-}" # gets what is after the '-' and assumes is the organism
+sampleName=$(basename $sampleDir) # (sampleName)
+organismDir=$(echo $sampleDir | rev | cut -d'/' -f3 | rev) # (xx-organism)
+organism="${organismDir##*-}" # (organism)
+upOrganism=$(echo $organism | tr '[:lower:]' '[:upper:]') # (ORGANISM)
 blastDB="${refDB}BLAST/"
-upOrganism=$(echo $organism | tr '[:lower:]' '[:upper:]')
 BLASTn_DB="${blastDB}blastn/${upOrganism}_blastn"
 BLASTx_DB="${blastDB}blastx/${upOrganism}_blastx"
 #		Directories
@@ -35,6 +44,7 @@ lablog="${outputDir}${sampleName}_blast_log.log"
 contigFaa="${outputDir}${sampleName}_contig_aa.faa"
 blastnHits="${outputDir}blastn_Hits.txt"
 
+# load programs in module (comment for local runs) 
 module load ncbi_blast-2.2.30+
 
 echo -e "$(date)" 
@@ -59,8 +69,6 @@ else
 	#	Filter blast results that pass min 100 length (col. 5) and 90% alignment (col. 4).
 	awk -F "\t" '{if($4 >= 90 && $5>= 100) print $0}' $blastnResult > $blastnResultFiltered
 	sort -k1 $blastnResultFiltered > $blastnResultSorted
-	#	CREATE FASTA WITH SEQUENCES THAT ALIGN 
-	
 	
 	#	RUN BLASTx and RAPSearch2
 	#echo -e "$(date)\t start running BLASTx for ${sampleName}\n" >> $lablog
@@ -74,4 +82,3 @@ else
 fi
 }
 
-#blast /processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/ANALYSIS/Unai16/ /processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/REFERENCES/BACTERIA_GENOME_REFERENCE/
