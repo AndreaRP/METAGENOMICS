@@ -100,26 +100,48 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 .icon-upload::before {
-	content: "\e68a";
+	background-image: url("../img/dna-structure.png");
+	display: inline-block;
+	color: black;
+	background-size: 100%;	
+	background-repeat: no-repeat;    
+    width: 12%; 
+    height: 0;
+    padding-bottom: 12%;    
+    content:" ";
 }
 .icon-home::before {
-	background-image: url("../img/bacteria.svg");
+	background-image: url("../img/clipboard.png");
 	display: inline-block;
-	background-size: 100%;
-
+	color: black;
+	background-size: 100%;	
+	background-repeat: no-repeat;    
+    width: 15%; 
+    height: 0;
+    padding-bottom: 15%;    
     content:" ";
-    /*background-size: 20px 20px;*/
-    
-    width: calc(100% - 1em); 
-    height: 100%;
-
-	/*content: "\e648";*/
 }
 .icon-display::before {
-	content: "\e65e";
+	background-image: url("../img/test-tube.png");
+	display: inline-block;
+	color: black;
+	background-size: 100%;	
+	background-repeat: no-repeat;    
+    width: 15%; 
+    height: 0;
+    padding-bottom: 15%;    
+    content:" ";
 }
 .icon-box::before {
-	content: "\e674";
+	background-image: url("../img/bacteria.png");
+	display: inline-block;
+	color: black;
+	background-size: 100%;	
+	background-repeat: no-repeat;    
+    width: 15%; 
+    height: 0;
+    padding-bottom: 15%;    
+    content:" ";
 }
 
 /* Content */

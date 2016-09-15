@@ -62,15 +62,9 @@ a:hover, a:focus {
 
 .container {
 	min-height: 100%;
-	margin-bottom: -155px; /* the bottom margin is the negative value of the footer's height */
+	margin-bottom: -120px; /* the bottom margin is the negative value of the footer's height */
 }
 
-/*
-.container:after{
-	content: "";
-  	display: block;
-}
-*/
 .container > section {
 	padding: 0 0 5em 0;
 	font-size: 1.25em;
@@ -84,11 +78,13 @@ a:hover, a:focus {
 }
 
 .container > section#contenido {
+	display: flex;
+	flex-flow: column;
+	height: 100%;
 	padding: 0;
 	width: 100%;
 	height: 100%;	
-	overflow: hidden;
-	
+	overflow: hidden;	
 	bottom:-155px;
 
 }
@@ -192,7 +188,7 @@ footer {
 	text-align: center;
 }
 
-footer > a {
+footer > div {
 	width: calc(100% - 20px);
 	max-width: 90%;
 	font-size: 15px;
@@ -204,8 +200,25 @@ footer > a {
 	padding: 1%;
 }
 
+footer > div > p {
+	margin:0;
+	padding: 0;
+}
+/*
+footer > a {
+	width: calc(100% - 20px);
+	max-width: 90%;
+	font-size: 15px;
+	border: 1px solid black;
+	border-color: initial;
+	display: inline-block;
+	text-align: center;
+	margin: 2% 1%;
+	padding: 1%;
+}
+*/
 .web-footer, .container:after {
-	height: 155px; /* .push must be the same height as .footer */
+	height: 120px; /* .push must be the same height as .footer */
 }
 
 /* Related demos */
