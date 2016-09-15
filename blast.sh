@@ -1,3 +1,4 @@
+#!/bin/bash
 set -e
 #########################################################
 #  SCRIPT TO RUN BLAST LOCALLY AGAINST NCBI VIRUS SEQ.	#

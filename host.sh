@@ -9,12 +9,8 @@ set -e
 # 
 
 
-#	GLOBAL VARIABLES
-workingDir='/processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/'
-hostDB="${workingDir}REFERENCES/HUMAN_GENOME_REFERENCE/"
 
 
-#	AWESOME SCRIPT
 echo -e "PIPELINE START: $(date)"
 #	Get parameters:
 sampleDir=''
@@ -28,13 +24,16 @@ do
 	esac
 done
 shift $((OPTIND-1))
-#["$1"="--"] && shift
 
 function showHelp {
 	echo -e 'Usage: host -s <path_to_samples>'
 	echo -e 'host -h: show this help'
 	exit 0
 }
+
+#	CONSTANTS
+workingDir='/processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/'
+hostDB="${workingDir}REFERENCES/HUMAN_GENOME_REFERENCE/"
 
 #	VARIABLES
 sampleName=$(basename "${sampleDir}")

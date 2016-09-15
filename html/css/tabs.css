@@ -106,16 +106,14 @@
 	background-image: url("../img/bacteria.svg");
 	display: inline-block;
 	background-size: 100%;
-	width: 20%; 
-    height: 20%;
+
     content:" ";
-    /*background-size: 10px 20px;
+    /*background-size: 20px 20px;*/
     
-    width: 10px; 
-    height: 20px;*
-    
-	/*content: url("../img/bacteria.svg");
-	content: "\e648";*/
+    width: calc(100% - 1em); 
+    height: 100%;
+
+	/*content: "\e648";*/
 }
 .icon-display::before {
 	content: "\e65e";
@@ -125,6 +123,13 @@
 }
 
 /* Content */
+section#contenido {
+	height: 100%;
+	-webkit-flex: 1; /* Safari 6.1+ */
+    -ms-flex: 1; /* IE 10 */ 
+    flex: 1;
+}
+
 .content-wrap {
 	position: relative;
 }
@@ -150,7 +155,28 @@
 	line-height: 1;
 }
 
-/* Fallback */
+.content-wrap section div {
+	width:100%;
+	height:100%;
+	margin: 0;
+	padding: 0;
+	/*color: rgba(40,44,42,0.05);
+	font-weight: 900;
+	font-size: 4em;
+	line-height: 1;
+	*/
+}
+
+div > object {
+	width:100%;
+	height:100%;
+	margin:0;
+	padding:0;
+
+}
+
+ /*Fallback*/
+/*
 .no-js .content-wrap section {
 	display: block;
 	padding-bottom: 2em;
@@ -165,6 +191,7 @@
 	min-width: 15%;
 	display: inline-block;
 }
+*/
 
 @media screen and (max-width: 58em) {
 	.tabs nav a.icon span {
