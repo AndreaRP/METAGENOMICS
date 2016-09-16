@@ -36,3 +36,46 @@
 	color: #fff;
 }
 
+/*****************************/
+/* Vertical menu */
+/*****************************/
+
+.vertical-nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 20%;
+    height: 100%;
+    background-color: #f1f1f1;
+}
+
+.vertical-nav li a {
+    display: block;
+    /*color: #000;*/
+    padding: 2% 4%;
+    text-decoration: none;
+}
+
+.vertical-nav nav ul li a span {
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-weight: 500;
+	font-size: 1em;
+}
+
+.vertical-nav nav ul li a:hover,
+.vertical-nav nav ul li a:focus {
+	color: #1C8598;
+}
+
+.vertical-nav nav ul li a {
+	margin: 0 2px;
+	background-color: #f7f7f7;
+	color: #74777b;
+	transition: background-color 0.2s, color 0.2s;
+}
+
+.vertical-nav nav  ul li a.menu.selected {
+	background: #1C8598;
+	color: #fff;
+}
