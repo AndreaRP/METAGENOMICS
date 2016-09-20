@@ -17,12 +17,12 @@
 		<script src="js/jquery-3.1.0.js"></script>
   		<script src="js/functionality.js"></script>
 	</head>
-	<body>
-		<svg class="hidden">
+	<body onload="load_element('resumen')">
+		<!--<svg class="hidden">
 			<defs>
 				<path id="tabshape" d="M80,60C34,53.5,64.417,0,0,0v60H80z"/>
 			</defs>
-		</svg>
+		</svg>-->
 		<div class="container">
 			<!-- Top Navigation -->
 			<header class="report-header">
@@ -39,7 +39,6 @@
 							<li><a href="#section-bar-4" class="icon icon-upload"><span>Análisis de calidad</span></a></li>
 						</ul>
 					</nav>
-					<div id="barra"></div>
 				</div><!-- /tabs -->
 				<div id = "pagina" class="content-wrap">						
 					<section id="section-bar-1"><div id="resumen"></div></section>
@@ -48,17 +47,17 @@
 					<section id="section-bar-4"><div id="calidad"></div></section>	
 				</div><!-- /content -->
 			</div>
-		</div>
-		<footer class="web-footer">
-			<div>
-			<p> Icons made by 
-				<a href="http://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
-			</p>
-			<p>
-				<a href="http://tympanus.net/codrops/?p=19559">
-			Desarrollado a partir de Tab Styles Inspiration de Cordrops</a>
-			</p>
+			<footer class="web-footer">
+				<div>
+				<p> Icons made by 
+					<a href="http://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+				</p>
+				<p>
+					<a href="http://tympanus.net/codrops/?p=19559">
+				Desarrollado a partir de Tab Styles Inspiration de Cordrops</a>
+				</p>
 			</div>
 		</footer>
+		</div>
 	</body>
 </html>

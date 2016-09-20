@@ -61,26 +61,25 @@ a:hover, a:focus {
 }
 
 .container {
+	
 	min-height: 100%;
-	margin-bottom: -120px; /* the bottom margin is the negative value of the footer's height */
+	/*margin-bottom: -120px; /* the bottom margin is the negative value of the footer's height */
 }
 
 .container > div {
 	padding: 0 0 5em 0;
 	font-size: 1.25em;
-	min-height: 100%;
+	/*min-height: 100%;*/
 }
 
 
 .container > div#contenido {
 	/*display: flex;
 	flex-flow: column;*/
-	height: 100%;
+	height: 75%;
 	padding: 0;
 	width: 100%;	
 	overflow: hidden;	
-	bottom:-155px;
-
 }
 
 .container > header {
@@ -176,15 +175,29 @@ p {
 	content: "\e004";
 }
 
+#pagina{
+	position:relative;
+	height: 90%;
+	bottom: 0;
+	right: 0;
+	left: 0;
+
+}
+
 /* Footer */
 
 footer {
 	text-align: center;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 9%;
+
 }
 
 footer > div {
 	width: calc(100% - 20px);
-	max-width: 90%;
+	max-width: 100%;
 	font-size: 15px;
 	border: 1px solid black;
 	border-color: initial;
@@ -200,7 +213,7 @@ footer > div > p {
 }
 
 .web-footer, .container:after {
-	height: 120px; /* .push must be the same height as .footer */
+	/*height: 120px; /* .push must be the same height as .footer */
 }
 
 /* Related demos */
