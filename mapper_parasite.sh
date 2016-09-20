@@ -20,7 +20,7 @@ set -e
 
 # Output files: (In ANALYSIS/08-protozoa/sampleName/reads/)
 # sampleName_protozoa_R1.fastq: .fastq file with R1 reads that mapped the protozoa DB.
-# sampleName_protozoa_R2.fastq: .fastq file with R2 reads that mapped the bacetria protozoa DB.
+# sampleName_protozoa_R2.fastq: .fastq file with R2 reads that mapped the protozoa DB.
 # sampleName_protozoa_sorted.bam: sorted BAM file with the reads that mapped against the protozoa Whole Genome reference.
 # sampleName_protozoa_sorted.bam.bai: index of the BAM file.
 # sampleName_protozoa_mapping.log: .log file with a log of the mapping of protozoa DB.
