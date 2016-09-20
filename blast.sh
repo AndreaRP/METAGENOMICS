@@ -18,7 +18,7 @@ set -e
 # Output files: (In ANALYSIS/xx-organism/sampleName/blast/)
 # sampleName_blast_log.log: log file for the blast run
 # sampleName_BLASTn.blast: hit file of the blast
-# sampleName_BLASTn_filtered.blast: hit file of the blast filetered by % id >90% and query sequence length > 100bp
+# sampleName_BLASTn_filtered.blast: hit file of the blast filtered by % id >90% and query sequence length > 100bp
 
 function blast {
 #	GET ARGUMENTS
