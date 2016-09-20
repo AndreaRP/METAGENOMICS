@@ -29,7 +29,7 @@ set -e
 
 # Output files: (In ANALYSIS/09-invertebrate/sampleName/reads/)
 # sampleName_invertebrate_R1.fastq: .fastq file with R1 reads that mapped the invertebrate DB.
-# sampleName_invertebrate_R2.fastq: .fastq file with R2 reads that mapped the bacetria invertebrate DB.
+# sampleName_invertebrate_R2.fastq: .fastq file with R2 reads that mapped the invertebrate DB.
 # sampleName_invertebrate_sorted.bam: sorted BAM file with the reads that mapped against the invertebrate Whole Genome reference.
 # sampleName_invertebrate_sorted.bam.bai: index of the BAM file.
 # sampleName_invertebrate_mapping.log: .log file with a log of the mapping of invertebrate DB.
