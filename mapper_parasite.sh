@@ -19,20 +19,20 @@ set -e
 # sampleName_noHost_R2.fastq: fastq file with the R2 reads of the sample after filtering the host.
 
 # Output files: (In ANALYSIS/08-protozoa/sampleName/reads/)
-# sampleName_protozoa_R1.fastq: .fastq file with R1 reads that mapped the protozoa protozoa DB.
+# sampleName_protozoa_R1.fastq: .fastq file with R1 reads that mapped the protozoa DB.
 # sampleName_protozoa_R2.fastq: .fastq file with R2 reads that mapped the bacetria protozoa DB.
 # sampleName_protozoa_sorted.bam: sorted BAM file with the reads that mapped against the protozoa Whole Genome reference.
 # sampleName_protozoa_sorted.bam.bai: index of the BAM file.
-# sampleName_protozoa_mapping.log: .log file with a log of the mapping of protozoa protozoa DB.
+# sampleName_protozoa_mapping.log: .log file with a log of the mapping of protozoa DB.
 # (sampleName_protozoa_mapped.sam: SAM file from mapping the processed files against protozoa Whole Genome reference. Intermediary file deleted on the run)
 # (sampleName_protozoa_mapped.bam: BAM file from mapping the processed files against protozoa Whole Genome reference. Intermediary file deleted on the run)
 
 # Output files: (In ANALYSIS/09-invertebrate/sampleName/reads/)
-# sampleName_invertebrate_R1.fastq: .fastq file with R1 reads that mapped the invertebrate invertebrate DB.
+# sampleName_invertebrate_R1.fastq: .fastq file with R1 reads that mapped the invertebrate DB.
 # sampleName_invertebrate_R2.fastq: .fastq file with R2 reads that mapped the bacetria invertebrate DB.
 # sampleName_invertebrate_sorted.bam: sorted BAM file with the reads that mapped against the invertebrate Whole Genome reference.
 # sampleName_invertebrate_sorted.bam.bai: index of the BAM file.
-# sampleName_invertebrate_mapping.log: .log file with a log of the mapping of invertebrate invertebrate DB.
+# sampleName_invertebrate_mapping.log: .log file with a log of the mapping of invertebrate DB.
 # (sampleName_invertebrate_mapped.sam: SAM file from mapping the processed files against invertebrate Whole Genome reference. Intermediary file deleted on the run)
 # (sampleName_invertebrate_mapped.bam: BAM file from mapping the processed files against invertebrate Whole Genome reference. Intermediary file deleted on the run)
 

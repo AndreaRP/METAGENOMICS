@@ -17,8 +17,8 @@ set -e
 # sampleName_noHost_R2.fastq: fastq file with the R2 reads of the sample after filtering the host.
 
 # Output files: (In ANALYSIS/06-virus/sampleName/reads/)
-# sampleName_virus_R1.fastq: .fastq file with R1 reads that mapped the virus virus DB.
-# sampleName_virus_R2.fastq: .fastq file with R2 reads that mapped the bacetria virus DB.
+# sampleName_virus_R1.fastq: .fastq file with R1 reads that mapped the virus DB.
+# sampleName_virus_R2.fastq: .fastq file with R2 reads that mapped the virus DB.
 # sampleName_virus_sorted.bam: sorted BAM file with the reads that mapped against the virus Whole Genome reference.
 # sampleName_virus_sorted.bam.bai: index of the BAM file.
 # sampleName_virus_mapping.log: .log file with a log of the mapping of virus virus DB.

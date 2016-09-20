@@ -20,7 +20,7 @@ set -e
 
 # Output files: (In ANALYSIS/05-fungi/sampleName/reads/)
 # sampleName_WG_fungi_R1.fastq: .fastq file with R1 reads that mapped the fungi WG DB.
-# sampleName_WG_fungi_R2.fastq: .fastq file with R2 reads that mapped the bacetria WG DB.
+# sampleName_WG_fungi_R2.fastq: .fastq file with R2 reads that mapped the fungi WG DB.
 # sampleName_WG_fungi_sorted.bam: sorted BAM file with the reads that mapped against the fungi Whole Genome reference.
 # sampleName_WG_fungi_sorted.bam.bai: index of the BAM file.
 # sampleName_WG_fungi_mapping.log: .log file with a log of the mapping of fungi WG DB.
@@ -28,7 +28,7 @@ set -e
 # (sampleName_WG_fungi_mapped.bam: BAM file from mapping the processed files against fungi Whole Genome reference. Intermediary file deleted on the run)
 
 # sampleName_fungi_R1_ITS.fastq: .fastq file with R1 reads that mapped the fungi ITS DB.
-# sampleName_fungi_R2_ITS.fastq: .fastq file with R2 reads that mapped the bacetria ITS DB.
+# sampleName_fungi_R2_ITS.fastq: .fastq file with R2 reads that mapped the fungi ITS DB.
 # sampleName_fungi_sorted_ITS.bam: sorted BAM file with the reads that mapped against the fungi ITS reference.
 # sampleName_fungi_sorted.bam_ITS.bai: index of the BAM file.
 # sampleName_fungi_mapping_ITS.log: .log file with a log of the mapping of fungi ITS DB.
