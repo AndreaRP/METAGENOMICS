@@ -12,17 +12,10 @@
 		<link rel="stylesheet" type="text/css" href="css/deco.css" />
 		<link rel="stylesheet" type="text/css" href="css/tabs.css" />
 		<link rel="stylesheet" type="text/css" href="css/tabstyles.css" />
-		<link rel="stylesheet" type="text/css" href="css/pieChart.css" />
-		<link rel="stylesheet" type="text/css" href="css/object.css" />
 		<script src="js/jquery-3.1.0.js"></script>
   		<script src="js/functionality.js"></script>
 	</head>
 	<body onload="load_element('resumen')">
-		<!--<svg class="hidden">
-			<defs>
-				<path id="tabshape" d="M80,60C34,53.5,64.417,0,0,0v60H80z"/>
-			</defs>
-		</svg>-->
 		<div class="container">
 			<!-- Top Navigation -->
 			<header class="report-header">
@@ -32,20 +25,18 @@
 			<div id="contenido">
 				<div class="tabs tabs-style-bar">
 					<nav>
-						<ul>
-							<li class="tab-current"><a href="#section-bar-1" class="icon icon-home" onclick="load_element('resumen')"><span>Resúmen</span></a></li>
+						<ul id = "horizontal-nav">
+							<li class="tab-current"><a href="#section-bar-1" class="icon icon-home" onclick="load_element('resumen')"><span>Resumen</span></a></li>
 							<li><a href="#section-bar-2" class="icon icon-box" onclick="load_element('blastn')"><span>Por organismo</span></a></li>
 							<li><a href="#section-bar-3" class="icon icon-display"><span>Por muestra</span></a></li>
 							<li><a href="#section-bar-4" class="icon icon-upload"><span>Análisis de calidad</span></a></li>
 						</ul>
 					</nav>
 				</div><!-- /tabs -->
-				<div id = "pagina" class="content-wrap">						
-					<section id="section-bar-1"><div id="resumen"></div></section>
-					<section id="section-bar-2"><div id="blast"></div></section>
-					<section id="section-bar-3"><div id="muestra"></div></section>
-					<section id="section-bar-4"><div id="calidad"></div></section>	
-				</div><!-- /content -->
+				
+				<div id = "pagina" class="content-wrap">
+				</div>
+				<!-- /content -->
 			</div>
 			<footer class="web-footer">
 				<div>

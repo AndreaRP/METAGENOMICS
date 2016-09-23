@@ -15,16 +15,19 @@
   		<script src="js/jquery-3.1.0.js"></script>
   		<script src="js/functionality.js"></script>
 	</head>
-  <body>
-  <div class="items vertical-nav">
+  <body onload="set_size()">
+  <div class="items vertical-nav" id = "vertical-bar">
 	<nav>
 		<ul>
 		  <li><a class="menu selected" href="#bacteria"><span>Bacteria</span></a></li>
 		  <li><a class="menu" href="#virus"><span>Virus</span></a></li>
-		  <li><a class="menu" href="#fungi"><span>Hongo</span></a></li>
-		  <li><a class="menu" href="#parasite"><span>Parásito</span></a></li>
+		  <li><a class="menu" href="#fungi"><span>Fungi</span></a></li>
+		  <li><a class="menu" href="#parasite"><span>Parasite</span></a></li>
 		</ul>
 	</nav>
 </div>	
   </body>
+  <script type="text/javascript">
+	window.onload = set_size;
+</script>
 </html>
