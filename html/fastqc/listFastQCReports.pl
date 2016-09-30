@@ -49,13 +49,13 @@ print "</table>";
 
 print "<p>Pre-Filter Reports:</p><ul>";
 foreach $key(@keys){	
-	print "<li><a href='",$infoPreFilt{$key}{"url"},"'>$key</a></li>";
+	print "<li><a target="_blank" href='",$infoPreFilt{$key}{"url"},"'>$key</a></li>";
 }
 print "</ul>";
 
 print "<p>Post-Filter Reports:</p><ul>";
 foreach $key(@keys){	
-	print "<li><a href='",$infoPostFilt{$key}{"url"},"'>$key</a></li>";
+	print "<li><a target="_blank" href='",$infoPostFilt{$key}{"url"},"'>$key</a></li>";
 }
 print "</ul>";
 
