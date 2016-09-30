@@ -40,8 +40,8 @@
 /* Vertical menu */
 /*****************************/
 
-#vertical-bar{
-	/*width: 40px;*/
+.vertical-nav{
+	height: 100%;
 }
 
 .vertical-nav ul {

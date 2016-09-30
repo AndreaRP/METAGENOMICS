@@ -133,7 +133,9 @@
     padding-bottom: 15%;    
     content:" ";
 }
-.icon-box::before {
+
+/* VERTICAL NAV*/
+.icon-bacteria::before {
 	background-image: url("../img/bacteria.png");
 	display: inline-block;
 	color: black;
@@ -143,6 +145,76 @@
     height: 0;
     padding-bottom: 15%;    
     content:" ";
+}
+.icon-virus::before {
+	background-image: url("../img/virus1.png");
+	display: inline-block;
+	color: black;
+	background-size: 100%;	
+	background-repeat: no-repeat;    
+    width: 15%; 
+    height: 0;
+    padding-bottom: 15%;    
+    content:" ";
+}
+.icon-fungi::before {
+	background-image: url("../img/fungi.png");
+	display: inline-block;
+	color: black;
+	background-size: 100%;	
+	background-repeat: no-repeat;    
+    width: 15%; 
+    height: 0;
+    padding-bottom: 15%;    
+    content:" ";
+}
+.icon-protozoo::before {
+	background-image: url("../img/protozoa.png");
+	display: inline-block;
+	color: black;
+	background-size: 100%;	
+	background-repeat: no-repeat;    
+    width: 15%; 
+    height: 0;
+    padding-bottom: 15%;    
+    content:" ";
+}
+.icon-invertebrate::before {
+	background-image: url("../img/invertebrate.png");
+	display: inline-block;
+	color: black;
+	background-size: 100%;	
+	background-repeat: no-repeat;    
+    width: 15%; 
+    height: 0;
+    padding-bottom: 15%;    
+    content:" ";
+}
+
+.items::before {
+	z-index: 10;
+	display: inline-block;
+	margin: 0 0.4em 0 0;
+	vertical-align: middle;
+	text-transform: none;
+	font-weight: normal;
+	font-variant: normal;
+	font-size: 1.3em;
+	font-family: 'stroke7pixeden';
+	line-height: 1;
+	speak: none;
+	-webkit-backface-visibility: hidden;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.items nav a{
+	position: relative;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 2.5;
 }
 
 /* items */
@@ -290,6 +362,15 @@ div > object {
 	.tabs nav a:before {
 		margin-right: 0;
 	}
+}
+@media screen and (max-width: 100em) {
+	.items nav a.icon span{
+		display:none;
+	}
+	.items nav a:before{
+		margin-right: 0;
+	}
+
 }
 
 #barra {

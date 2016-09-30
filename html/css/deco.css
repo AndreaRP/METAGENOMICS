@@ -60,10 +60,8 @@ a:hover, a:focus {
 	opacity: 0;
 }
 
-.container {
-	
+.container {	
 	min-height: 100%;
-	/*margin-bottom: -120px; /* the bottom margin is the negative value of the footer's height */
 }
 
 .container > div {
@@ -74,8 +72,6 @@ a:hover, a:focus {
 
 
 .container > div#contenido {
-	/*display: flex;
-	flex-flow: column;*/
 	height: 75%;
 	padding: 0;
 	width: 100%;	
@@ -106,73 +102,6 @@ a:hover, a:focus {
 p {
 	text-align: center;
 	padding: 1em;
-}
-
-/* Header */
-.codrops-header {
-	padding: 7em 0 3em;
-	letter-spacing: -1px;
-}
-
-.codrops-header h1 {
-	max-width: 1200px;
-	margin: 0 auto;
-	font-weight: 800;
-	font-size: 5em;
-	line-height: 1;
-}
-
-.codrops-header h1 span {
-	display: block;
-	font-size: 50%;
-	font-weight: 400;
-	padding-top: 0.325em;
-	color: #bdc2c9;
-}
-
-/* To Navigation Style */
-.codrops-top {
-	width: 100%;
-	text-transform: uppercase;
-	font-weight: 700;
-	font-size: 0.69em;
-	line-height: 2.2;
-}
-
-.codrops-top a {
-	display: inline-block;
-	padding: 1em 2em;
-	text-decoration: none;
-	letter-spacing: 1px;
-}
-
-.codrops-top span.right {
-	float: right;
-}
-
-.codrops-top span.right a {
-	display: block;
-	float: left;
-}
-
-.codrops-icon:before {
-	margin: 0 4px;
-	text-transform: none;
-	font-weight: normal;
-	font-style: normal;
-	font-variant: normal;
-	font-family: 'codropsicons';
-	line-height: 1;
-	speak: none;
-	-webkit-font-smoothing: antialiased;
-}
-
-.codrops-icon-drop:before {
-	content: "\e001";
-}
-
-.codrops-icon-prev:before {
-	content: "\e004";
 }
 
 #pagina{
@@ -216,50 +145,3 @@ footer > div > p {
 	/*height: 120px; /* .push must be the same height as .footer */
 }
 
-/* Related demos */
-.related {
-	text-align: center;
-}
-
-.related > a {
-	width: calc(100% - 20px);
-	max-width: 90%;
-	font-size: 15px;
-	border: 1px solid black;
-	border-color: initial;
-	display: inline-block;
-	text-align: center;
-	margin: 2% 1%;
-	padding: 1%;
-}
-
-@media screen and (max-width: 1280px) {
-	.codrops-header h1 {
-		padding: 0 0.5em;
-	}
-	.support {
-		padding: 0 1.5em;
-	}
-}
-
-@media screen and (max-width: 30em) {
-	.container > div {
-		padding: 3em 0;
-	}
-	.codrops-header {
-		padding: 2em 0 1em;
-	}
-	.codrops-header h1 {
-		font-size: 3.5em;
-	}
-}
-
-
-@media screen and (max-width: 25em) {
-	.codrops-icon {
-		font-size: 1.5em;
-	}
-	.codrops-icon span {
-		display: none;
-	}
-}
