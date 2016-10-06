@@ -23,7 +23,7 @@ workingDir='/processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC
 sampleName="C1" # (sampleName)
 organism="bacteria"
 sampleResult="${workingDir}RESULTS/data/C1_bacteria_results.txt"
-result_page="${workingDir}RESULTS/C1_bacteria_results.html"
+result_page="${workingDir}RESULTS/data/C1_bacteria_results.html"
 #	GET PARAMETERS
 #sampleDir=$1  #/workingDir/ANALYSIS/xx-organism/sampleName/
 
@@ -39,7 +39,7 @@ coverageFile=""
 #		INPUT FILES
 #sampleResult="${workingDir}RESULTS/data/${sampleName}_${organism}_results.txt"
 #		OUTPUT FILES
-#result_page="${workingDir}/RESULTS/${sampleName}_${organism}_results.html"
+#result_page="${workingDir}/RESULTS/data/${sampleName}_${organism}_results.html"
 
 
 echo "
