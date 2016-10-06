@@ -49,8 +49,8 @@ echo "
    		 echo "$sampleName ${organism} results" >> $result_page
    		 echo "
    		</title>
-   		<link rel='stylesheet' type='text/css' href='css/table.css'>
-   		<link rel='stylesheet' type='text/css' href='css/deco.css' />
+   		<link rel='stylesheet' type='text/css' href='../css/table.css'>
+   		<link rel='stylesheet' type='text/css' href='../css/deco.css' />
    	 	<meta content=''>
 	</head>
 	<body>
@@ -108,6 +108,6 @@ echo "
 		</table>
 		<script src='http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js'></script>
 		<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js'></script>
-		<script src='js/jquery.stickyheader.js'></script>
+		<script src='../js/jquery.stickyheader.js'></script>
 	</body>
 </html>" >> $result_page
