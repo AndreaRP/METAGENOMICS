@@ -25,6 +25,6 @@ blast = subset(blast, select = c("Organism","Reference Id","% of identical match
 sampleResults = merge(x=blast, y=coverage, by.x = "Reference Id", by.y = "gnm")
 #writeTable
 organism=unlist(strsplit(organism, split='-', fixed=TRUE))[2]
-write.table(sampleResults, file=(paste(workingDir, "RESULTS/data/", sampleName, "_", organism, "_results.txt", sep="")), sep= '\t', row.names=FALSE)
+write.table(sampleResults, file=(paste(workingDir, "RESULTS/data/", sampleName, "_", organism, "_results.txt", sep="")), sep= '\t', col.names=FALSE, row.names=FALSE)
 
 
