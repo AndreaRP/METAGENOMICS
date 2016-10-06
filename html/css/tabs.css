@@ -1,16 +1,5 @@
 /* Default tab style */
-/*
-@font-face {
-	font-weight: normal;
-	font-style: normal;
-	font-family: 'stroke7pixeden';
-	src:url('../fonts/stroke7pixeden/stroke7pixeden.eot?u58ytb');
-	src:url('../fonts/stroke7pixeden/stroke7pixeden.eot?#iefixu58ytb') format('embedded-opentype'),
-		url('../fonts/stroke7pixeden/stroke7pixeden.woff?u58ytb') format('woff'),
-		url('../fonts/stroke7pixeden/stroke7pixeden.ttf?u58ytb') format('truetype'),
-		url('../fonts/stroke7pixeden/stroke7pixeden.svg?u58ytb#stroke7pixeden') format('svg');
-}
-*/
+
 .tabs {
 	position: relative;
 	overflow: hidden;
@@ -214,10 +203,10 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    line-height: 2.5;
+    line-height: 1;
 }
 
-/* items */
+/* tabs */
 .tabs nav {
 	text-align: center;
 }
@@ -264,7 +253,7 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	line-height: 2.5;
+	line-height: 2.6;
 }
 
 .tabs nav a span {
@@ -322,11 +311,6 @@ div#contenido {
 	height:100%;
 	margin: 0;
 	padding: 0;
-	/*color: rgba(40,44,42,0.05);
-	font-weight: 900;
-	font-size: 4em;
-	line-height: 1;
-	*/
 }
 
 div > object {
@@ -337,23 +321,6 @@ div > object {
 
 }
 
- /*Fallback*/
-/*
-.no-js .content-wrap section {
-	display: block;
-	padding-bottom: 2em;
-	border-bottom: 1px solid rgba(255,255,255,0.6);
-}
-
-.no-flexbox nav ul {
-	display: block;
-}
-
-.no-flexbox nav ul li {
-	min-width: 15%;
-	display: inline-block;
-}
-*/
 
 @media screen and (max-width: 58em) {
 	.tabs nav a.icon span {
@@ -362,21 +329,29 @@ div > object {
 	.tabs nav a:before {
 		margin-right: 0;
 	}
+
 }
 @media screen and (max-width: 100em) {
+
+	.items nav {
+		text-align: center;
+	}
+
 	.items nav a.icon span{
 		display:none;
 	}
-	.items nav a:before{
-		margin-right: 0;
+
+	.items nav a{
+		padding: 0;
 	}
 
+	.items nav a:before{
+		margin-right: 0;
+		margin-top: 0;
+		width: 50%;		
+		padding-bottom: 50%;
+		display: inline-block;
+
+	}
 }
 
-#barra {
-	background-color: #1C8598;
-	padding: 0;
-	margin: 0;
-	height: 0.4em;
-	width: 100%;
-}

@@ -82,3 +82,9 @@
 	background: #1C8598;
 	color: #fff;
 }
+
+@media screen and (max-width: 100em) {
+	.vertical-nav li a {
+    padding: 0;
+	}
+}
