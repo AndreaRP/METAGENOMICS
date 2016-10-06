@@ -79,7 +79,7 @@ function showHelp {
 samplePreProQCDir="${workingDir}ANALYSIS/01-fastqc/${sampleName}"
 samplePostProDir="${workingDir}ANALYSIS/02-preprocessing/${sampleName}"
 samplePostProQCDir="${workingDir}ANALYSIS/03-preproQC/${sampleName}"
-sampleStatsDir="${workingDir}ANALYSIS/99-stats/${sampleName}/"
+sampleStatsDir="${workingDir}ANALYSIS/99-stats/data/${sampleName}/"
 rawDir="${workingDir}ANALYSIS/00-reads/"
 
 

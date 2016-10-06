@@ -19,6 +19,8 @@ do
 done
 
 # generate fastqc report: 
-perl ${workingDir}ANALYSIS/SRC/html/fastqc/listFastQCReports.pl ${workingDir}ANALYSIS/99-stats/ > ${workingDir}ANALYSIS/99-stats/table.html
-perl ${workingDir}ANALYSIS/SRC/html/fastqc/createHTML.pl
+cp -r ${workingDir}ANALYSIS/SRC/html/quality/template.html ${workingDir}ANALYSIS/99-stats/
+
+perl ${workingDir}ANALYSIS/SRC/html/quality/listFastQCReports.pl ${workingDir}ANALYSIS/99-stats/data/ > ${workingDir}ANALYSIS/99-stats/table.html
+perl ${workingDir}ANALYSIS/SRC/html/quality/createHTML.pl
 
