@@ -7,10 +7,10 @@ set -e
 
 # 1. Creates quality directory if necessary
 # 2. Copy Utilities (css, icons and js files)
-# 3. Generates quality report
+# 3. Generates quality report (with scripts: ANALYSIS/SRC/html/quality/listFastQCReports.pl and ANALYSIS/SRC/html/quality/createHTML.pl)
 # 4. Creates data directory in RESULTS if necessary
-# 5. Generates merged results table
-# 6. Creater results html for each sample and analysed organism.
+# 5. Generates merged results table (with script ANALYSIS/SRC/mergeResults.R)
+# 6. Creates results html for each sample and analysed organism. (with script: ANALYSIS/SRC/createResultHtml.sh)
 # * Note: This script should only be run after the analysis has finished.
 
 
