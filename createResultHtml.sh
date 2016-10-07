@@ -2,44 +2,39 @@
 set -e
 
 #########################################################
-#	SCRIPT TO CREATE HTML REPORT OF THE BLAST RESULTS	#
+#	SCRIPT TO CREATE HTML REPORT OF THE SAMPLE RESULTS	#
 #########################################################
 # 1. Creates necessary directories. 
-# 2. Generates html with the BLASTn and BLASTx files.
-# Note: This script should only be run after running blast.sh. The script createIndex.sh should be run
-# before this report can be viewed correctly. 
+# 2. Generates html with the merged table.
+# Note: This script should only be run after running mergeResults.R. 
 
 # Arguments:
 # $1 (sampleDir) = Directory of the organism analysis of the sample. (ANALYSIS/xx-organism/sampleName/)
 
-# Input Files: (In ANALYSIS/xx-organism/sampleName/blast/)
-# sampleName_BLASTn_filtered.blast: Filtered blast file (containing only hits >100bp and >90% identity)
+# Input Files: (In RESULTS/data/)
+# sampleName_organism_results.txt: File generated with mergeResults.R
 
-# Output files: (In RESULTS/xx-organism/sampleName/blast/)
-# blastn.html: html file 
-# blastx.html
+# Output files: (In RESULTS/data/)
+# sampleName_organism_results.html: html file of the merged results table.
 
-workingDir='/processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/'
-sampleName="C1" # (sampleName)
-organism="bacteria"
-sampleResult="${workingDir}RESULTS/data/C1_bacteria_results.txt"
-result_page="${workingDir}RESULTS/data/C1_bacteria_results.html"
+
 #	GET PARAMETERS
-#sampleDir=$1  #/workingDir/ANALYSIS/xx-organism/sampleName/
+sampleDir=$1  #/workingDir/ANALYSIS/xx-organism/sampleName/
+
 
 #	INITIALIZE VARIABLES
 genomeId=""
 coverageFile=""
 #		CONSTANTS
-#sampleName=$(basename $sampleDir) # (sampleName)
+sampleName=$(basename $sampleDir) # (sampleName)
 
-#workingDir="$(echo $sampleDir | rev | cut -d'/' -f5- | rev)/" # (workingDir) 
-#organismDir=$(echo $sampleDir | rev | cut -d'/' -f3 | rev) # (xx-organism)
-#organism="${organismDir##*-}" # (organism)
+workingDir="$(echo $sampleDir | rev | cut -d'/' -f5- | rev)/" # (workingDir) 
+organismDir=$(echo $sampleDir | rev | cut -d'/' -f3 | rev) # (xx-organism)
+organism="${organismDir##*-}" # (organism)
 #		INPUT FILES
-#sampleResult="${workingDir}RESULTS/data/${sampleName}_${organism}_results.txt"
+sampleResult="${workingDir}RESULTS/data/${sampleName}_${organism}_results.txt"
 #		OUTPUT FILES
-#result_page="${workingDir}/RESULTS/data/${sampleName}_${organism}_results.html"
+result_page="${workingDir}/RESULTS/data/${sampleName}_${organism}_results.html"
 
 
 echo "
