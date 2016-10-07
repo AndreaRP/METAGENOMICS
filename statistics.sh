@@ -12,7 +12,8 @@ set -e
 # OUTPUT FILES: (In ANALYSIS/xx-organism/sampleName/taxonomy/)
 # sampleName_organismList.txt: List of unique blast hits: unformated taxonomy, accession and number of hits. 
 # sampleName_formated_organismList.txt: List of hits formated.
-
+# Note: This script can be run after executing the blast.sh, please keep in mind that it is highly dependent
+# of the format of the taxonomy of the reference database, and how the organism is described there.
 
 # ARGUMENTS    
 blastDir=$1 #workingDir/ANALYSIS/xx-organism/sampleName/blast/
