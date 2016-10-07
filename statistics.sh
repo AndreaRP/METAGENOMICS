@@ -36,23 +36,37 @@ fi
 
 cat $blastFile | cut -f 1,3 | sort | uniq -c > "${outputDir}/${sampleName}_organismList.txt"
 
-echo '' > "${outputDir}/${sampleName}_formated_organismList.txt"
+rm -f "${outputDir}/${sampleName}_formated_organismList.txt"
 
 cat "${outputDir}/${sampleName}_organismList.txt"| while read entry
 do
 	case $organism in
 		bacteria)
+			# 11 Alistipes finegoldii DSM 17242, complete genome  AC_5438754
+			bac=$(echo ${entry} | cut -f1 -d'	')
+			bac=$(echo ${bac} | cut -f1 -d',')
+			bac=$(echo $bac | awk '{sub(/strain/,"");sub(/str./,"");sub(/complete genome/,""); print}')
+			echo $bac >> "${outputDir}/${sampleName}_formated_organismList.txt"
+			# 11 Alistipes finegoldii DSM 17242
 			;;
 		virus)
-			# 13 Human adenovirus 2, complete genome
+			# 13 Human adenovirus 2, complete genome  AC_98655
 			vir=$(echo ${entry} | cut -f1 -d'	')
 			vir=$(echo ${vir} | cut -f1 -d',')
-			# 13 Human adenovirus 2 ...
 			echo $vir >> "${outputDir}/${sampleName}_formated_organismList.txt"
-			#$total=$(($total + $(echo $vir | cut -f1 -d' ')))
+			# 13 Human adenovirus 2 ...
 			;;
 		fungi)
-			#bla
+			# 11 dna:supercontig supercontig:ASM15152v1:GG729702:1:504:1 puccinia_triticina|GG729702
+			fun=$(echo ${entry} | cut -f2 -d'	')
+			number=$(echo ${fun} |   cut -f1 -d' ') # 11
+			fun=$(echo ${fun} |   cut -f1 -d'|') # puccinia_triticina|GG729702
+			sp=$(echo ${fun} |   cut -f4 -d' ') # puccinia_triticina
+			sp="$(tr '[:lower:]' '[:upper:]' <<< ${sp:0:1})${sp:1}"
+			sp=$(echo $sp | awk '{sub(/strain/,"");sub(/str./,"");sub(/complete genome/,""); print}')
+			sp=$(echo $sp | awk '{sub(/_/," "); print}')
+			echo "${number} ${sp}">> "${outputDir}/${sampleName}_formated_organismList.txt"
+			# 1	Puccinia triticina
 			;;
 		protozoa)
 			#bla
