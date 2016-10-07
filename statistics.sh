@@ -17,7 +17,7 @@ set -e
 # ARGUMENTS    
 blastDir=$1 #workingDir/ANALYSIS/xx-organism/sampleName/blast/
 
-# CONTSANTS
+# CONSTANTS
 workingDir="/processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/"
 sampleName=$(echo $blastDir | rev | cut -d'/' -f3 | rev) #gets the second to last column (sampleName)
 organismDir=$(echo $blastDir | rev | cut -d'/' -f4 | rev) # gets the 3 to last column (xx-organism)
