@@ -4,18 +4,18 @@ set -e
 #########################################################
 #	SCRIPT TO CREATE HTML PAGE WITH THE SAMPLE LIST		#
 #########################################################
-# 1. Creates necessary directories. 
-# 2. Generates html with the merged table.
-# Note: This script should only be run after running mergeResults.R. 
+# 1. Gets the list of samples 
+# 2. Creates the sample list
+# Note: This script should only be run after the analysis is finished. 
 
 # Arguments:
-# $1 (sampleDir) = Directory of the organism analysis of the sample. (ANALYSIS/xx-organism/sampleName/)
+# $1 (workingDir) = Directory of the analysis. 
 
-# Input Files: (In RESULTS/data/)
-# sampleName_organism_results.txt: File generated with mergeResults.R
+# Input Files: (In workingDir)
+# samples_id.txt: File generated with samplesID_gen.sh
 
-# Output files: (In RESULTS/data/)
-# sampleName_organism_results.html: html file of the merged results table.
+# Output files: (In RESULTS/)
+# results.html: html file of with the sample list.
 
 
 #	GET PARAMETERS
