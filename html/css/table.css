@@ -7,17 +7,6 @@ html, body {
        overflow: hidden;
 }
 
-/*
-@font-face {
-	font-family: 'Blokk';
-	src: url('../fonts/blokk/BLOKKRegular.eot');
-	src: url('../fonts/blokk/BLOKKRegular.eot?#iefix') format('embedded-opentype'),
-		 url('../fonts/blokk/BLOKKRegular.woff') format('woff'),
-		 url('../fonts/blokk/BLOKKRegular.svg#BLOKKRegular') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-*/
 table {
     border-collapse: collapse;
     margin-bottom: 3em;
@@ -52,6 +41,7 @@ tbody tr:nth-child(2n-1) {
 tbody tr:hover {
     background-color: rgba(28,133,152,.3);
 }
+
 
 /* For appearance */
 .sticky-wrap {

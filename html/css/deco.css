@@ -104,15 +104,6 @@ p {
 	padding: 1em;
 }
 
-#pagina{
-	position:relative;
-	height: 90%;
-	bottom: 0;
-	right: 0;
-	left: 0;
-
-}
-
 /* Footer */
 
 footer {
@@ -132,7 +123,7 @@ footer > div {
 	border-color: initial;
 	display: inline-block;
 	text-align: center;
-	margin: 2% 1%;
+	margin: 1% 1%;
 	padding: 1%;
 }
 

@@ -123,6 +123,18 @@
     content:" ";
 }
 
+.icon-book::before {
+	background-image: url("../img/book.png");
+	display: inline-block;
+	color: black;
+	background-size: 100%;	
+	background-repeat: no-repeat;    
+    width: 15%; 
+    height: 0;
+    padding-bottom: 15%;    
+    content:" ";
+}
+
 /* VERTICAL NAV*/
 .icon-bacteria::before {
 	background-image: url("../img/bacteria.png");
@@ -131,6 +143,7 @@
 	background-size: 100%;	
 	background-repeat: no-repeat;    
     width: 15%; 
+    max-width: 35px;
     height: 0;
     padding-bottom: 15%;    
     content:" ";
@@ -142,9 +155,11 @@
 	background-size: 100%;	
 	background-repeat: no-repeat;    
     width: 15%; 
+    max-width: 35px;
     height: 0;
     padding-bottom: 15%;    
     content:" ";
+    overflow-y: auto;
 }
 .icon-fungi::before {
 	background-image: url("../img/fungi.png");
@@ -153,6 +168,7 @@
 	background-size: 100%;	
 	background-repeat: no-repeat;    
     width: 15%; 
+    max-width: 35px;
     height: 0;
     padding-bottom: 15%;    
     content:" ";
@@ -164,6 +180,7 @@
 	background-size: 100%;	
 	background-repeat: no-repeat;    
     width: 15%; 
+    max-width: 35px;
     height: 0;
     padding-bottom: 15%;    
     content:" ";
@@ -175,6 +192,7 @@
 	background-size: 100%;	
 	background-repeat: no-repeat;    
     width: 15%; 
+    max-width: 35px;
     height: 0;
     padding-bottom: 15%;    
     content:" ";
@@ -281,6 +299,12 @@ div#contenido {
 
 .content-wrap {
 	position: relative;
+	height: 90%;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	margin-right: 0;
+	overflow: hidden;
 
 }
 
@@ -321,6 +345,17 @@ div > object {
 
 }
 
+.results{
+	float:right;
+	height: 100%;
+	margin-right: 0;
+}
+
+.items.vertical-nav{
+	margin-right: 0;
+	float:left;
+}
+
 
 @media screen and (max-width: 58em) {
 	.tabs nav a.icon span {
@@ -332,7 +367,7 @@ div > object {
 
 }
 @media screen and (max-width: 100em) {
-
+/*
 	.items nav {
 		text-align: center;
 	}
@@ -353,5 +388,6 @@ div > object {
 		display: inline-block;
 
 	}
+	*/
 }
 
