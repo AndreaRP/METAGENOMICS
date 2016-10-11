@@ -44,8 +44,8 @@ $(function(){
 			// Set widths
 			var setWidths = function () {
 					$t
-					.find('thead th').each(function (i) {
-						$stickyHead.find('th').eq(i).width($(this).width());
+					.find('thead th').each(function (i) {	
+						$stickyHead.find('th').eq(i).width($(this).width());					
 					})
 					.end()
 					.find('tr').each(function (i) {
