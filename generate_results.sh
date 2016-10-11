@@ -71,7 +71,7 @@ do
 		cat ${workingDir}ANALYSIS/samples_id.txt | while read sample
 		do
 			# Create results table
-			${workingDir}ANALYSIS/SRC/mergeResults.R $sample $organism
+			Rscript ${workingDir}ANALYSIS/SRC/mergeResults.R $sample $organism
 			# Create results html
 			sampleDir=$1  #/workingDir/ANALYSIS/xx-organism/sampleName/
 			${workingDir}ANALYSIS/SRC/createResultHtml.sh "${workingDir}ANALYSIS/${organism}/${sample}/" 
@@ -79,5 +79,6 @@ do
 	fi
 done
 
+# Copy the layout for the quality report.
 ########## SUMMARY ##########
 
