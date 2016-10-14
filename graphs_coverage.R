@@ -29,7 +29,9 @@ cov <- ddply(df,.(gnm),summarize,covThreshold=covThreshold,fracAboveThreshold=1-
 # ...
 
 # generamos una nueva tabla agrupada por genoma con la media, min, max, sd y mediana de cada uno
-new_cov <- ddply(cov,.(gnm),summarize,covMean=mean(covThreshold),covMin=min(covThreshold),covMax=max(covThreshold),covSD=sd(covThreshold),covMedian=median(covThreshold))
+#new_cov <- ddply(cov,.(gnm),summarize,covMean=mean(covThreshold),covMin=min(covThreshold),covMax=max(covThreshold),(if (is.na((sd(covThreshold)))){covSD="NA"}else{covSD=sd(covThreshold)}),covMedian=median(covThreshold))
+new_cov <- ddply(cov,.(gnm),summarize,covMean=mean(covThreshold),covMin=min(covThreshold),covMax=max(covThreshold),covSD=((if (is.na((sd(covThreshold)))){covSD="NotA"}else{covSD=sd(covThreshold)})),covMedian=median(covThreshold))
+
 # new_cov:
 # gnm 			covMean covMin    covMax covSD 		covMedian
 # AC_000001.1       250      0      500    217        123
@@ -41,17 +43,32 @@ write.table(new_cov, file=paste(sampleCoverageDir,sampleName,"_new.txt", sep= ''
 #se agrupa por gnm y se saca el valor que corresponde a cobertura >1, >5, >10 y >20 (en columnas)
 summary_cov <- by(cov, cov[,"gnm"], function(x){
 				  
-				  #x$fracAboveThreshold[max(x$covThreshold[x$covThreshold>=1 & x$covThreshold < 5]) | max(x$covThreshold[x$covThreshold>=5 & x$covThreshold<10]) | max(x$covThreshold[x$covThreshold>=10 & x$covThreshold <20]) | max(x$covThreshold>=20)]
-                  #p$fracAboveThreshold[(p$covThreshold == max(p$covThreshold[p$covThreshold >=1 & p$covThreshold <5])) | p$covThreshold == max(p$covThreshold[p$covThreshold >=5 & p$covThreshold <10])]
-                  #se cogen los valores de frac above threshold de la read con mayor profundidad en cada intervalo.
-                  x$fracAboveThreshold[
-                  	  x$covThreshold == max(x$covThreshold[x$covThreshold >=1 & x$covThreshold <5]) 
-                  	# Se cogen todas las profundidades entre 1 y 4 y se selecciona la máxima. 
-                  	# De esa read se saca el frac above threshold que es la proporción de reads con esa cobertura o mayor.
-                  	| x$covThreshold == max(x$covThreshold[x$covThreshold >=5 & x$covThreshold <10]) 
-                  	| x$covThreshold == max(x$covThreshold[x$covThreshold >=10 & x$covThreshold <20])  
-                  	| x$covThreshold == max(x$covThreshold[x$covThreshold >=20])
-                  	]
+                  # se cogen los valores de fracAboveThreshold de la read con mayor profundidad en cada intervalo.
+                  y0=x$fracAboveThreshold[x$covThreshold == max(x$covThreshold[x$covThreshold >=1 & x$covThreshold <5])]
+                  # Se cogen todas las profundidades en el intervalo y se selecciona la máxima. 
+                  # De esa read se saca el fracAboveThreshold que es la proporción de reads con esa cobertura o mayor.                  
+                  #if(is.null(y0)){
+                  if(length(y0)== 0){
+                  # Si no hay lecturas en ese intervalo nos aseguramos que el valor no sea null poniendo un 0
+                      y0=0
+                  }
+                  y1=x$fracAboveThreshold[x$covThreshold == max(x$covThreshold[x$covThreshold >=5 & x$covThreshold <10])] 
+                  #if(is.null(y1)){
+                  if(length(y1)== 0){
+				  	  y1=0
+				  }
+                  y2=x$fracAboveThreshold[x$covThreshold == max(x$covThreshold[x$covThreshold >=10 & x$covThreshold <20])]  
+                  #if(is.null(y2)){
+                  if(length(y2)== 0){
+				  	  y2=0
+				  }
+                  y3=x$fracAboveThreshold[x$covThreshold == max(x$covThreshold[x$covThreshold >=20])]
+                  #if(is.null(y3)){
+                  if(length(y3)== 0){
+				  	  y3=0
+				  }
+
+                  return(c(y0,y1,y2,y3))
 					}
 				  )
 #convierte una lista en matriz
