@@ -19,7 +19,7 @@ colnames(df) <- c("gnm","covThreshold","fractionAtThisCoverage","genomeLength","
 # ...
 
 # generamos una nueva tabla en la que se agrupa por genoma y se calcula en cada cobertura el % de pb que se encentran a entre esa cobertura y la máxima (1-cumsum(diffFracBelowThreshold))
-cov <- ddply(df,.(gnm),summarize,covThreshold=covThreshold,fracAboveThreshold=1-cumsum(diffFracBelowThreshold))
+cov <- ddply(df,.(gnm),summarize,covThreshold=covThreshold,diffFracBelowThreshold=diffFracBelowThreshold,fracAboveThreshold=1-cumsum(diffFracBelowThreshold))
 # cov:
 #         gnm covThreshold fracAboveThreshold
 # AC_000001.1            5               0.60  -> en el genoma AC_000001.1 hay un 60% de pb que están a una profundidad >= 5
@@ -29,8 +29,8 @@ cov <- ddply(df,.(gnm),summarize,covThreshold=covThreshold,fracAboveThreshold=1-
 # ...
 
 # generamos una nueva tabla agrupada por genoma con la media, min, max, sd y mediana de cada uno
-#new_cov <- ddply(cov,.(gnm),summarize,covMean=mean(covThreshold),covMin=min(covThreshold),covMax=max(covThreshold),(if (is.na((sd(covThreshold)))){covSD="NA"}else{covSD=sd(covThreshold)}),covMedian=median(covThreshold))
-new_cov <- ddply(cov,.(gnm),summarize,covMean=mean(covThreshold),covMin=min(covThreshold),covMax=max(covThreshold),covSD=((if (is.na((sd(covThreshold)))){covSD="NotA"}else{covSD=sd(covThreshold)})),covMedian=median(covThreshold))
+new_cov <- ddply(cov,.(gnm),summarize,covMean=mean(covThreshold),covMin=min(covThreshold),covSD=sd(covThreshold),covMedian=median(covThreshold))
+#new_cov <- ddply(cov,.(gnm),summarize,covMean=mean(covThreshold),covMin=min(covThreshold),covMax=max(covThreshold),covSD=((if (is.na((sd(covThreshold)))){covSD="NotA"}else{covSD=sd(covThreshold)})),covMedian=median(covThreshold))
 
 # new_cov:
 # gnm 			covMean covMin    covMax covSD 		covMedian
@@ -43,46 +43,52 @@ write.table(new_cov, file=paste(sampleCoverageDir,sampleName,"_new.txt", sep= ''
 #se agrupa por gnm y se saca el valor que corresponde a cobertura >1, >5, >10 y >20 (en columnas)
 summary_cov <- by(cov, cov[,"gnm"], function(x){
 				  
-                  # se cogen los valores de fracAboveThreshold de la read con mayor profundidad en cada intervalo.
-                  y0=x$fracAboveThreshold[x$covThreshold == max(x$covThreshold[x$covThreshold >=1 & x$covThreshold <5])]
-                  # Se cogen todas las profundidades en el intervalo y se selecciona la máxima. 
-                  # De esa read se saca el fracAboveThreshold que es la proporción de reads con esa cobertura o mayor.                  
-                  #if(is.null(y0)){
-                  if(length(y0)== 0){
+                  # Se cogen todas las profundidades en el intervalo y se suman sus porcentajes. 
+                  y0=sum(x$diffFracBelowThreshold[x$covThreshold >=1 & x$covThreshold <5])
+                                    
                   # Si no hay lecturas en ese intervalo nos aseguramos que el valor no sea null poniendo un 0
+                  if(length(y0)== 0){
                       y0=0
                   }
-                  y1=x$fracAboveThreshold[x$covThreshold == max(x$covThreshold[x$covThreshold >=5 & x$covThreshold <10])] 
-                  #if(is.null(y1)){
+                  y1=sum(x$diffFracBelowThreshold[x$covThreshold >=5 & x$covThreshold <10])
                   if(length(y1)== 0){
 				  	  y1=0
 				  }
-                  y2=x$fracAboveThreshold[x$covThreshold == max(x$covThreshold[x$covThreshold >=10 & x$covThreshold <20])]  
-                  #if(is.null(y2)){
+                  y2=sum(x$diffFracBelowThreshold[x$covThreshold >=10 & x$covThreshold <20])
                   if(length(y2)== 0){
 				  	  y2=0
 				  }
-                  y3=x$fracAboveThreshold[x$covThreshold == max(x$covThreshold[x$covThreshold >=20])]
-                  #if(is.null(y3)){
+                  y3=sum(x$diffFracBelowThreshold[x$covThreshold >=20])
                   if(length(y3)== 0){
 				  	  y3=0
 				  }
-
-                  return(c(y0,y1,y2,y3))
+				  # Se suman las coberturas en cada intervalo para sacar la total de ese genoma.
+                  y4 <- sum(y0,y1,y2,y3)
+                  return(c(y0,y1,y2,y3,y4))
 					}
 				  )
 #convierte una lista en matriz
 summary_cov <- do.call(rbind,summary_cov)
+write.table(summary_cov, "summary_cov.txt",sep="\t")
 #damos nombre a las columnas
-colnames(summary_cov) <- c("x1-x4","x5-x9","x10-x19",">x20")
+colnames(summary_cov) <- c("x1-x4","x5-x9","x10-x19",">x20","total")
 write.table(summary_cov, file=paste(sampleCoverageDir,sampleName,"_summaryCov.txt", sep= ''),sep="\t")
 # summary_cov:
 # gnm       	  x1          x5          x10         x20
 # AC_000001.1	0.8869967	0.7844005	0.7025351	0.60814771
 # AC_000002.1   0.280761	0.1780007	0.13370223	0.0825864199999999
 # AC_000004.1   0.269992	0.1507732	0.11396872	0.08871942
+
+# Subset de datos con genomas con cobertura != de 0
+i <- (rowSums(summary_cov[,1:4]) !=0)
+dd <- summary_cov[i,]
+write.table(dd, "dd.txt",sep="\t")
+write.table(new_cov[new_cov$covMean > 0,], "new_cov.txt",sep="\t")
+
 #junto los dos dataframes
-cov_def <- cbind(new_cov[new_cov$covMean > 0,],summary_cov)
+cov_def <- cbind(new_cov[new_cov$covMean > 0,],dd)
+#cov_def <- cbind(new_cov[new_cov$covMean > 0,],summary_cov)
+#cov_def <- cbind(new_cov[new_cov$covMean > 0,],summary_cov[colSums(summary_cov[,0:3]) > 0 ])
 #cov_def:
 # gnm           covMean covMin    covMax covSD      covMedian  x1          x5          x10         x20
 # AC_000001.1       250      0      500    217        123		0.8869967	0.7844005	0.7025351	0.60814771
