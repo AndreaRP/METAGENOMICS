@@ -9,6 +9,33 @@
 	font-size: 1.25em;
 }
 
+
+.socialMedia{
+	height: 5%;
+	width: auto;
+	display: ;
+	margin: 0;
+	padding: 0;
+	z-index: 10;
+	position: absolute;
+	right:0px;
+	float: right;
+
+}
+
+.social {
+	max-width: 5%;
+    height: auto;
+	margin:0;
+	padding: 0;
+}
+
+.social:hover{
+	-webkit-transform: rotateZ(-30deg);
+    -ms-transform: rotateZ(-30deg);
+    transform: rotateZ(-30deg);
+}
+
 /* Nav */
 .tabs nav {
 	text-align: center;
