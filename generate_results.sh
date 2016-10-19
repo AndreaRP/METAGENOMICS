@@ -22,13 +22,21 @@ module load R/R-3.2.5
 #       CONSTANTS	
 workingDir='/processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/'
 resultsDir="${workingDir}RESULTS/"
+lablog="${resultsDir}_results_log.log"
 
-########## COPY UTILITIES ############
+############### COPY UTILITIES ################	
+echo -e "$(date)\t start copying utilities (css, js, img...)\n" > $lablog
+echo -e "The commands are:\ncp -r ${workingDir}ANALYSIS/SRC/html/css*\ncp -r ${workingDir}ANALYSIS/SRC/html/img* ${resultsDir}\ncp -r ${workingDir}ANALYSIS/SRC/html/js* ${resultsDir}
+" > $lablog
 cp -r ${workingDir}ANALYSIS/SRC/html/css* ${resultsDir}
 cp -r ${workingDir}ANALYSIS/SRC/html/img* ${resultsDir}
 cp -r ${workingDir}ANALYSIS/SRC/html/js* ${resultsDir}
+echo -e "$(date)\t finished copying utilities into $resultsDir" >> $lablog
 
-
+################## WHAT IS THIS? ##############
+echo -e "$(date)\t start copying info.html into $resultsDir" >> $lablog
+echo -e "The command is:\ncp ${workingDir}ANALYSIS/SRC/html/info.html ${resultsDir}" >> $lablog
+cp ${workingDir}ANALYSIS/SRC/html/info.html ${resultsDir}
 
 ########## QUALITY REPORT #############
 
@@ -36,21 +44,29 @@ cp -r ${workingDir}ANALYSIS/SRC/html/js* ${resultsDir}
 if [ ! -d "${resultsDir}quality" ]
 then
 	mkdir -p "${resultsDir}quality"
+	echo -e "$(date)\t Generate ${resultsDir}quality" >> $lablog
 	echo -e "${resultsDir}quality created"
 fi
 
 # Copy quality utilities
+echo -e "$(date)\t Start copying utilities for quality results:" >> $lablog
+echo -e "cp -r ${workingDir}ANALYSIS/SRC/html/quality/ ${resultsDir}" >> $lablog
 cp -r ${workingDir}ANALYSIS/SRC/html/quality/ ${resultsDir}
 # Copy data 
+echo -e "cp -r ${workingDir}ANALYSIS/99-stats/data* ${resultsDir}quality" >> $lablog
 cp -r ${workingDir}ANALYSIS/99-stats/data* ${resultsDir}quality
 
 # Change to quality dir
 cd ${resultsDir}quality
 
 # generate fastqc report: 
+echo -e "Generate fastq report:" >> $lablog
+echo -e "perl ./listFastQCReports.pl ${resultsDir}quality/data/ > ${resultsDir}quality/table.html" >> $lablog
 perl ./listFastQCReports.pl ${resultsDir}quality/data/ > ${resultsDir}quality/table.html
+echo -e "perl ./createHTML.pl" >> $lablog
 perl ./createHTML.pl
 
+echo -e "Removing template.html, table.html, listFastQCReports.pl and createHTML.pl" >> $lablog
 rm ./template.html
 rm ./table.html
 rm ./listFastQCReports.pl
@@ -65,14 +81,17 @@ cd ${workingDir}
 if [ ! -d "${resultsDir}data" ]
 then
 	mkdir -p "${resultsDir}data"
+	echo -e "$(date)\t Generate ${resultsDir}data" >> $lablog
 	echo -e "${resultsDir}data created"
 fi
 
 # Generate by sample template html
-
+echo -e "$(date)\t Run script to generate BySample template:" >> $lablog
+echo -e "bash ${workingDir}ANALYSIS/createSamplesHtml.sh ${workingDir}" >> $lablog
 bash ${workingDir}ANALYSIS/createSamplesHtml.sh ${workingDir}
 
 # Generate actual sample data html files
+echo -e "$(date)\t Generate actual data sample html files" >> $lablog
 organisms=()
 for organism in ${workingDir}ANALYSIS/*
 do
@@ -81,10 +100,15 @@ do
 	then
 		cat ${workingDir}ANALYSIS/samples_id.txt | while read sample
 		do
+			echo -e "$sample" >> $lablog
 			# Create results table
+			echo -e "\t$(date)\t Create results table (.txt)" >> $lablog
+			echo -e "\t$(date)\t Rscript ${workingDir}ANALYSIS/SRC/mergeResults.R $sample $organism" >> $lablog
 			Rscript ${workingDir}ANALYSIS/SRC/mergeResults.R $sample $organism
 			# Create results html
 			sampleDir=$1  #/workingDir/ANALYSIS/xx-organism/sampleName/
+			echo -e "\t$(date)\t Create results html file" >> $lablog
+			echo -e "\t$(date)\t ${workingDir}ANALYSIS/SRC/createResultHtml.sh ${workingDir}ANALYSIS/${organism}/${sample}/" >> $lablog
 			${workingDir}ANALYSIS/SRC/createResultHtml.sh "${workingDir}ANALYSIS/${organism}/${sample}/" 
 		done
 	fi
@@ -95,4 +119,3 @@ done
 
 # Taxonomy
 
-######### WHAT IS THIS? ###########
