@@ -87,8 +87,8 @@ fi
 
 # Generate by sample template html
 echo -e "$(date)\t Run script to generate BySample template:" >> $lablog
-echo -e "bash ${workingDir}ANALYSIS/createSamplesHtml.sh ${workingDir}" >> $lablog
-bash ${workingDir}ANALYSIS/createSamplesHtml.sh ${workingDir}
+echo -e "bash ${workingDir}ANALYSIS/SRC/createSamplesHtml.sh ${workingDir}" >> $lablog
+bash ${workingDir}ANALYSIS/SRC/createSamplesHtml.sh ${workingDir} 2>&1 | tee -a $lablog
 
 # Generate actual sample data html files
 echo -e "$(date)\t Generate actual data sample html files" >> $lablog
@@ -104,12 +104,12 @@ do
 			# Create results table
 			echo -e "\t$(date)\t Create results table (.txt)" >> $lablog
 			echo -e "\t$(date)\t Rscript ${workingDir}ANALYSIS/SRC/mergeResults.R $sample $organism" >> $lablog
-			Rscript ${workingDir}ANALYSIS/SRC/mergeResults.R $sample $organism
+			Rscript ${workingDir}ANALYSIS/SRC/mergeResults.R $sample $organism 2>&1 | tee -a $lablog
 			# Create results html
 			sampleDir=$1  #/workingDir/ANALYSIS/xx-organism/sampleName/
 			echo -e "\t$(date)\t Create results html file" >> $lablog
 			echo -e "\t$(date)\t ${workingDir}ANALYSIS/SRC/createResultHtml.sh ${workingDir}ANALYSIS/${organism}/${sample}/" >> $lablog
-			${workingDir}ANALYSIS/SRC/createResultHtml.sh "${workingDir}ANALYSIS/${organism}/${sample}/" 
+			${workingDir}ANALYSIS/SRC/createResultHtml.sh "${workingDir}ANALYSIS/${organism}/${sample}/" 2>&1 | tee -a $lablog 
 		done
 	fi
 done
