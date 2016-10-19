@@ -6,13 +6,13 @@ set -e
 #########################################################
 
 # 1. Copy web utilities (css, icons and js files)
-# 2. Creates quality directory if necessary
-# 3. Generates quality report (with scripts: ANALYSIS/SRC/html/quality/listFastQCReports.pl and ANALYSIS/SRC/html/quality/createHTML.pl)
-# 4. Creates data directory in RESULTS if necessary
-# 5. Generates merged results table (with script ANALYSIS/SRC/mergeResults.R)
-# 6. Creates results html for each sample and analysed organism. (with script: ANALYSIS/SRC/createResultHtml.sh)
-# 7. Generates result summary of each sample 
-# 8. Generates info html file
+# 2. Generates info html file
+# 3. Creates quality directory if necessary
+# 4. Generates quality report (with scripts: ANALYSIS/SRC/html/quality/listFastQCReports.pl and ANALYSIS/SRC/html/quality/createHTML.pl)
+# 5. Creates data directory in RESULTS if necessary
+# 6. Generates merged results table (with script ANALYSIS/SRC/mergeResults.R)
+# 7. Creates results html for each sample and analysed organism. (with script: ANALYSIS/SRC/createResultHtml.sh)
+# 8. Generates result summary of each sample 
 # * Note: This script should only be run after the analysis has finished.
 
 
@@ -26,7 +26,7 @@ lablog="${resultsDir}_results_log.log"
 
 ############### COPY UTILITIES ################	
 echo -e "$(date)\t start copying utilities (css, js, img...)\n" > $lablog
-echo -e "The commands are:\ncp -r ${workingDir}ANALYSIS/SRC/html/css*\ncp -r ${workingDir}ANALYSIS/SRC/html/img* ${resultsDir}\ncp -r ${workingDir}ANALYSIS/SRC/html/js* ${resultsDir}
+echo -e "The commands are:\ncp -r ${workingDir}ANALYSIS/SRC/html/css* ${resultsDir}\ncp -r ${workingDir}ANALYSIS/SRC/html/img* ${resultsDir}\ncp -r ${workingDir}ANALYSIS/SRC/html/js* ${resultsDir}
 " > $lablog
 cp -r ${workingDir}ANALYSIS/SRC/html/css* ${resultsDir}
 cp -r ${workingDir}ANALYSIS/SRC/html/img* ${resultsDir}
