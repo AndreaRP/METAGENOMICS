@@ -72,6 +72,11 @@ rm ./table.html
 rm ./listFastQCReports.pl
 rm ./createHTML.pl
 
+# Copy quality template html file
+echo -e "$(date)\t Copy the quality template page:" >> $lablog
+echo -e "cp ${workingDir}ANALYSIS/SRC/html/quality.html ${resultsDir}" >> $lablog
+cp ${workingDir}ANALYSIS/SRC/html/quality.html ${resultsDir}
+
 cd ${workingDir}
 
 
@@ -116,6 +121,10 @@ done
 
 
 ######### SUMMARY ###########
+
+echo -e "$(date)\t Copy the summary page:" >> $lablog
+echo -e "cp ${workingDir}ANALYSIS/SRC/html/summary.html ${resultsDir}" >> $lablog
+cp ${workingDir}ANALYSIS/SRC/html/summary.html ${resultsDir}
 
 # Taxonomy
 
