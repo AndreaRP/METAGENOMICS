@@ -83,7 +83,7 @@ echo "
 				cat $samplesId | while read in
 				do
 					 echo "
-					 <li><a class='icon menu' href='""" >> $result_page
+					 <li><a class='icon menu' href='#""" >> $result_page
 					 echo $in >> $result_page
 					 echo "'><span>">> $result_page
 					 echo $in >> $result_page
@@ -93,7 +93,7 @@ echo "
 				echo "</ul>
 					</nav>
 					</div>
-					<object class="results" type="text/html" data=""></object>
+					<object class='results' type='text/html' data=''></object>
 					</div>
 				</div><!-- /tabs -->
 			<footer class='web-footer'>
