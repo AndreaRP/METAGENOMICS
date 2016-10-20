@@ -71,6 +71,37 @@ a:hover, a:focus {
 }
 
 
+
+.socialMedia {
+	width: 100%;
+	display: inline-block;
+	margin: 0%;
+	padding: 0%;
+	z-index: 100;
+}
+
+.social {
+	max-width: 35px;
+	width: 15%;
+    height: auto;
+	margin: 0;
+	padding: 0;
+	/*
+	border-bottom: 3px solid transparent;
+	*/
+}
+
+
+.social:hover{
+	
+	-webkit-transform: rotateZ(-30deg);
+    -ms-transform: rotateZ(-30deg);
+    transform: rotateZ(-30deg);
+   /*
+    border-bottom: 3px solid blue;
+    width: 200px;
+     */
+}
 .container > div#contenido {
 	height: 75%;
 	padding: 0;
@@ -123,41 +154,15 @@ footer > div {
 	border-color: initial;
 	display: inline-block;
 	text-align: center;
-	margin: 1% 1%;
+	margin: 1%;
 	padding: 1%;
 }
 
-footer > div > p {
-	margin:0;
-	padding: 0;
+footer > div > span {
+	width: 80%;
+	vertical-align: middle;
 }
 
-
-.socialMedia{
-	height: 5%;
-	width: auto;
-	display: inline-block;
-	margin: 0;
-	padding: 0;
-	z-index: 10;
-	position: absolute;
-	right:0px;
-	float: right;
-
-}
-
-.social {
-	max-width: 5%;
-    height: auto;
-	margin:0;
-	padding: 0;
-}
-
-.social:hover{
-	-webkit-transform: rotateZ(-30deg);
-    -ms-transform: rotateZ(-30deg);
-    transform: rotateZ(-30deg);
-}
 
 .web-footer, .container:after {
 	/*height: 120px; /* .push must be the same height as .footer */

@@ -10,31 +10,6 @@
 }
 
 
-.socialMedia{
-	height: 5%;
-	width: auto;
-	display: ;
-	margin: 0;
-	padding: 0;
-	z-index: 10;
-	position: absolute;
-	right:0px;
-	float: right;
-
-}
-
-.social {
-	max-width: 5%;
-    height: auto;
-	margin:0;
-	padding: 0;
-}
-
-.social:hover{
-	-webkit-transform: rotateZ(-30deg);
-    -ms-transform: rotateZ(-30deg);
-    transform: rotateZ(-30deg);
-}
 
 /* Nav */
 .tabs nav {
@@ -326,7 +301,7 @@ div#contenido {
 
 .content-wrap {
 	position: relative;
-	height: 90%;
+	height: 85%;
 	bottom: 0;
 	right: 0;
 	left: 0;
