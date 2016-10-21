@@ -32,9 +32,9 @@ workingDir="$(echo $sampleDir | rev | cut -d'/' -f5- | rev)/" # (workingDir)
 organismDir=$(echo $sampleDir | rev | cut -d'/' -f3 | rev) # (xx-organism)
 organism="${organismDir##*-}" # (organism)
 #		INPUT FILES
-sampleResult="${workingDir}RESULTS/data/${sampleName}_${organism}_results.txt"
+sampleResult="${workingDir}RESULTS/data/persamples/${sampleName}_${organism}_results.txt"
 #		OUTPUT FILES
-result_page="${workingDir}/RESULTS/data/${sampleName}_${organism}_results.html"
+result_page="${workingDir}/RESULTS/data/persamples/${sampleName}_${organism}_results.html"
 
 
 echo "

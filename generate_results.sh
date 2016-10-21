@@ -83,11 +83,11 @@ cd ${workingDir}
 ######### PER SAMPLE ########
 
 #	CREATE DIRECTORY FOR THE SAMPLE IF NECESSARY
-if [ ! -d "${resultsDir}data" ]
+if [ ! -d "${resultsDir}data/persamples" ]
 then
-	mkdir -p "${resultsDir}data"
-	echo -e "$(date)\t Generate ${resultsDir}data" >> $lablog
-	echo -e "${resultsDir}data created"
+	mkdir -p "${resultsDir}data/persamples"
+	echo -e "$(date)\t Generate ${resultsDir}data/persamples" >> $lablog
+	echo -e "${resultsDir}data/persamples created"
 fi
 
 # Generate by sample template html
@@ -122,9 +122,37 @@ done
 
 ######### SUMMARY ###########
 
-echo -e "$(date)\t Copy the summary page:" >> $lablog
+echo -e "$(date)\t Create the json file:" >> $lablog
 echo -e "cp ${workingDir}ANALYSIS/SRC/html/summary.html ${resultsDir}" >> $lablog
 cp ${workingDir}ANALYSIS/SRC/html/summary.html ${resultsDir}
 
-# Taxonomy
+#	CREATE DIRECTORY FOR THE SAMPLE IF NECESSARY
+if [ ! -d "${resultsDir}data" ]
+then
+	mkdir -p "${resultsDir}data/summary/"
+	echo -e "$(date)\t Generate ${resultsDir}data/summary" >> $lablog
+	echo -e "${resultsDir}data/summary created"
+fi
 
+# Generate taxonomy statistics files
+echo -e "$(date)\t Generate taxonomy statistics files" >> $lablog
+organisms=()
+for organism in ${workingDir}ANALYSIS/*
+do
+	organism=$(echo $organism | rev | cut -d'/' -f1 | rev)
+	if [[ $organism =~ ^[0]{1}[5-9] ]];
+	then
+		echo -e "$organism" >> $lablog
+		organism_stripped="${organism##*-}" # gets what is after the '-' and assumes is the organism
+		cat ${workingDir}ANALYSIS/samples_id.txt | while read sample
+		do
+			echo -e "\t$sample" >> $lablog
+			# Generate taxonomy statistics
+			echo -e "\t\t$(date)\t Generate taxonomy file" >> $lablog
+			echo -e "\t\t${workingDir}ANALYSIS/SRC/statistics.sh ${workingDir}ANALYSIS/${organism}/${sample}/blast" >> $lablog
+			${workingDir}ANALYSIS/SRC/statistics.sh ${workingDir}ANALYSIS/${organism}/${sample}/blast 2>&1 | tee -a $lablog
+			# Copy statistics files to RESULTS data folder
+			cp "${workingDir}ANALYSIS/${organism}/${sample}/taxonomy/${sample}_${organism_stripped}_statistics.txt" "${resultsDir}/data/summary/" 2>&1 | tee -a $lablog
+		done
+	fi
+done
