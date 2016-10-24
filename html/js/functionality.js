@@ -35,6 +35,7 @@ function set_size() {
     }
     //Charts size
     $('.charts').css("width", $(window).width() - $('.vertical-nav').css("width").replace(/[^-\d\.]/g, ''));
+    $('.results').css("width", $(window).width() - $('.vertical-nav').css("width").replace(/[^-\d\.]/g, ''));
 
     // 2nd level responsive behaviour. We change the class so the css
     //can change it
