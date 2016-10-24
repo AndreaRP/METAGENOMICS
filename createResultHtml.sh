@@ -104,6 +104,6 @@ echo "
 		</table>
 		<script src='http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js'></script>
 		<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js'></script>
-		<script src='../js/jquery.stickyheader.js'></script>
+		<script src='../../js/jquery.stickyheader.js'></script>
 	</body>
 </html>" >> $result_page
