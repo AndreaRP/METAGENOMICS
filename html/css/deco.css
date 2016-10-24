@@ -91,6 +91,20 @@ a:hover, a:focus {
 	*/
 }
 
+.charts {
+	height: 100%;
+	min-height: 100%;
+	margin: 0;
+	padding: 0;
+	float: right;
+}
+
+#bacteria, #virus, #fungi, 
+#protozoa, #invertebrate{
+	float:left;
+	height: 45%;
+	width: 30%;
+}
 
 .social:hover{
 	
