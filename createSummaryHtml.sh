@@ -20,11 +20,14 @@ set -e
 
 #	GET PARAMETERS
 workingDir=$1  #
+summaryDir="${workingDir}RESULTS/data/summary/"
 #		INPUT FILES
 samplesId="${workingDir}ANALYSIS/samples_id.txt"
 #		OUTPUT FILES
 result_page="${workingDir}/RESULTS/summary.html"
 
+#	CONSTANTS
+organisms=("bacteria" "virus" "fungi" "protozoa" "invertebrate")
 
 echo "
 <!DOCTYPE html>
@@ -42,6 +45,7 @@ echo "
 		<link rel='stylesheet' type='text/css' href='css/tabs.css' />
 		<link rel='stylesheet' type='text/css' href='css/tabstyles.css' />
 		<script src='js/jquery-3.1.0.js'></script>
+		<script type='text/javascript' src='js/google-loader.js'></script>
 		<script src='js/functionality.js'></script>
 	</head>
 	<body>
@@ -85,7 +89,7 @@ echo "
 					 echo "
 					 <li><a class='icon menu' href='#""" >> $result_page
 					 echo $in >> $result_page
-					 echo "'><span>">> $result_page
+					 echo "'><span onclick='load_summary(this.innerText)'>">> $result_page
 					 echo $in >> $result_page
 					 echo "</span></a>
 					 </li>" >> $result_page
@@ -93,7 +97,28 @@ echo "
 				echo "</ul>
 					</nav>
 					</div>
-					<object class='results' type='text/html' data=''></object>
+						<div style='display:none' class='results'>
+							<div class='"
+							cat $samplesId | while read line
+							do 
+								echo $in >> $result_page
+								echo "'>"
+                            # read summary files 
+								for organism in "${organisms[@]}"
+								do
+                            		echo "<div class='${organism}'><span>" >> $result_page
+                                		cat "${summaryDir}${line}_${organism}_statistics.txt">> $result_page
+                            		echo "</span></div>" >> $result_page
+                            	done
+                            done
+                            echo "</div>
+						</div>
+						<div class='charts'>"
+						for organism in "${organisms[@]}"
+						do
+                    		echo "<div id='${organism}'></div>" >> $result_page
+                        done
+						echo "</div>
 					</div>
 				</div><!-- /tabs -->
 			<footer class='web-footer'>

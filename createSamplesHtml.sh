@@ -42,6 +42,7 @@ echo "
 		<link rel='stylesheet' type='text/css' href='css/tabs.css' />
 		<link rel='stylesheet' type='text/css' href='css/tabstyles.css' />
 		<script src='js/jquery-3.1.0.js'></script>
+		<script type='text/javascript' src='js/google-loader.js'></script>
 		<script src='js/functionality.js'></script>
 	</head>
 	<body>
