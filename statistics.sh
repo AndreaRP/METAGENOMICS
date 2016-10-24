@@ -30,9 +30,9 @@ outputDir="${sampleDir}/taxonomy/"
 #	Input file
 blastFile="${blastDir}*_filtered.blast"
 #	Output Files
-organism_list="${outputDir}/${sampleName}_${organism}_organismList.txt"
-organism_formated_list="${outputDir}/${sampleName}_${organism}_formated_organismList.txt"
-statisticsFile="${outputDir}/${sampleName}_${organism}_statistics.txt"
+organism_list="${outputDir}${sampleName}_${organism}_organismList.txt"
+organism_formated_list="${outputDir}${sampleName}_${organism}_formated_organismList.txt"
+statisticsFile="${outputDir}${sampleName}_${organism}_statistics.txt"
 # sampleName_organism_formated_organismList.txt
 
 # CREATE DIRECTORY
@@ -49,20 +49,19 @@ cat $blastFile | sort -t$'\t' -rk2,2 -k13,13 -rk12,13 -rk4,4 | cut -f 1,3,2,13,1
 #cat $blastFile | cut -f 1,3 | sort | uniq -c > "${outputDir}/${sampleName}_organismList.txt"
 
 rm -f "${organism_formated_list}"
+rm -f "${statisticsFile}"
 
 cat "${organism_list}"| while read entry
 do
 	case $organism in
 		bacteria)
 			# Corynebacteriales bacterium X1698, complete genome	NODE_10_length_377_cov_2.36646	NZ_CP012390.1	97.21	4e-116	  425
-			echo "${entry}" | awk -F"	" 'BEGIN{OFS="\t";} {sub(/,/,"");sub(/genome/,"");sub(/strain/,"");sub(/str./,"");sub(/complete/,"");sub(/sequence/,"");sub(/assembly/,"");print $1, $3, $4, $5, $6}' >> "${outputDir}/${sampleName}_formated_organismList.txt"
+			echo "${entry}" | awk -F"	" 'BEGIN{OFS="\t";} {sub(/,/,"");sub(/:/,"");sub(/genome/,"");sub(/strain/,"");sub(/str./,"");sub(/complete/,"");sub(/sequence/,"");sub(/assembly/,"");print $1, $3, $4, $5, $6}' >> "${organism_formated_list}"
 			# Corynebacteriales bacterium X1698   NZ_CP012390.1   97.21   4e-116    425
-			cat "${organism_formated_list}" | cut -f 1 | uniq -c >>  "${statisticsFile}"
 			;;
 		virus)
 			# 13 Human adenovirus 2, complete genome  AC_98655
 			echo "${entry}" | awk -F"	" 'BEGIN{OFS="\t";} {sub(/,/,"");sub(/genome/,"");sub(/strain/,"");sub(/str./,"");sub(/complete/,"");sub(/sequence/,"");sub(/assembly/,"");print $1, $3, $4, $5, $6}' >> "${outputDir}/${sampleName}_formated_organismList.txt"
-			cat "${organism_formated_list}" | cut -f 1 | uniq -c >>  "${statisticsFile}"
 			# 13 Human adenovirus 2 ...
 			;;
 		fungi)
@@ -75,19 +74,17 @@ do
 			sp=$(echo $sp | awk '{sub(/strain/,"");sub(/str./,"");sub(/complete genome/,"");sub(/_/," "); print}')
 			echo "${entry}" | awk -F"	" -v sp="$sp" 'BEGIN{OFS="\t";} {sub(/,/,"");sub(/genome/,"");sub(/strain/,"");sub(/str./,"");sub(/complete/,"");sub(/sequence/,"");sub(/assembly/,"");print sp,$4, $5, $6}' >> "${outputDir}/${sampleName}_formated_organismList.txt"
 			# Puccinia triticina 90.05   7e-63     244
-			cat "${organism_formated_list}" | cut -f 1 | uniq -c >>  "${statisticsFile}"
 			;;
 		protozoa)
 			#Perkinsus marinus ATCC 50983 genomic scaffold scf_1104296975874, whole genome shotgun sequence	NODE_2_length_593_cov_5.33643	NW_003200631.1	91.32	380	31	2	215	593	970	592	2e-144	  518  
 			echo "${entry}" | awk -F"	" 'BEGIN{OFS="\t";} {sub(/,/,"");sub(/genomic/,"");sub(/assembly/,"");sub(/whole/,"");sub(/shotgun/,"");sub(/genome/,"");sub(/strain/,"");sub(/str./,"");sub(/complete/,"");sub(/sequence/,"");sub(/assembly/,"");print $1, $4, $5, $6}' >> "${outputDir}/${sampleName}_formated_organismList.txt"
-			cat "${organism_formated_list}" | cut -f 1 | uniq -c >>  "${statisticsFile}"
 			;;
 		invertebrate)
 			# Nematostella vectensis NEMVEscaffold_1252 genomic scaffold, whole genome shotgun sequence	NW_001833215.1  
 			echo "${entry}" | awk -F"	" 'BEGIN{OFS="\t";} {sub(/,/,"");sub(/genomic/,"");sub(/assembly/,"");sub(/whole/,"");sub(/shotgun/,"");sub(/genome/,"");sub(/strain/,"");sub(/str./,"");sub(/complete/,"");sub(/sequence/,"");sub(/assembly/,"");print $1, $4, $5, $6}' >> "${outputDir}/${sampleName}_formated_organismList.txt"
-			cat "${organism_formated_list}" | cut -f 1 | uniq -c >>  "${statisticsFile}"
 			;;
 		*) echo "Unknown organism"
 	esac
 done
-
+# count gnm in sample
+awk -F'\t' '{print $1}' "${organism_formated_list}" | sort | uniq -c | sort -nr >> "${statisticsFile}" 
