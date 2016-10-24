@@ -44,8 +44,8 @@ echo "
    		 echo "$sampleName ${organism} results" >> $result_page
    		 echo "
    		</title>
-   		<link rel='stylesheet' type='text/css' href='../css/table.css'>
-   		<link rel='stylesheet' type='text/css' href='../css/deco.css' />
+   		<link rel='stylesheet' type='text/css' href='../../css/table.css'>
+   		<link rel='stylesheet' type='text/css' href='../../css/deco.css' />
    	 	<meta content=''>
 	</head>
 	<body>
