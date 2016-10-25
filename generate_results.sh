@@ -122,9 +122,6 @@ done
 
 ######### SUMMARY ###########
 
-echo -e "$(date)\t Create the json file:" >> $lablog
-echo -e "cp ${workingDir}ANALYSIS/SRC/html/summary.html ${resultsDir}" >> $lablog
-cp ${workingDir}ANALYSIS/SRC/html/summary.html ${resultsDir}
 
 #	CREATE DIRECTORY FOR THE SAMPLE IF NECESSARY
 if [ ! -d "${resultsDir}data" ]
@@ -148,7 +145,7 @@ do
 		do
 			echo -e "\t$sample" >> $lablog
 			# Generate taxonomy statistics
-			echo -e "\t\t$(date)\t Generate taxonomy file" >> $lablog
+			echo -e "\t\t$(date)\t Generate taxonomy" >> $lablog
 			echo -e "\t\t${workingDir}ANALYSIS/SRC/statistics.sh ${workingDir}ANALYSIS/${organism}/${sample}/blast" >> $lablog
 			${workingDir}ANALYSIS/SRC/statistics.sh ${workingDir}ANALYSIS/${organism}/${sample}/blast 2>&1 | tee -a $lablog
 			# Copy statistics files to RESULTS data folder
@@ -156,3 +153,8 @@ do
 		done
 	fi
 done
+
+# Generates the html file once the txt statistics are finished and copied.
+echo -e "$(date)\t Create html file:" >> $lablog
+echo -e "cp ${workingDir}ANALYSIS/SRC/html/summary.html ${resultsDir}" >> $lablog
+cp ${workingDir}ANALYSIS/SRC/html/summary.html ${resultsDir}
