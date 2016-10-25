@@ -97,24 +97,26 @@ a:hover, a:focus {
 	margin: 0;
 	padding: 0;
 	float: right;
+	background-color: white;
 }
 
 #bacteria, #virus, #fungi, 
 #protozoa, #invertebrate{
 	float:left;
-	height: 45%;
-	width: 30%;
+	height: 50%;
+	width: 33%;
+	
 }
 
-.social:hover{
-	
+/* Make span is clickable */
+a.icon.menu span {
+	display: block;
+}
+
+.social:hover{	
 	-webkit-transform: rotateZ(-30deg);
     -ms-transform: rotateZ(-30deg);
     transform: rotateZ(-30deg);
-   /*
-    border-bottom: 3px solid blue;
-    width: 200px;
-     */
 }
 .container > div#contenido {
 	height: 75%;
