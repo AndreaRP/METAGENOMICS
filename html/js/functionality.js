@@ -68,19 +68,22 @@ function load_summary(sample) {
             //title
             span[0]=new Array(2);
             span[0][0]="Genome";
-            span[0][1]="hits";
+            span[0][1]="Hits";
             //data
             j=1;
             for (line = 0; line < lines.length-1; line++) { 
-                //strip tabs so they don't mess the data    
+                //trim spaces and strip tabs so they don't mess the data    
                 lines[line]=lines[line].trim().replace('\t','');
                 span[j]= new Array(2);
                 span[j][0] = lines[line].substr(lines[line].indexOf(' ') + 1); //gnm
                 span[j][1] = parseInt(lines[line].substr(0,lines[line].indexOf(' '))); //cuantity 
+
                 j++;
+
             }   
 
             data = google.visualization.arrayToDataTable(span);
+
             options = {
               title: sample+' '+organisms[i],
               pieHole: 0.4,
