@@ -4,15 +4,15 @@ set -e
 #########################################################
 #		  		HTML RESULTS GENERATOR				 	#
 #########################################################
-# Copies web utilities into RESULTS/ (css, img, js...).
-# Generates info.html.
-# Generates quality reports of each sample. (with listFastQCReports.pl and createHTML.pl).
-# Generates quality.html.
-# Generates merged results table (with mergeResults.R).
-# Generates results web table for each sample and organism (with script createResultHtml.sh).
-# Generates samples.html.
-# Generates statistics of each sample and organism (with script statistics.sh).
-# Generates result summary.html.
+# 1. Copies web utilities into RESULTS/ (css, img, js...).
+# 2. Generates info.html.
+# 3. Generates quality reports of each sample. (with listFastQCReports.pl and createHTML.pl).
+# 4. Generates quality.html.
+# 5. Generates merged results table (with mergeResults.R).
+# 6. Generates results web table for each sample and organism (with script createResultHtml.sh).
+# 7. Generates samples.html.
+# 8. Generates statistics of each sample and organism (with script statistics.sh).
+# 9. Generates result summary.html.
 
 # load programs in module (comment for local runs) 
 module load R/R-3.2.5
