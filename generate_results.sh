@@ -4,17 +4,15 @@ set -e
 #########################################################
 #		  		HTML RESULTS GENERATOR				 	#
 #########################################################
-
-# 1. Copy web utilities (css, icons and js files)
-# 2. Generates info html file
-# 3. Creates quality directory if necessary
-# 4. Generates quality report (with scripts: ANALYSIS/SRC/html/quality/listFastQCReports.pl and ANALYSIS/SRC/html/quality/createHTML.pl)
-# 5. Creates data directory in RESULTS if necessary
-# 6. Generates merged results table (with script ANALYSIS/SRC/mergeResults.R)
-# 7. Creates results html for each sample and analysed organism. (with script: ANALYSIS/SRC/createResultHtml.sh)
-# 8. Generates result summary of each sample 
-# * Note: This script should only be run after the analysis has finished.
-
+# Copies web utilities into RESULTS/ (css, img, js...).
+# Generates info.html.
+# Generates quality reports of each sample. (with listFastQCReports.pl and createHTML.pl).
+# Generates quality.html.
+# Generates merged results table (with mergeResults.R).
+# Generates results web table for each sample and organism (with script createResultHtml.sh).
+# Generates samples.html.
+# Generates statistics of each sample and organism (with script statistics.sh).
+# Generates result summary.html.
 
 # load programs in module (comment for local runs) 
 module load R/R-3.2.5
