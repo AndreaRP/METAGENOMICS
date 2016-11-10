@@ -1,7 +1,6 @@
 
 $(document).ready(function() {
     /*changes properties of naviagtion menus*/
-    /*set_size();*/
     $(".menu").click(function() {
         // Change style of the selected sample
         $('a.selected').removeClass('selected');

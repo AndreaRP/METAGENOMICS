@@ -76,20 +76,48 @@ a {
 }
 
 .scroller > nav a:hover:before {
-  /*background: rgba(255,255,255,0.6);*/
   background-color: #1C8598;
 }
+
 
 .scroller > nav a.current:before {
   background: #1C8598;
 }
 /* End Vertical Navigation*/
+
+/*DICTIONARY*/
+dl {
+  width: 100%;
+  overflow: hidden;
+  padding: 0;
+  margin: 0
+}
+dt {
+  float: left;
+  width: 50%;
+  /* adjust the width; make sure the total of both is 100% */
+  padding: 0;
+  margin: 0
+  font-weight:bold;
+}
+dd {
+  float: left;
+  width: 50%;
+  /* adjust the width; make sure the total of both is 100% */
+  padding: 0;
+  margin: 0
+}
+
+
 /* -------------------------------- 
 
 Modules - reusable parts of our design
 
 -------------------------------- */
-
+section{
+  margin: 0;
+  padding: 0;
+}
 
 .cd-container {
   /* this class is used to give a max-width to the element it is applied to, and center it horizontally when it reaches that max-width */
