@@ -95,4 +95,9 @@ function load_summary(sample) {
         delete span, lines, data, chart;
       }
   }
+
+  function load_info(section){
+    $('.show').removeClass('show');
+    $('#'+section).addClass('show');
+  }
   
