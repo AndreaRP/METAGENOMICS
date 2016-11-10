@@ -12,9 +12,13 @@
 		<link rel='stylesheet' type='text/css' href='css/shared.css' />
 		<link rel='stylesheet' type='text/css' href='css/info.css' />
 		<script src='js/jquery-3.1.0.js'></script>
+		<!--Thrid party-->
         <script src="js/google-loader.js"></script>
 		<script src="js/modernizr.custom.js"></script>
+		<script src="js/jquery.viewport.js"></script>
+		<!--custom-->
 		<script src='js/main-nav.js'></script>
+		<script src='js/info.js'></script>
 	</head>
 	<body>
 		<div class='container'>
@@ -56,23 +60,23 @@
 						</nav>
 						<!--/Scroller nav-->
 						<main class="cd-main-content">
-							<div id="overview" class="cd-fixed-bg cd-bg-1">
+							<div id="overview" class="cd-fixed-bg cd-bg-1 section overview">
 								<h1>Overview</h1>
 							</div> <!-- cd-fixed-bg -->
-							<div class="cd-scrolling-bg cd-color-2">
+							<div id="overview" class="cd-scrolling-bg cd-color-2 section overview">
 								<div class="cd-container">
 									<p>
 										This webpage is generated when using the <a href='https://github.com/AndreaRP/METAGENOMICS/' title='Metagenomics'>Metagenomics</a> Workflow. This section will sketchly explain how the data is generated.
 									</p>
 									<p>
 										You can find the complete project available for download on GitHub. There is also a <a href='https://github.com/AndreaRP/METAGENOMICS/wiki' title='Metagenomics wiki'>Metagenomics Wiki</a> section featuring an in-depth explanation about how to install and run <a href='https://github.com/AndreaRP/METAGENOMICS/' title='Metagenomics'>Metagenomics</a>, from dependency installation and the way to generate the reference databases to how to run each script.
-									</p>
+									</p>									
 								</div> <!-- cd-container -->
 							</div> <!-- cd-scrolling-bg -->
-							<div id="quality" class="cd-fixed-bg cd-bg-2">
+							<div id="quality" class="cd-fixed-bg cd-bg-2 section quality">
 								<h2>Quality Control</h2>
 							</div> <!-- cd-fixed-bg -->
-							<div class="cd-scrolling-bg cd-color-3">
+							<div id="quality" class="cd-scrolling-bg cd-color-3 section quality">
 								<div class="cd-container">
 									<p>
 										The quality control is the first step in the analysis. This step comprehends the following:
@@ -90,10 +94,10 @@
 									</p>
 								</div> <!-- cd-container -->
 							</div> <!-- cd-scrolling-bg -->
-							<div id="summary" class="cd-fixed-bg cd-bg-3">
+							<div id="summary" class="cd-fixed-bg cd-bg-3 section summary">
 								<h2>Summary</h2>
 							</div> <!-- cd-fixed-bg -->
-							<div class="cd-scrolling-bg cd-color-1">
+							<div id="summary" class="cd-scrolling-bg cd-color-1 section summary">
 								<div class="cd-container">
 										<p>
 											The data used for each pie chart comes from selecting the best blast hit of each contig in the sample. The best hit is determined by getting the maximum value after sorting by Bit score, e-value and nucleotide identity, in that order. Let's consider the following blast result:
@@ -233,12 +237,10 @@
                                           ['Organism2',  1],
                                           ['Organism4',  2]
                                         ]);
-
                                         var options = {
                                           title: 'Sample Pie-Chart',
                                           pieHole: 0.4,
                                         };
-
                                         var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
                                         chart.draw(data, options);
                                       }
@@ -247,10 +249,10 @@
                                     <p>Please, bear in mind that these results are only orientative, the Per Sample section contains much more detailed data.</p>
 								</div> <!-- cd-container -->
 							</div> <!-- cd-scrolling-bg -->
-							<div id="sample" class="cd-fixed-bg cd-bg-4">
+							<div id="sample" class="cd-fixed-bg cd-bg-4 section sample">
 								<h2>By Sample</h2>
 							</div> <!-- cd-fixed-bg -->
-							<div class="cd-scrolling-bg cd-color-1">
+							<div id="sample" class="cd-scrolling-bg cd-color-1 section sample">
 								<div class="cd-container">
                                     The data in the Per Sample section comes from the combined results of running blast and calculating the coverage of each genome of the reference that aligned to the sample. A table is presented for each organism group in each sample with the following information:
                                     <dl>
