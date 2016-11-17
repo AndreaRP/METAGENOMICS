@@ -43,9 +43,9 @@ sampleDir=$2
 #		Constants
 sampleName=$(basename "${sampleDir}")
 bac16SDB="${bacDB}16S/bwt2/16S"
-bacWGDB="${bacDB}WG/bwt2/WG"
+bacWGDB="${bacDB}WG/bwt2-offrate/WG-offrate"
 workingDir="/processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/"
-bacFilesDir="${workingDir}/ANALYSIS/05-bacteria/${sampleName}/reads/" #directory where the files will we saved (sam for mapping and fastq for mapped samples)
+bacFilesDir="${workingDir}/ANALYSIS/05-bacteria/${sampleName}/reads-offrate/" #directory where the files will we saved (sam for mapping and fastq for mapped samples)
 noHostDir="${workingDir}/ANALYSIS/04-noHost/${sampleName}/" #directory where the host free samples are located
 #		Input Files
 noHostR1Fastq="${noHostDir}${sampleName}_noHost_R1.fastq" #R1 host free file

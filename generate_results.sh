@@ -143,7 +143,7 @@ do
 		do
 			echo -e "\t$sample" >> $lablog
 			# Generate taxonomy statistics
-			echo -e "\t\t$(date)\t Generate taxonomy" >> $lablog
+			echo -e "\t\t$(date)\t Generate statistics" >> $lablog
 			echo -e "\t\t${workingDir}ANALYSIS/SRC/statistics.sh ${workingDir}ANALYSIS/${organism}/${sample}/blast" >> $lablog
 			${workingDir}ANALYSIS/SRC/statistics.sh ${workingDir}ANALYSIS/${organism}/${sample}/blast 2>&1 | tee -a $lablog
 			# Copy statistics files to RESULTS data folder

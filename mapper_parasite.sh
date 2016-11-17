@@ -91,7 +91,7 @@ fi
 echo -e "--------Bowtie2 is mapping against the protozoa reference ....------"
 echo -e "$(date)\t Start mapping ${sampleName} to protozoa reference \n" > $bowtie2logFileProtozoa
 echo -e "The command is: ### bowtie2 -fr -x "$protozoaDB" -q -1 $noHostR1Fastq -2 $noHostR2Fastq -S $mappedSamProtozoaFile ###\n" >> $bowtie2logFileProtozoa 
-bowtie2 -fr -x "$protozoaDB" -q -1 $noHostR1Fastq -2 $noHostR2Fastq -S $mappedSamProtozoaFile 2>&1 | tee -a $bowtie2logFileProtozoa
+bowtie2 -a -fr -x "$protozoaDB" -q -1 $noHostR1Fastq -2 $noHostR2Fastq -S $mappedSamProtozoaFile 2>&1 | tee -a $bowtie2logFileProtozoa
 echo -e "$(date)\t Finished mapping ${sampleName} against protozoa reference \n" >> $bowtie2logFileProtozoa
 echo -e "$(date)\t Converting SAM to BAM of ${sampleName} \n" >> $bowtie2logFileProtozoa
 samtools view -Sb $mappedSamProtozoaFile > $mappedBamProtozoaFile
@@ -116,7 +116,7 @@ echo -e "$(date)\t Finished filtering ${sampleName} reads that mapped to protozo
 echo -e "--------Bowtie2 is mapping against the Invertebrate reference ....------"
 echo -e "$(date)\t Start mapping ${sampleName} to Invertebrate reference \n" > $bowtie2logFileInvertebrate
 echo -e "The command is: ### bowtie2 -fr -x "$invertebrateDB" -q -1 $noHostR1Fastq -2 $noHostR2Fastq -S $mappedSamInvertebrateFile ###\n" >> $bowtie2logFileInvertebrate 
-bowtie2 -fr -x "$invertebrateDB" -q -1 $noHostR1Fastq -2 $noHostR2Fastq -S $mappedSamInvertebrateFile 2>&1 | tee -a $bowtie2logFileInvertebrate
+bowtie2 -a -fr -x "$invertebrateDB" -q -1 $noHostR1Fastq -2 $noHostR2Fastq -S $mappedSamInvertebrateFile 2>&1 | tee -a $bowtie2logFileInvertebrate
 echo -e "$(date)\t Finished mapping ${sampleName} against Invertebrate reference \n" >> $bowtie2logFileInvertebrate
 echo -e "$(date)\t Converting SAM to BAM of ${sampleName} \n" >> $bowtie2logFileInvertebrate
 samtools view -Sb $mappedSamInvertebrateFile > $mappedBamInvertebrateFile

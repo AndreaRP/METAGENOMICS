@@ -66,7 +66,7 @@ fi
 echo -e "--------Bowtie2 is mapping against the reference ....------"
 echo -e "$(date)\t Start mapping ${sampleName}\n" > $bowtie2logFile
 echo -e "The command is: ### bowtie2 -fr -x "$virDBDir" -q -1 $noHostR1Fastq -2 $noHostR2Fastq -S $mappedSamFile ###\n" >> $bowtie2logFile 
-bowtie2 -fr -x "$virDBDir" -q -1 $noHostR1Fastq -2 $noHostR2Fastq -S $mappedSamFile 2>&1 | tee -a $bowtie2logFile
+bowtie2 -a -fr -x "$virDBDir" -q -1 $noHostR1Fastq -2 $noHostR2Fastq -S $mappedSamFile 2>&1 | tee -a $bowtie2logFile
 echo -e "$(date)\t Finished mapping ${sampleName}\n" >> $bowtie2logFile
 echo -e "$(date)\t Converting SAM to BAM of ${sampleName} \n" >> $bowtie2logFile
 samtools view -Sb $mappedSamFile > $mappedBamFile

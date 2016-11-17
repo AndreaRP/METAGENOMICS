@@ -43,9 +43,9 @@ sampleDir=$2
 #		Constants
 sampleName=$(basename "${sampleDir}")
 bac16SDB="${bacDB}16S/bwt2/16S"
-bacWGDB="${bacDB}WG/bwt2/WG"
+bacWGDB="${bacDB}WG/bwt2-offrate/WG-offrate"
 workingDir="/processing_Data/bioinformatics/research/20160530_METAGENOMICS_AR_IC_T/"
-bacFilesDir="${workingDir}/ANALYSIS/05-bacteria/${sampleName}/reads/" #directory where the files will we saved (sam for mapping and fastq for mapped samples)
+bacFilesDir="${workingDir}/ANALYSIS/05-bacteria/${sampleName}/reads-offrate/" #directory where the files will we saved (sam for mapping and fastq for mapped samples)
 noHostDir="${workingDir}/ANALYSIS/04-noHost/${sampleName}/" #directory where the host free samples are located
 #		Input Files
 noHostR1Fastq="${noHostDir}${sampleName}_noHost_R1.fastq" #R1 host free file
@@ -83,7 +83,7 @@ fi
 echo -e "--------Bowtie2 is mapping against the 16S reference ....------"
 echo -e "$(date)\t Start mapping ${sampleName} to 16S reference \n" > $bowtie2logFile16S
 echo -e "The command is: ### bowtie2 -fr -x "$bac16SDB" -q -1 $noHostR1Fastq -2 $noHostR2Fastq -S $mappedSam16SFile ###\n" >> $bowtie2logFile16S 
-bowtie2 -a -fr -x "$bac16SDB" -q -1 $noHostR1Fastq -2 $noHostR2Fastq -S $mappedSam16SFile 2>&1 | tee -a $bowtie2logFile16S
+bowtie2 -a -t 20 -fr -x "$bac16SDB" -q -1 $noHostR1Fastq -2 $noHostR2Fastq -S $mappedSam16SFile 2>&1 | tee -a $bowtie2logFile16S
 echo -e "$(date)\t Finished mapping ${sampleName} against 16S reference \n" >> $bowtie2logFile16S
 echo -e "$(date)\t Converting SAM to BAM of ${sampleName} \n" >> $bowtie2logFile16S
 samtools view -Sb $mappedSam16SFile > $mappedBam16SFile
@@ -108,7 +108,7 @@ echo -e "$(date)\t Finished filtering ${sampleName} reads that mapped to 16S \n"
 echo -e "--------Bowtie2 is mapping against bacteria WG reference ....------"
 echo -e "$(date)\t Start mapping ${sampleName} reads to bacteria WG reference \n" > $bowtie2logFileWG
 echo -e "The command is: ### bowtie2 -fr -x "$bacWGDB" -q -1 $noHostR1Fastq -2 $noHostR2Fastq -S $mappedSamWGFile ###\n" >> $bowtie2logFileWG 
-bowtie2 -a -fr -x "$bacWGDB" -q -1 $noHostR1Fastq -2 $noHostR2Fastq -S $mappedSamWGFile 2>&1 | tee -a $bowtie2logFileWG
+bowtie2 -a -t 20 -fr -x "$bacWGDB" -q -1 $noHostR1Fastq -2 $noHostR2Fastq -S $mappedSamWGFile 2>&1 | tee -a $bowtie2logFileWG
 echo -e "$(date)\t Finished mapping ${sampleName} reads to bacteria WG reference \n" >> $bowtie2logFileWG
 echo -e "$(date)\t Converting SAM to BAM of ${sampleName} \n" >> $bowtie2logFileWG
 samtools view -Sb $mappedSamWGFile > $mappedBamWGFile

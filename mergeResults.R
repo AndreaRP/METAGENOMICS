@@ -49,6 +49,6 @@ sampleResults = merge(x=blast, y=coverage, by.x = "Reference Id", by.y = "gnm")
 
 # WRITE AOUTPUT FILE WITH MERGED TABLES
 organism=unlist(strsplit(organism, split='-', fixed=TRUE))[2]
-write.table(sampleResults, file=(paste(workingDir, "RESULTS/data/", sampleName, "_", organism, "_results.txt", sep="")), sep= '\t', col.names=FALSE, row.names=FALSE)
+write.table(sampleResults, file=(paste(workingDir, "RESULTS/data/persamples/", sampleName, "_", organism, "_results.txt", sep="")), sep= '\t', col.names=FALSE, row.names=FALSE)
 
 

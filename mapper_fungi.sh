@@ -83,7 +83,7 @@ fi
 echo -e "--------Bowtie2 is mapping against the ITS reference ....------"
 echo -e "$(date)\t Start mapping ${sampleName} to ITS reference \n" > $bowtie2logFileITS
 echo -e "The command is: ### bowtie2 -fr -x "$fungiITSDB" -q -1 $noHostR1Fastq -2 $noHostR2Fastq -S $mappedSamITSFile ###\n" >> $bowtie2logFileITS 
-bowtie2 -fr -x "$fungiITSDB" -q -1 $noHostR1Fastq -2 $noHostR2Fastq -S $mappedSamITSFile 2>&1 | tee -a $bowtie2logFileITS
+bowtie2 -a -fr -x "$fungiITSDB" -q -1 $noHostR1Fastq -2 $noHostR2Fastq -S $mappedSamITSFile 2>&1 | tee -a $bowtie2logFileITS
 echo -e "$(date)\t Finished mapping ${sampleName} against ITS reference \n" >> $bowtie2logFileITS
 echo -e "$(date)\t Converting SAM to BAM of ${sampleName} \n" >> $bowtie2logFileITS
 samtools view -Sb $mappedSamITSFile > $mappedBamITSFile
@@ -108,7 +108,7 @@ echo -e "$(date)\t Finished filtering ${sampleName} reads that mapped to ITS \n"
 echo -e "--------Bowtie2 is mapping against fungi WG reference ....------"
 echo -e "$(date)\t Start mapping ${sampleName} reads to fungi WG reference \n" > $bowtie2logFileWG
 echo -e "The command is: ### bowtie2 -fr -x "$fungiWGDB" -q -1 $noHostR1Fastq -2 $noHostR2Fastq -S $mappedSamWGFile ###\n" >> $bowtie2logFileWG 
-bowtie2 -fr -x "$fungiWGDB" -q -1 $noHostR1Fastq -2 $noHostR2Fastq -S $mappedSamWGFile 2>&1 | tee -a $bowtie2logFileWG
+bowtie2 -a -fr -x "$fungiWGDB" -q -1 $noHostR1Fastq -2 $noHostR2Fastq -S $mappedSamWGFile 2>&1 | tee -a $bowtie2logFileWG
 echo -e "$(date)\t Finished mapping ${sampleName} reads to fungi WG reference \n" >> $bowtie2logFileWG
 echo -e "$(date)\t Converting SAM to BAM of ${sampleName} \n" >> $bowtie2logFileWG
 samtools view -Sb $mappedSamWGFile > $mappedBamWGFile

@@ -72,7 +72,8 @@ echo -e "$(date)\t Finished mapping ${sampleName}\n" >> $bowtie2logFile
 echo -e "$(date)\t Converting SAM to BAM of ${sampleName} \n" >> $bowtie2logFile
 samtools view -Sb $mappedSamFile > $mappedBamFile
 rm $mappedSamFile
-samtools sort -O bam -T temp -o $sortedBamFile $mappedBamFile
+#samtools sort -O bam -T temp -o $sortedBamFile $mappedBamFile
+samtools sort -O bam -T $sortedBamFile -o $sortedBamFile $mappedBamFile 2>&1 | tee -a $bowtie2logFile
 samtools index -b $sortedBamFile
 rm $mappedBamFile
 echo -e "$(date)\t Finished converting SAM to BAM of ${sampleName} \n" >> $bowtie2logFile
