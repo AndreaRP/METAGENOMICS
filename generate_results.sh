@@ -26,6 +26,21 @@ lablog="${resultsDir}_results_log.log"
 echo -e "$(date)\t start copying utilities (css, js, img...)\n" > $lablog
 echo -e "The commands are:\ncp -r ${workingDir}ANALYSIS/SRC/html/css* ${resultsDir}\ncp -r ${workingDir}ANALYSIS/SRC/html/img* ${resultsDir}\ncp -r ${workingDir}ANALYSIS/SRC/html/js* ${resultsDir}
 " > $lablog
+#	CREATE DIRECTORies IF NECESSARY
+if [ ! -d "${resultsDir}css" ]
+then
+	mkdir -p "${resultsDir}css"
+	echo -e "$(date)\t Generate ${resultsDir}css" >> $lablog
+	echo -e "${resultsDir}css created"
+fi
+
+if [ ! -d "${resultsDir}js" ]
+then
+	mkdir -p "${resultsDir}js"
+	echo -e "$(date)\t Generate ${resultsDir}js" >> $lablog
+	echo -e "${resultsDir}js created"
+fi
+
 cp -r ${workingDir}ANALYSIS/SRC/html/css/*.css "${resultsDir}css/"
 cp -r ${workingDir}ANALYSIS/SRC/html/img* ${resultsDir}
 cp -r ${workingDir}ANALYSIS/SRC/html/js/*.js "${resultsDir}js/"
@@ -122,7 +137,7 @@ done
 
 
 # Create directory for the sample if necessary
-if [ ! -d "${resultsDir}data" ]
+if [ ! -d "${resultsDir}data/summary" ]
 then
 	mkdir -p "${resultsDir}data/summary/"
 	echo -e "$(date)\t Generate ${resultsDir}data/summary" >> $lablog
@@ -145,7 +160,7 @@ do
 			# Generate taxonomy statistics
 			echo -e "\t\t$(date)\t Generate statistics" >> $lablog
 			echo -e "\t\t${workingDir}ANALYSIS/SRC/statistics.sh ${workingDir}ANALYSIS/${organism}/${sample}/blast" >> $lablog
-			${workingDir}ANALYSIS/SRC/statistics.sh ${workingDir}ANALYSIS/${organism}/${sample}/blast 2>&1 | tee -a $lablog
+			${workingDir}ANALYSIS/SRC/statistics.sh ${workingDir}ANALYSIS/${organism}/${sample}/blast/ 2>&1 | tee -a $lablog
 			# Copy statistics files to RESULTS data folder
 			cp "${workingDir}ANALYSIS/${organism}/${sample}/taxonomy/${sample}_${organism_stripped}_statistics.txt" "${resultsDir}/data/summary/" 2>&1 | tee -a $lablog
 		done

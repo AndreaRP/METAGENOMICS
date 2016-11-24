@@ -116,7 +116,7 @@ else
     	   		<meta content=''>
     	</head>
     	<body>
-    	   	<p>Sorry, we couldn't identify any "${organism}" in the sample "${sampleName}".</p>
+    	   	<p>Sorry, we couldn't identify "${organism}" in the sample "${sampleName}".</p>
     	</body>
     </html>" > $result_page
 fi 

@@ -117,7 +117,7 @@ echo "
                             done
                             echo "</div>
 						</div>
-						<div class='charts'>"
+						<div class='charts'>" >> $result_page
 						for organism in "${organisms[@]}"
 						do
                     		echo "<div id='${organism}'></div>" >> $result_page
