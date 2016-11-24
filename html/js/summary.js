@@ -46,7 +46,7 @@ function load_summary(sample) {
             span[0][1]="Hits";
             //data
             j=1;
-            for (line = 0; line < lines.length-1; line++) { 
+            for (line = 0; line < lines.length; line++) { 
                 //trim spaces and strip tabs so they don't mess the data    
                 lines[line]=lines[line].trim().replace('\t','');
                 span[j]= new Array(2);
