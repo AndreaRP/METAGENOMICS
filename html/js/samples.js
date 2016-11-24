@@ -6,9 +6,9 @@ $(document).ready(function() {
         // loads the corresponding result page
         //get organism and sample
         var organism = ($(this).text().toLowerCase());
-        var sample = $(this).parent().parent().parent().find('span#sample').text().toLowerCase();
-        load_result('C1', 'bacteria');
-        //load_result(sample,organism);
+        var sample = $(this).parent().parent().parent().find('span:first').text();
+        //load_result('C1', 'bacteria');
+        load_result(sample,organism);
     });
     $(window).resize(function() {
         set_size();
