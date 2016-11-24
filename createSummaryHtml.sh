@@ -95,14 +95,14 @@ echo "
 					 echo $in >> $result_page
 					 echo "'><span onclick='load_summary(this.innerText)'>">> $result_page
 					 echo $in >> $result_page
-					 echo "</span></a>
+					 echo "</span></a>    
 					 </li>" >> $result_page
 				done
 				echo "</ul>
 					</nav>
 					</div>
 						<div style='display:none' class='results'>
-							<div class='"
+							<div class='" >> $result_page          
 							cat $samplesId | while read line
 							do 
 								echo $in >> $result_page
