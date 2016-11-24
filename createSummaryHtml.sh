@@ -101,21 +101,23 @@ echo "
 				echo "</ul>
 					</nav>
 					</div>
-						<div style='display:none' class='results'>
-							<div class='" >> $result_page          
+						<div style='display:none' class='results'>">> $result_page							         
 							cat $samplesId | while read line
 							do 
-								echo $in >> $result_page
-								echo "'>"
                             # read summary files 
+                            	echo "<div class='" >> $result_page 
+								echo $line >> $result_page
+								echo "'>" >> $result_page
 								for organism in "${organisms[@]}"
 								do
+									
                             		echo "<div class='${organism}'><span>" >> $result_page
                                 		cat "${summaryDir}${line}_${organism}_statistics.txt">> $result_page
                             		echo "</span></div>" >> $result_page
                             	done
+                            	echo "</div>" >> $result_page
                             done
-                            echo "</div>
+                            echo "
 						</div>
 						<div class='charts'>" >> $result_page
 						for organism in "${organisms[@]}"
