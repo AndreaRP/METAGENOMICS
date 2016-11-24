@@ -26,9 +26,9 @@ lablog="${resultsDir}_results_log.log"
 echo -e "$(date)\t start copying utilities (css, js, img...)\n" > $lablog
 echo -e "The commands are:\ncp -r ${workingDir}ANALYSIS/SRC/html/css* ${resultsDir}\ncp -r ${workingDir}ANALYSIS/SRC/html/img* ${resultsDir}\ncp -r ${workingDir}ANALYSIS/SRC/html/js* ${resultsDir}
 " > $lablog
-cp -r ${workingDir}ANALYSIS/SRC/html/css* ${resultsDir}
+cp -r ${workingDir}ANALYSIS/SRC/html/css/*.css "${resultsDir}css/"
 cp -r ${workingDir}ANALYSIS/SRC/html/img* ${resultsDir}
-cp -r ${workingDir}ANALYSIS/SRC/html/js* ${resultsDir}
+cp -r ${workingDir}ANALYSIS/SRC/html/js/*.js "${resultsDir}js/"
 echo -e "$(date)\t finished copying utilities into $resultsDir" >> $lablog
 
 ################## WHAT IS THIS? ##############
@@ -154,8 +154,8 @@ done
 
 # Generates the html file once the txt statistics are finished and copied.
 echo -e "$(date)\t Create summary html file:" >> $lablog
-echo -e "${workingDir}ANALYSIS/SRC/createSummaryHtml.sh" >> $lablog
-${workingDir}ANALYSIS/SRC/createSummaryHtml.sh 2>&1 | tee -a $lablog
+echo -e "${workingDir}ANALYSIS/SRC/createSummaryHtml.sh $workingDir" >> $lablog
+${workingDir}ANALYSIS/SRC/createSummaryHtml.sh $workingDir 2>&1 | tee -a $lablog
 
 
 

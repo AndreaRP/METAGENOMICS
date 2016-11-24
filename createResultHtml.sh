@@ -45,7 +45,6 @@ echo "
    		 echo "
    		</title>
    		<link rel='stylesheet' type='text/css' href='../../css/table.css'>
-   		<link rel='stylesheet' type='text/css' href='../../css/deco.css' />
    	 	<meta content=''>
 	</head>
 	<body>
@@ -70,14 +69,13 @@ echo "
 					<th>Bit score</th>
 					<th>Coverage mean</th>
 					<th>Minimum coverage</th>
-					<th>Maximum coverage</th>
 					<th>Coverage SD</th>
 					<th>Coverage median</th>
 					<th>x1-x4 depth</th>
 					<th>x5-x9 depth</th>
 					<th>x10-x19 depth</th>
-					<th> =>20 depth</th>
-					<th> Total coverage</th>
+					<th>=>20 depth</th>
+					<th>Total coverage</th>
 					<th>Coverage graph</th>
 				</tr>
 			</thead>

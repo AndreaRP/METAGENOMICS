@@ -59,7 +59,7 @@ echo "
 				<div>
 					<h1>Metagenomic Analysis
 					<span>Results report</span>
-					<p class='support'>This browser doen't support<strong>flexbox</strong>! <br />To correctly view this report, please use an <strong>updated browser</strong>.</p>
+					<p class='support'>This browser doesn't support<strong>flexbox</strong>! <br />To correctly view this report, please use an <strong>updated browser</strong>.</p>
 				</div>
 				<div class='socialMedia'>
 					<!--<span>Find us at: </span>-->				

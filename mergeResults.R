@@ -37,13 +37,15 @@ blast=read.table(sampleBlastTable, sep="\t", header=FALSE)
 # 	Name input files 
 colnames(blast) <- c("Organism","Query_seq_id","Reference Id","% of identical matches","Alignment length", "Number of mismatches", 
 					 "Number of Gap openings", "Start of alignment in query", "End of alignment in query", "Start of alignment in subject", 
-					 "Expect value", "Bit Score", "Query")
+					 "End of alignment in subject", "Expect value", "Bit Score", "Query")
+
 
 # 	dropping query id and query sequence
 blast = subset(blast, select = c("Organism","Reference Id","% of identical matches","Alignment length", "Number of mismatches",
 								 "Number of Gap openings", "Start of alignment in query", "End of alignment in query", "Start of alignment in subject",
-								 "Expect value", "Bit Score"))
+								 "End of alignment in subject", "Expect value", "Bit Score"))
 
+coverage = subset(coverage, select = c("gnm", "covMean", "covMin", "covSD", "covMedian", "x1.x4", "x5.x9", "x10.x19", "X.x20", "total"))
 # 	merge files
 sampleResults = merge(x=blast, y=coverage, by.x = "Reference Id", by.y = "gnm")
 
