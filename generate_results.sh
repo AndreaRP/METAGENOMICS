@@ -121,7 +121,7 @@ done
 ######### SUMMARY ###########
 
 
-#	CREATE DIRECTORY FOR THE SAMPLE IF NECESSARY
+# Create directory for the sample if necessary
 if [ ! -d "${resultsDir}data" ]
 then
 	mkdir -p "${resultsDir}data/summary/"
@@ -153,6 +153,16 @@ do
 done
 
 # Generates the html file once the txt statistics are finished and copied.
-echo -e "$(date)\t Create html file:" >> $lablog
-echo -e "cp ${workingDir}ANALYSIS/SRC/html/summary.html ${resultsDir}" >> $lablog
-cp ${workingDir}ANALYSIS/SRC/html/summary.html ${resultsDir}
+echo -e "$(date)\t Create summary html file:" >> $lablog
+echo -e "${workingDir}ANALYSIS/SRC/createSummaryHtml.sh" >> $lablog
+${workingDir}ANALYSIS/SRC/createSummaryHtml.sh 2>&1 | tee -a $lablog
+
+
+
+
+
+
+
+
+
+
