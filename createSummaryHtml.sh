@@ -40,13 +40,17 @@ echo "
 		<meta name='description' content='Metagenomic Analysis: Results report' />
 		<meta name='keywords' content='metagenetics, metagenomics, ISCIII, bioinformatics' />
 		<meta name='author' content='ISCIII Bioinformatics unit' />
+		<link rel='stylesheet' type='text/css' href='css/shared.css' />
 		<link rel='stylesheet' type='text/css' href='css/normalize.css' />
-		<link rel='stylesheet' type='text/css' href='css/deco.css' />
-		<link rel='stylesheet' type='text/css' href='css/tabs.css' />
-		<link rel='stylesheet' type='text/css' href='css/tabstyles.css' />
+		<link rel='stylesheet' type='text/css' href='css/summary.css' />
+		<!-- JQuery -->
 		<script src='js/jquery-3.1.0.js'></script>
-		<script type='text/javascript' src='js/google-loader.js'></script>
-		<script src='js/functionality.js'></script>
+		<!--Thrid party-->
+	    <script type='text/javascript' src='js/google-loader.js'></script>
+		<!--custom-->
+		<script src='js/main-nav.js'></script>
+		<script src='js/summary.js'></script>
+
 	</head>
 	<body>
 		<div class='container'>
