@@ -15,7 +15,7 @@ source ${analysisDir}/SRC/assembly.sh
 samplesIdFile="${analysisDir}/samples_id.txt"
 
 
-if [ "${cluster}" == "yes" ] # qsub -V -j y -b y -cwd -t 1-#muestras -q all.q -N name command
+if [ "${cluster}" -eq "yes" ] # qsub -V -j y -b y -cwd -t 1-#muestras -q all.q -N name command
 then
 	in=$(awk "NR==$SGE_TASK_ID" $samplesIdFile)
 	mappedDir="${analysisDir}/10-unknown/${in}/reads/"

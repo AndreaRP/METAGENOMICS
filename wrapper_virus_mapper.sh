@@ -14,7 +14,7 @@ source ./pikaVirus.config
 source ${analysisDir}/SRC/mapper_virus.sh
 samplesIdFile="${analysisDir}/samples_id.txt"
 
-if [ "${cluster}" == "yes" ] # qsub -V -j y -b y -cwd -t 1-number of samples -q all.q -N name command
+if [ "${cluster}" -eq "yes" ] # qsub -V -j y -b y -cwd -t 1-number of samples -q all.q -N name command
 then
 	in=$(awk "NR==$SGE_TASK_ID" $samplesIdFile)
 	map_virus $in

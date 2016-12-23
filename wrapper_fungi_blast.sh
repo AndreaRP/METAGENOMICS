@@ -15,15 +15,15 @@ source ${analysisDir}/SRC/blast.sh
 samplesIdFile="${analysisDir}/samples_id.txt"
 
 
-if [ "${cluster}" == "yes" ] # qsub -V -j y -b y -cwd -t 1-16 -q all.q -N name command
+if [ "${cluster}" -eq "yes" ] # qsub -V -j y -b y -cwd -t 1-16 -q all.q -N name command
 then
 	in=$(awk "NR==$SGE_TASK_ID" $samplesIdFile)
-	sampleDir="${workingDir}ANALYSIS/07-fungi/${in}/"
+	sampleDir="${analysisDirDir}/07-fungi/${in}/"
 	blast $sampleDir $fungiDB
 else
 	cat ${analysisDir}/samples_id.txt | while read in
 	do
-		sampleDir="${workingDir}ANALYSIS/07-fungi/${in}/"
+		sampleDir="${analysisDir}/07-fungi/${in}/"
 		blast $sampleDir $fungiDB
 	done
 fi

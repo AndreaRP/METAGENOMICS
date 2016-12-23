@@ -52,6 +52,7 @@ blastnHits="${outputDir}blastn_Hits.txt"
 
 echo -e "$(date)" 
 echo -e "*********** BLAST $sampleName ************"
+echo $organismDir
 
 #	CREATE DIRECTORY FOR THE SAMPLE IF NECESSARY
 if [ ! -d ${outputDir} ]
@@ -65,7 +66,7 @@ if [ ! -f $sampleContig ]; then
 	echo "$sampleContig file not found!" > $lablog
 else
 	# if it is unknown, blast has to be run against all the databases
-	if [ $organismDir=="10-unknown" ]; then
+	if [ $organismDir -eq "10-unknown" ]; then
 		# echo -e "$(date)\t start running BLASTn for ${sampleName}\n" > $lablog
 		# echo -e "$(date)\t BACTERIA BLAST \t" >> $lablog
 		# echo -e "The command is: ### blastn -db ${bacDB}BLAST/blastn/BACTERIA_blastn -query $sampleContig -outfmt '6 stitle staxids std qseq' > $blastResult ###" >> $lablog
@@ -84,10 +85,10 @@ else
 		# blastn -db ${invertebrateDB}BLAST/blastn/INVERTEBRATE_blastn -query $sampleContig -outfmt '6 stitle std qseq' > $blastnResult 
 		# echo -e "$(date)\t finished running BLASTn for ${sampleName}\n" >> $lablog
 	else		
-		echo -e "$(date)\t start running BLASTn for ${sampleName}\n" > $lablog
+		echo -e "$(date)\t start running BLASTn for ${sampleName}" > $lablog
 		echo -e "The command is: ### blastn -db $BLASTn_DB -query $sampleContig -outfmt '6 stitle staxids std qseq' > $blastResult ###" >> $lablog
 		blastn -db $BLASTn_DB -query $sampleContig -outfmt '6 stitle std qseq' > $blastnResult 
-		echo -e "$(date)\t finished running BLASTn for ${sampleName}\n" >> $lablog
+		echo -e "$(date)\t finished running BLASTn for ${sampleName}" >> $lablog
 		#	Filter blast results that pass min 100 length (col. 5) and 90% alignment (col. 4).
 		awk -F "\t" '{if($4 >= 90 && $5>= 100) print $0}' $blastnResult > $blastnResultFiltered
 		sort -k1 $blastnResultFiltered > $blastnResultSorted

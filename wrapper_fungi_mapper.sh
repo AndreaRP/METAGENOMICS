@@ -14,7 +14,7 @@ source ${analysisDir}/SRC/mapper_fungi.sh
 samplesIdFile="${analysisDir}/samples_id.txt"
 
 
-if [ "${cluster}" == "yes" ] # qsub -V -j y -b y -cwd -t 1-16 -q all.q -N name command
+if [ "${cluster}" -eq "yes" ] # qsub -V -j y -b y -cwd -t 1-16 -q all.q -N name command
 then
 	in=$(awk "NR==$SGE_TASK_ID" $samplesIdFile)
 	map_fungi $in

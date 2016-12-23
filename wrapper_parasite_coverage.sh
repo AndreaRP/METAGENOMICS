@@ -14,7 +14,7 @@ source ./pikaVirus.config
 samplesIdFile="${analysisDir}/samples_id.txt"
 
 # Calculates coverage for each sample
-if [ "${cluster}" == "yes" ] # qsub -V -j y -b y -cwd -t 1-number of samples -q all.q -N name command
+if [ "${cluster}" -eq "yes" ] # qsub -V -j y -b y -cwd -t 1-number of samples -q all.q -N name command
 then
 	in=$(awk "NR==$SGE_TASK_ID" $samplesIdFile)
 	sampleProtozoaDir="${analysisDir}/08-protozoa/${in}/"
