@@ -123,7 +123,7 @@ function quality_report {
 	echo -e "cp ${analysisDir}/SRC/html/quality.html ${resultsDir}" >> $lablog
 	cp ${analysisDir}/SRC/html/quality.html ${resultsDir}
 
-	cd ${workingDir}
+	cd ${analysisDir}
 }
 
 ######### PER SAMPLE ########
