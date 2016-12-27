@@ -27,7 +27,8 @@ function set_size() {
 }
 
 function load_summary(sample) { 
-      sample = sample.charAt(0).toUpperCase() + sample.substr(1).toLowerCase();
+        sample = sample..toLowerCase();
+      //sample = sample.charAt(0).toUpperCase() + sample.substr(1).toLowerCase();
       google.charts.load("current", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawChart);
 
